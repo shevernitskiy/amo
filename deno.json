@@ -1,0 +1,13 @@
+{
+  "importMap": "import_map.json",
+  "lock": false,
+  "tasks": {
+    "start": "deno run -A ./src/app.ts",
+    "dev": "deno run -A --watch ./src/app.ts"
+  },
+  "fmt": {
+    "options": {
+      "lineWidth": 120
+    }
+  }
+}

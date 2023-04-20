@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "@typings/": "./src/typings/",
+    "@core/": "./src/core/",
+    "@api/": "./src/api/",
+    "@helpers/": "./src/helpers/"
+  }
+}
