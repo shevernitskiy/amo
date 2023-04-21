@@ -10,8 +10,8 @@
 - [ ] API
   - [x] Account
   - [x] Leads
-  - [ ] Unsorted
-  - [ ] Pipelines and Stages
+  - [x] Unsorted
+  - [x] Pipelines and Stages
   - [x] Contacts
   - [x] Companies
   - [ ] Links
