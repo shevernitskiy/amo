@@ -1,5 +1,5 @@
 import { Contact } from "@typings/entities.ts";
-import { Embedded, Links, Page } from "@typings/utility.ts";
+import { Embedded, Links, Page, Total } from "@typings/utility.ts";
 
 export type ResponseGetContacts = Page & Links & {
   _embedded: {
@@ -87,8 +87,7 @@ export type RequestLinkContactToChat = {
   request_id?: string;
 };
 
-export type ResponseLinkContactToChat = {
-  _total_items: number;
+export type ResponseLinkContactToChat = Total & {
   _embedded: {
     chats: {
       chat_id: string;
@@ -99,8 +98,7 @@ export type ResponseLinkContactToChat = {
   };
 };
 
-export type ResponseGetContactToChat = {
-  _total_items: number;
+export type ResponseGetContactToChat = Total & {
   _embedded: {
     chats: {
       chat_id: string;

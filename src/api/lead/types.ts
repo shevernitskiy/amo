@@ -13,25 +13,27 @@ export type ReponseGetLeadById = Links & Lead & {
   _embedded: Pick<Embedded, "loss_reason" | "tags" | "contacts" | "companies" | "catalog_elements">;
 };
 
-export type RequestAddLead = Partial<
-  Omit<
-    Lead,
-    | "id"
-    | "group_id"
-    | "source_id"
-    | "is_deleted"
-    | "score"
-    | "account_id"
-    | "labor_cost"
-    | "is_price_modified_by_robot"
-  > & {
+export type RequestAddLead =
+  & Partial<
+    Omit<
+      Lead,
+      | "id"
+      | "group_id"
+      | "source_id"
+      | "is_deleted"
+      | "score"
+      | "account_id"
+      | "labor_cost"
+      | "is_price_modified_by_robot"
+    >
+  >
+  & {
     _embedded?: {
       tags?: {
         id: number;
       }[];
     };
-  }
->;
+  };
 
 export type ResponseAddLeads = Links & {
   _embedded: {
@@ -74,18 +76,21 @@ export type ResponseUpdateLeads = Links & {
   };
 };
 
-export type RequestAddComplex = Partial<
-  Omit<
-    Lead,
-    | "id"
-    | "group_id"
-    | "source_id"
-    | "is_deleted"
-    | "score"
-    | "account_id"
-    | "labor_cost"
-    | "is_price_modified_by_robot"
-  > & {
+export type RequestAddComplex =
+  & Partial<
+    Omit<
+      Lead,
+      | "id"
+      | "group_id"
+      | "source_id"
+      | "is_deleted"
+      | "score"
+      | "account_id"
+      | "labor_cost"
+      | "is_price_modified_by_robot"
+    >
+  >
+  & {
     _embedded?: {
       tags?: {
         id: number;
@@ -98,8 +103,7 @@ export type RequestAddComplex = Partial<
         type?: string;
       };
     };
-  }
->;
+  };
 
 export type ResponseAddComplex = {
   id: number;

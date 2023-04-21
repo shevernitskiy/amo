@@ -180,7 +180,7 @@ export type UnsrotedMetadataMail = {
   content_summary: string;
 };
 
-type Pipeline = {
+export type Pipeline = {
   /** ID воронки */
   id: number;
   /** Название воронки */
@@ -197,7 +197,7 @@ type Pipeline = {
   account_id: number;
 };
 
-type PipelineStatus = {
+export type PipelineStatus = {
   /** ID статуса */
   id: number;
   /** Название статуса */

@@ -15,6 +15,10 @@ export type Links = {
   };
 };
 
+export type Total = {
+  _total_items: number;
+};
+
 export type Page = {
   _page: number;
 };

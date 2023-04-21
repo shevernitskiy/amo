@@ -1,4 +1,4 @@
-import type { Embedded, Links, Page } from "@typings/utility.ts";
+import type { Embedded, Links, Page, Total } from "@typings/utility.ts";
 import type { Company, Contact, Lead, Unsorted, UnsrotedMetadataForm, UnsrotedMetadataSip } from "@typings/entities.ts";
 
 export type ReponseGetUnsorted = Links & Page & {
@@ -28,8 +28,7 @@ export type RequestAddUnsorted<T> =
 export type RequestAddUnsortedSip = RequestAddUnsorted<UnsrotedMetadataSip>;
 export type RequestAddUnsortedForm = RequestAddUnsorted<UnsrotedMetadataForm>;
 
-export type ResponseAddUnsorted = {
-  _total_items: number;
+export type ResponseAddUnsorted = Total & {
   _embedded: {
     unsorted: (Links & {
       uid: string;
