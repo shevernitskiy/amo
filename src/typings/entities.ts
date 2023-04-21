@@ -141,8 +141,8 @@ export type UnsrotedMetadataSip = {
   service_code: string;
   /** Данный флаг не возвращается в API, но может быть передан. В случае передачи значения true, в карточку будет добавлено событие о входящем звонке. */
   is_call_event_needed: boolean;
-  from: string;
-  uniq: string;
+  from: string; // why is it only in exmaple not table?!
+  uniq: string; // why is it only in exmaple not table?!
 };
 
 export type UnsrotedMetadataForm = {

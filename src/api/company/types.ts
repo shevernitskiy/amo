@@ -14,7 +14,7 @@ export type ReponseGetCompanyById = Links & Company & {
 };
 
 export type RequestAddCompany = Partial<
-  Omit<Company, "id" | "group_id" | "closest_task_at" | "is_deleted" | "account_id"> & {
+  Pick<Company, "name" | "responsible_user_id" | "created_by" | "updated_by" | "custom_fields_values"> & {
     _embedded?: {
       tags?: {
         id?: number;
@@ -35,14 +35,13 @@ export type ResponseAddCompanies = Links & {
 };
 
 export type RequestUpdateCompany = Partial<
-  Omit<Company, "group_id" | "closest_task_at" | "is_deleted" | "account_id"> & {
+  Pick<Company, "id" | "name" | "responsible_user_id" | "created_by" | "updated_by" | "custom_fields_values"> & {
     _embedded?: {
       tags?: {
         id?: number;
         name?: string;
       }[];
     };
-    request_id?: string;
   }
 >;
 

@@ -15,52 +15,59 @@ export type ReponseGetLeadById = Links & Lead & {
 
 export type RequestAddLead =
   & Partial<
-    Omit<
+    Pick<
       Lead,
-      | "id"
-      | "group_id"
-      | "source_id"
-      | "is_deleted"
-      | "score"
-      | "account_id"
-      | "labor_cost"
-      | "is_price_modified_by_robot"
+      | "name"
+      | "price"
+      | "status_id"
+      | "pipeline_id"
+      | "created_by"
+      | "updated_by"
+      | "closed_at"
+      | "created_at"
+      | "updated_at"
+      | "loss_reason_id"
+      | "responsible_user_id"
+      | "custom_fields_values"
     >
   >
   & {
     _embedded?: {
       tags?: {
-        id: number;
+        id?: number;
+        name?: string;
       }[];
     };
   };
 
 export type ResponseAddLeads = Links & {
-  _embedded: {
-    leads: (Links & {
-      id: number;
-      request_id: string;
-    })[];
-  };
+  _embedded: Pick<Embedded, "leads">[];
 };
 
 export type RequestUpdateLead =
   & Partial<
-    Omit<
+    Pick<
       Lead,
-      | "group_id"
-      | "source_id"
-      | "is_deleted"
-      | "score"
-      | "account_id"
-      | "labor_cost"
-      | "is_price_modified_by_robot"
+      | "id"
+      | "name"
+      | "price"
+      | "status_id"
+      | "pipeline_id"
+      | "created_by"
+      | "updated_by"
+      | "closed_at"
+      | "created_at"
+      | "updated_at"
+      | "loss_reason_id"
+      | "responsible_user_id"
+      | "custom_fields_values"
     >
   >
   & {
     _embedded?: {
       tags?: {
-        id: number;
+        id?: number;
+        name?: string;
       }[];
     };
   };
@@ -78,22 +85,27 @@ export type ResponseUpdateLeads = Links & {
 
 export type RequestAddComplex =
   & Partial<
-    Omit<
+    Pick<
       Lead,
-      | "id"
-      | "group_id"
-      | "source_id"
-      | "is_deleted"
-      | "score"
-      | "account_id"
-      | "labor_cost"
-      | "is_price_modified_by_robot"
+      | "name"
+      | "price"
+      | "status_id"
+      | "pipeline_id"
+      | "created_by"
+      | "updated_by"
+      | "closed_at"
+      | "created_at"
+      | "updated_at"
+      | "loss_reason_id"
+      | "responsible_user_id"
+      | "custom_fields_values"
     >
   >
   & {
     _embedded?: {
       tags?: {
-        id: number;
+        id?: number;
+        name?: string;
       }[];
       contacts?: Partial<Contact>[];
       companies?: Partial<Company>[];
