@@ -5,12 +5,14 @@ import { LeadApi } from "@api/lead/client.ts";
 import { ContactApi } from "@api/contact/client.ts";
 import { AccountApi } from "@api/account/client.ts";
 import { CompanyApi } from "@api/company/client.ts";
+import { UnsortedApi } from "@api/unsorted/client.ts";
 
 export class Amo {
   private rest: RestClient;
 
   private _account: AccountApi;
   private _lead: LeadApi;
+  private _unsorted: UnsortedApi;
   private _contact: ContactApi;
   private _company: CompanyApi;
 
@@ -23,6 +25,7 @@ export class Amo {
 
     this._account = new AccountApi(this.rest);
     this._lead = new LeadApi(this.rest);
+    this._unsorted = new UnsortedApi(this.rest);
     this._contact = new ContactApi(this.rest);
     this._company = new CompanyApi(this.rest);
   }
@@ -39,6 +42,10 @@ export class Amo {
   /** Lead Api */
   get lead(): LeadApi {
     return this._lead;
+  }
+  /** Unsorted Api */
+  get unsorted(): UnsortedApi {
+    return this._unsorted;
   }
   /** Contact Api */
   get contact(): ContactApi {
