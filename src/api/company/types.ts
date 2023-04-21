@@ -1,42 +1,16 @@
-import type { Company, Tag } from "@typings/entities.ts";
-import type { Links, Page } from "@typings/utility.ts";
+import type { Company } from "@typings/entities.ts";
+import type { Embedded, Links, Page } from "@typings/utility.ts";
 
 export type ReponseGetCompanies = Links & Page & {
   _embedded: {
     companies: (Company & Links & {
-      _embedded: {
-        tags: Tag[];
-        contacts: (Links & { id: number })[];
-        customers: (Links & { id: number })[];
-        leads: (Links & { id: number })[];
-        catalog_elements: {
-          id: number;
-          metedata: {
-            quantity: number;
-            catalog_id: number;
-          };
-          price_id: number;
-        }[];
-      };
+      _embedded: Pick<Embedded, "tags" | "contacts" | "customers" | "leads" | "catalog_elements">;
     })[];
   };
 };
 
 export type ReponseGetCompanyById = Links & Company & {
-  _embedded: {
-    tags: Tag[];
-    contacts: (Links & { id: number })[];
-    customers: (Links & { id: number })[];
-    leads: (Links & { id: number })[];
-    catalog_elements: {
-      id: number;
-      metedata: {
-        quantity: number;
-        catalog_id: number;
-      };
-      price_id: number;
-    }[];
-  };
+  _embedded: Pick<Embedded, "tags" | "contacts" | "customers" | "leads" | "catalog_elements">;
 };
 
 export type RequestAddCompany = Partial<

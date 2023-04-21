@@ -2,69 +2,22 @@ import type {
   Company,
   Contact,
   Lead,
-  Tag,
   UnsrotedMetadataChat,
   UnsrotedMetadataMail,
   UnsrotedMetadataSip,
 } from "@typings/entities.ts";
-import type { Links, Page } from "@typings/utility.ts";
+import type { Embedded, Links, Page } from "@typings/utility.ts";
 
 export type ReponseGetLeads = Links & Page & {
   _embedded: {
     leads: (Lead & Links & {
-      _embedded: {
-        loss_reason: Links & {
-          id: number;
-          name: string;
-          created_at: number;
-          updated_at: number;
-        }[];
-        tags: Tag[];
-        contacts: Links & {
-          id: number;
-          is_main: boolean;
-        }[];
-        companies: Links & {
-          id: number;
-        }[];
-        catalog_elements: {
-          id: number;
-          metedata: {
-            quantity: number;
-            catalog_id: number;
-          };
-          price_id: number;
-        }[];
-      };
+      _embedded: Pick<Embedded, "loss_reason" | "tags" | "contacts" | "companies" | "catalog_elements">;
     })[];
   };
 };
 
 export type ReponseGetLeadById = Links & Lead & {
-  _embedded: {
-    loss_reason: Links & {
-      id: number;
-      name: string;
-      created_at: number;
-      updated_at: number;
-    }[];
-    tags: Tag[];
-    contacts: Links & {
-      id: number;
-      is_main: boolean;
-    }[];
-    companies: Links & {
-      id: number;
-    }[];
-    catalog_elements: {
-      id: number;
-      metedata: {
-        quantity: number;
-        catalog_id: number;
-      };
-      price_id: number;
-    }[];
-  };
+  _embedded: Pick<Embedded, "loss_reason" | "tags" | "contacts" | "companies" | "catalog_elements">;
 };
 
 export type RequestAddLead = Partial<
@@ -149,7 +102,7 @@ export type RequestAddComplex = Partial<
       metadata?: Partial<UnsrotedMetadataChat> | Partial<UnsrotedMetadataSip> | Partial<UnsrotedMetadataMail>;
       source?: {
         external_id?: number;
-        type: string;
+        type?: string;
       };
     };
   }

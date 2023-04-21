@@ -745,7 +745,7 @@ type Note = {
   account_id: number;
 };
 
-type Customer = {
+export type Customer = {
   /** ID покупателя */
   id: number;
   /** Название покупателя */

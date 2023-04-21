@@ -1,3 +1,5 @@
+import type { Company, Contact, Customer, Lead, Tag } from "@typings/entities.ts";
+
 export type JSONValue =
   | string
   | number
@@ -35,3 +37,25 @@ export type Order<T extends string[]> = {
 };
 
 export type With<T extends string[]> = (T[keyof T])[];
+
+export type Embedded = {
+  tags?: Tag[];
+  catalog_elements?: {
+    id: number;
+    metedata: {
+      quantity: number;
+      catalog_id: number;
+      price_id: number;
+    };
+  }[];
+  loss_reason: Links & {
+    id: number;
+    name: string;
+    created_at: number;
+    updated_at: number;
+  }[];
+  leads?: (Pick<Lead, "id"> & Links)[];
+  customers?: (Pick<Customer, "id"> & Links)[];
+  companies?: (Pick<Company, "id"> & Links)[];
+  contacts?: (Pick<Contact, "id"> & { is_main?: boolean } & Links)[];
+};
