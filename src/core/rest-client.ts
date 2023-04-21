@@ -108,6 +108,10 @@ export class RestClient {
     return this.request<T>("PATCH", init);
   }
 
+  delete<T>(init: RequestInit): Promise<T> {
+    return this.request<T>("DELETE", init);
+  }
+
   // deno-lint-ignore no-explicit-any
   private params(query: Record<string, any>): URLSearchParams {
     return new URLSearchParams(

@@ -90,7 +90,7 @@ export type Unsorted = {
   /** Дата создания неразобранного в Unix Timestamp */
   created_at: number;
   /** Метаданные заявки, каждый тип заявки имеет свой набор данных. Подробней тут */
-  metadata: UnsrotedMetadataChat | UnsrotedMetadataSip | UnsrotedMetadataMail;
+  metadata: UnsrotedMetadataChat | UnsrotedMetadataSip | UnsrotedMetadataMail | UnsrotedMetadataForm;
   /** ID аккаунта, в котором находится неразобранное */
   account_id: number;
 };
@@ -141,6 +141,23 @@ export type UnsrotedMetadataSip = {
   service_code: string;
   /** Данный флаг не возвращается в API, но может быть передан. В случае передачи значения true, в карточку будет добавлено событие о входящем звонке. */
   is_call_event_needed: boolean;
+  from: string;
+  uniq: string;
+};
+
+export type UnsrotedMetadataForm = {
+  /** Идентификатор формы на стороне интеграции. */
+  form_id: string;
+  /** Название формы */
+  form_name: string;
+  /** Страница, на которой установлена форма */
+  form_page: string;
+  /** IP адрес, с которого поступила заявка */
+  ip: string;
+  /**	Временная метка отправки данных через форму. Данные в формате Unix Timestamp */
+  form_sent_at: number;
+  /**	Информация, откуда был переход на страницу, где расположена форма. */
+  referer: string;
 };
 
 export type UnsrotedMetadataMail = {

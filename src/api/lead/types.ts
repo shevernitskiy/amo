@@ -1,11 +1,4 @@
-import type {
-  Company,
-  Contact,
-  Lead,
-  UnsrotedMetadataChat,
-  UnsrotedMetadataMail,
-  UnsrotedMetadataSip,
-} from "@typings/entities.ts";
+import type { Company, Contact, Lead, UnsrotedMetadataForm, UnsrotedMetadataSip } from "@typings/entities.ts";
 import type { Embedded, Links, Page } from "@typings/utility.ts";
 
 export type ReponseGetLeads = Links & Page & {
@@ -99,7 +92,7 @@ export type RequestAddComplex = Partial<
       }[];
       contacts?: Partial<Contact>[];
       companies?: Partial<Company>[];
-      metadata?: Partial<UnsrotedMetadataChat> | Partial<UnsrotedMetadataSip> | Partial<UnsrotedMetadataMail>;
+      metadata?: Partial<UnsrotedMetadataForm> | Partial<UnsrotedMetadataSip>;
       source?: {
         external_id?: number;
         type?: string;
