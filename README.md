@@ -12,7 +12,7 @@
   - [x] Leads
   - [ ] Unsorted
   - [ ] Pipelines and Stages
-  - [ ] Contacts
+  - [x] Contacts
   - [x] Companies
   - [ ] Links
   - [ ] Tasks
