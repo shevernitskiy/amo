@@ -14,6 +14,7 @@
   - [x] Pipelines and Stages
   - [x] Contacts
   - [x] Companies
+  - [x] Catalogs
   - [ ] Links
   - [ ] Tasks
   - [ ] Custom Fields

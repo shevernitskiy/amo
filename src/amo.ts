@@ -7,6 +7,7 @@ import { AccountApi } from "@api/account/client.ts";
 import { CompanyApi } from "@api/company/client.ts";
 import { UnsortedApi } from "@api/unsorted/client.ts";
 import { PipelineApi } from "@api/pipeline/client.ts";
+import { CatalogApi } from "@api/catalog/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -17,6 +18,7 @@ export class Amo {
   private _pipeline: PipelineApi;
   private _contact: ContactApi;
   private _company: CompanyApi;
+  private _catalog: CatalogApi;
 
   constructor(
     subdomain: string,
@@ -31,6 +33,7 @@ export class Amo {
     this._pipeline = new PipelineApi(this.rest);
     this._contact = new ContactApi(this.rest);
     this._company = new CompanyApi(this.rest);
+    this._catalog = new CatalogApi(this.rest);
   }
 
   /** Token struct */
@@ -61,5 +64,9 @@ export class Amo {
   /** Comapny Api */
   get company(): CompanyApi {
     return this._company;
+  }
+  /** Catalog Api */
+  get catalog(): CatalogApi {
+    return this._catalog;
   }
 }

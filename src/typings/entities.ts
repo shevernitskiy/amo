@@ -274,7 +274,7 @@ export type Company = {
   account_id: number;
 };
 
-type Catalog = {
+export type Catalog = {
   /** ID списка */
   id: number;
   /** Название списка */
@@ -305,7 +305,7 @@ type Catalog = {
   account_id: number;
 };
 
-type CatalogElement = {
+export type CatalogElement = {
   /** ID элемента списка */
   id: number;
   /** ID списка */
