@@ -328,7 +328,7 @@ export type CatalogElement = {
   account_id: number;
 };
 
-type Task = {
+export type Task = {
   /** ID задачи */
   id: number;
   /** ID пользователя, создавшего задачу */
@@ -366,7 +366,7 @@ type Task = {
   account_id: number;
 };
 
-type CustomFieldsValue = {
+export type CustomFieldsValue = {
   /** ID поля */
   id: number;
   /** Название поля */
@@ -451,7 +451,7 @@ type CustomFieldsValue = {
   search_in: string | null;
 };
 
-type CustomFieldsValueTypes =
+export type CustomFieldsValueTypes =
   /** Текст */
   | "text"
   /** Число */
