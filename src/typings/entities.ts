@@ -801,17 +801,21 @@ export type Customer = {
   account_id: number;
 };
 
-type EntityLink = {
+export type EntityLink = {
+  entity_id: number;
+  entity_type: "leads" | "contacts" | "companies" | "customers" | "catalog_elements";
   to_entity_id: number;
-  to_entity_type: string;
-  metadata: {
-    main_contact: boolean;
-    is_main: boolean;
-    quantity: number;
-    catalog_id: number;
-    updated_by: number;
-    price_id: number | null;
-  } | null;
+  to_entity_type: "leads" | "contacts" | "companies" | "customers" | "catalog_elements";
+  metadata:
+    | Partial<{
+      main_contact: boolean;
+      is_main: boolean;
+      quantity: number;
+      catalog_id: number;
+      updated_by: number;
+      price_id: number | null;
+    }>
+    | null;
 };
 
 // TODO: what is Condition?

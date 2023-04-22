@@ -7,6 +7,11 @@ export type JSONValue =
   | { [x: string]: JSONValue }
   | Array<JSONValue>;
 
+export type DeepPartial<T> = T extends object ? {
+    [P in keyof T]?: DeepPartial<T[P]>;
+  }
+  : T;
+
 export type Links = {
   _links: {
     self: { href: string };

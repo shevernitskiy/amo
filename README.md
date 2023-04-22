@@ -15,7 +15,7 @@
   - [x] Contacts
   - [x] Companies
   - [x] Catalogs
-  - [ ] Links
+  - [x] Links
   - [ ] Tasks
   - [ ] Custom Fields
   - [ ] Tags
