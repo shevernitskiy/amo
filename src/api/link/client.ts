@@ -10,25 +10,32 @@ import type {
   ResponseAddLinksByEntityType,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
+import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
 
 export class LinkApi {
   constructor(private rest: RestClient) {}
 
   /** Метод позволяет получить связанные сущности по типу основной сущности. */
   getLinksByEntityType(entity_type: "leads" | "contacts" | "companies" | "customers", params?: {
-    // filter?: Filter[];
+    filter?: FilterLike<["to_entity_id", "to_entity_type", "to_catalog_id"], ["entity_id"], never, never, never>;
   }): Promise<ReponseGetLinksByEntityType> {
     return this.rest.get<ReponseGetLinksByEntityType>({
       url: `/api/v4/${entity_type}/links`,
+      query: params === undefined ? undefined : {
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
+      },
     });
   }
 
   /** Метод позволяет получить связанные сущности по ID основной сущности. */
   getLinksByEntityId(id: number, entity_type: "leads" | "contacts" | "companies" | "customers", params?: {
-    // filter?: Filter[];
+    filter?: FilterLike<["to_entity_id", "to_entity_type", "to_catalog_id"], never, never, never, never>;
   }): Promise<ReponseGetLinksByEntityId> {
     return this.rest.get<ReponseGetLinksByEntityId>({
       url: `/api/v4/${entity_type}/${id}/links`,
+      query: params === undefined ? undefined : {
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
+      },
     });
   }
 

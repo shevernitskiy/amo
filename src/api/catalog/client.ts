@@ -16,6 +16,7 @@ import type {
   ResponseUpdateCatalogs,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
+import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
 
 export class CatalogApi {
   constructor(private rest: RestClient) {}
@@ -68,13 +69,14 @@ export class CatalogApi {
     page?: number;
     limit?: number;
     query?: string | number;
-    // filter?: Filter[];
+    filter?: FilterLike<["id"], ["id"], never, never, never>;
   }): Promise<ReponseGetCatalogElements> {
     return this.rest.get<ReponseGetCatalogElements>({
       url: `/api/v4/catalogs/${catalog_id}/elements`,
       query: params === undefined ? undefined : {
         ...params,
         with: params.with === undefined ? undefined : params.with.join(","),
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
       },
     });
   }

@@ -30,6 +30,6 @@
   - [ ] Chats
   - [ ] Sources
 - [ ] Helpers
-  - [ ] Filter builder
+  - [x] Filter builder
   - [ ] Webhook handling
   - [ ] Error handling

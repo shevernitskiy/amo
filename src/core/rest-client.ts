@@ -113,15 +113,16 @@ export class RestClient {
   }
 
   // deno-lint-ignore no-explicit-any
-  private params(query: Record<string, any>): URLSearchParams {
-    return new URLSearchParams(
+  private params(query: Record<string, any>): string {
+    const result = new URLSearchParams(
       Object.entries(query)
-        .filter((item) => item[1] !== undefined)
+        .filter((item) => item[1] !== undefined && item[0] !== "filter")
         .map<string[]>((item) => {
           if (item[0] === "order") return [item[1][0], item[1][1]];
           return [item[0], item[1].toString()];
         }),
     );
+    return query.filter !== undefined ? result.toString() + "&" + query.filter : result.toString();
   }
 
   isOAuthCode(

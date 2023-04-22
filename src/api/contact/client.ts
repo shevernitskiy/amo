@@ -13,6 +13,7 @@ import type {
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
 import { order } from "@helpers/order.ts";
+import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
 
 export class ContactApi {
   constructor(private rest: RestClient) {}
@@ -23,7 +24,13 @@ export class ContactApi {
     page?: number;
     limit?: number;
     query?: string | number;
-    // filter?: Filter[];
+    filter?: FilterLike<
+      ["id", "name", "created_by", "updated_by", "responsible_user_id"],
+      ["id", "name", "created_by", "updated_by", "responsible_user_id"],
+      ["created_at", "updated_at", "closest_task_at"],
+      number,
+      never
+    >;
     order?: Order<["updated_at", "id"]>;
   }): Promise<ResponseGetContacts> {
     return this.rest.get<ResponseGetContacts>({
@@ -32,6 +39,7 @@ export class ContactApi {
         ...params,
         with: params.with === undefined ? undefined : params.with.join(","),
         order: params.order === undefined ? undefined : order(params.order),
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
       },
     });
   }

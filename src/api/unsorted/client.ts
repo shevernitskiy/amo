@@ -12,6 +12,7 @@ import type {
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
 import { order } from "@helpers/order.ts";
+import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
 
 export class UnsortedApi {
   constructor(private rest: RestClient) {}
@@ -20,7 +21,7 @@ export class UnsortedApi {
   getUnsorted(params?: {
     page?: number;
     limit?: number;
-    // filter?: Filter[];
+    filter?: FilterLike<["uid", "pipeline_id"], ["uid", "category"], never, never, never>;
     order?: Order<["created_at", "updated_at", "id"]>;
   }): Promise<ReponseGetUnsorted> {
     return this.rest.get<ReponseGetUnsorted>({
@@ -28,6 +29,7 @@ export class UnsortedApi {
       query: params === undefined ? undefined : {
         ...params,
         order: params.order === undefined ? undefined : order(params.order),
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
       },
     });
   }
@@ -95,11 +97,14 @@ export class UnsortedApi {
 
   /** Метод позволяет получить сводную информацию о неразобранном в аккаунте. */
   getUnsortedSummary(params?: {
-    // filter?: Filter[];
+    filter?: FilterLike<["uid", "pipeline_id, created_at"], ["uid"], ["created_at"], never, never>;
   }): Promise<ReponseGetUnsortedSummary> {
     return this.rest.get<ReponseGetUnsortedSummary>({
       url: "/api/v4/leads/unsorted/summary",
-      query: params,
+      query: params === undefined ? undefined : {
+        ...params,
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
+      },
     });
   }
 }
