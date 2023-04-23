@@ -17,6 +17,7 @@ export type Links = {
     self: { href: string };
     next?: { href: string };
     prev?: { href: string };
+    last?: { href: string };
   };
 };
 
@@ -26,6 +27,10 @@ export type Total = {
 
 export type Page = {
   _page: number;
+};
+
+export type PageCount = {
+  _page_count: number;
 };
 
 // export type GenericGet = {

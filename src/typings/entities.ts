@@ -376,9 +376,9 @@ export type CustomFieldsValue = {
   /** Сортировка поля */
   sort: number;
   /** Тип поля. Список доступных полей */
-  type: string;
+  type: CustomFieldsValueTypes;
   /** Тип сущности (leads, contacts, companies, segments, customers, catalogs) */
-  entity_type: string;
+  entity_type: "leads" | "contacts" | "companies" | "segments" | "customers" | "catalogs";
   /** Параметр отвечает за определение типа поля как "вычисляемое" (computed) поле. Данный ключ возвращается только при получении списка полей сделки */
   is_computed: boolean;
   /** Является ли поле предустановленным. Данный ключ возвращается только при получении списка полей контактов и компаний */
@@ -392,7 +392,7 @@ export type CustomFieldsValue = {
   /** Настройки поля. Данный ключ возвращается только при получении списка полей списков (каталогов) */
   settings: any[] | null;
   /** Когда напоминать о дне рождения (never – никогда, day – за день, week – за неделю, month – за месяц). Значение данного поля доступно только для поля типа birthday. Данный ключ возвращается только при получении списка полей контактов, сделок и компаний */
-  remind: string | null;
+  remind: "never" | "day" | "week" | "month" | null;
   /** Код валюты поля. Применимо только для типа поля – monetary. Для других типов полей – null. */
   currency: string | null;
   /** Доступные значения для поля. Значение данного поля доступно только для полей с поддержкой enum */
@@ -497,7 +497,7 @@ export type CustomFieldsValueTypes =
   /** Файл */
   | "file";
 
-type CustomFieldsValueGroup = {
+export type CustomFieldsValueGroup = {
   /** ID группы полей */
   id: string;
   /** Название группы полей */
