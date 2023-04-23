@@ -21,7 +21,7 @@
   - [x] Tags
   - [x] Events
   - [x] Notes
-  - [ ] Customers
+  - [x] Customers
   - [ ] Statuses and Segments
   - [ ] Users
   - [ ] Products

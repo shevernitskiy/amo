@@ -1,0 +1,147 @@
+import type { JSONValue, With } from "@typings/utility.ts";
+import type {
+  ReponseGetCustomerById,
+  ReponseGetCustomers,
+  ReponseGetTransactions,
+  RequestAddCustomer,
+  RequestAddTransactionsToCustomer,
+  RequestUpdateBonusPoints,
+  RequestUpdateCustomer,
+  RequestUpdateCustomerById,
+  ResponseAddCustomers,
+  ResponseAddTransactionsToCustomer,
+  ResponseUpdateBonusPoints,
+  ResponseUpdateCustomerById,
+  ResponseUpdateCustomers,
+} from "./types.ts";
+import { RestClient } from "@core/rest-client.ts";
+import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+
+export class CustomerApi {
+  constructor(private rest: RestClient) {}
+
+  /** Метод позволяет включать/выключать функционал покупателей, а также менять режим функционала. */
+  updateCustomersMode(params: {
+    mode: "segments" | "periodicity";
+    is_enabled: boolean;
+  }): Promise<typeof params> {
+    return this.rest.patch<typeof params>({
+      url: "/api/v4/customers/mode",
+      payload: params as JSONValue,
+    });
+  }
+
+  /** Метод позволяет получить список покупателей в аккаунте. */
+  getCustomers(params?: {
+    with?: With<["catalog_elements", "contacts", "companies"]>;
+    page?: number;
+    limit?: number;
+    query?: string | number;
+    filter?: FilterLike<
+      ["id", "name", "pipeline_id", "status_id", "created_by", "updated_by", "responsible_user_id"],
+      ["id", "name", "pipeline_id", "status_id", "created_by", "updated_by", "responsible_user_id"],
+      ["next_price", "next_date", "created_at", "updated_at", "closed_at", "closest_task_at"],
+      never,
+      number
+    >;
+  }): Promise<ReponseGetCustomers> {
+    return this.rest.get<ReponseGetCustomers>({
+      url: "/api/v4/customers",
+      query: params === undefined ? undefined : {
+        ...params,
+        with: params.with === undefined ? undefined : params.with.join(","),
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
+      },
+    });
+  }
+
+  /** Метод позволяет получить данные конкретного покупателя по ID. */
+  getCustomerById(id: number, params?: {
+    with?: With<["catalog_elements", "contacts", "companies"]>;
+  }): Promise<ReponseGetCustomerById> {
+    return this.rest.get<ReponseGetCustomerById>({
+      url: `/api/v4/customers/${id}`,
+      query: params?.with === undefined ? undefined : { with: params.with.join(",") },
+    });
+  }
+
+  /** Метод позволяет добавлять покупателей в аккаунт пакетно. */
+  addCustomers(customers: RequestAddCustomer[]): Promise<ResponseAddCustomers> {
+    return this.rest.post<ResponseAddCustomers>({
+      url: "/api/v4/customers",
+      payload: customers as JSONValue,
+    });
+  }
+
+  /** Метод позволяет редактировать покупателей пакетно. */
+  updateCustomers(customers: RequestUpdateCustomer[]): Promise<ResponseUpdateCustomers> {
+    return this.rest.patch<ResponseUpdateCustomers>({
+      url: "/api/v4/customers",
+      payload: customers as JSONValue,
+    });
+  }
+
+  /** Метод позволяет редактировать покупателей по ID. */
+  updateCustomerById(id: number, customer: RequestUpdateCustomerById): Promise<ResponseUpdateCustomerById> {
+    return this.rest.patch<ResponseUpdateCustomerById>({
+      url: `/api/v4/customers/${id}`,
+      payload: customer as JSONValue,
+    });
+  }
+
+  /** Метод позволяет получить список транзакций в аккаунте. */
+  getTransactions(params?: {
+    page?: number;
+    limit?: number;
+    filter?: FilterLike<["id"], ["id"], never, never, never>;
+  }): Promise<ReponseGetTransactions> {
+    return this.rest.get<ReponseGetTransactions>({
+      url: "/api/v4/customers/transactions",
+      query: params === undefined ? undefined : {
+        ...params,
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
+      },
+    });
+  }
+
+  /** Метод позволяет получить список транзакций покупателя по ID. */
+  getTransactionsByCustomerId(customer_id: number, params?: {
+    page?: number;
+    limit?: number;
+    filter?: FilterLike<["id"], ["id"], never, never, never>;
+  }): Promise<ReponseGetCustomerById> {
+    return this.rest.get<ReponseGetCustomerById>({
+      url: `/api/v4/customers/${customer_id}/transactions`,
+      query: params === undefined ? undefined : {
+        ...params,
+        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
+      },
+    });
+  }
+
+  /** Метод позволяет добавлять транзакции к конкретному покупателю в аккаунт пакетно. */
+  addTransactionsToCustomer(
+    customer_id: number,
+    transactions: RequestAddTransactionsToCustomer[],
+  ): Promise<ResponseAddTransactionsToCustomer> {
+    return this.rest.post<ResponseAddTransactionsToCustomer>({
+      url: `/api/v4/customers/${customer_id}/transactions`,
+      payload: transactions as JSONValue,
+    });
+  }
+
+  /** Метод позволяет удалить транзакцию в аккаунте. */
+  deleteTransactionsById(id: number): Promise<void> {
+    return this.rest.delete<void>({
+      url: `/api/v4/customers/transactions/${id}`,
+    });
+  }
+
+  /** Метод позволяет удалить транзакцию в аккаунте. */
+  updateBonusPointsByCustomerId(id: number, points: RequestUpdateBonusPoints): Promise<ResponseUpdateBonusPoints> {
+    return this.rest.post<ResponseUpdateBonusPoints>({
+      url: `/api/v4/customers/${id}/bonus_points`,
+      payload: points as JSONValue,
+    });
+  }
+}

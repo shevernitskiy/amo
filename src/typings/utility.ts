@@ -1,4 +1,4 @@
-import type { Company, Contact, Customer, Lead, Tag } from "@typings/entities.ts";
+import type { Company, Contact, Customer, Lead, Segment, Tag } from "@typings/entities.ts";
 
 export type JSONValue =
   | string
@@ -73,4 +73,5 @@ export type Embedded = {
   customers?: (Pick<Customer, "id"> & Links)[];
   companies?: (Pick<Company, "id"> & Links)[];
   contacts?: (Pick<Contact, "id"> & { is_main?: boolean } & Links)[];
+  segments?: (Pick<Segment, "id"> & Links)[];
 };

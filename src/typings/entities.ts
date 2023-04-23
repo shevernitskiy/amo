@@ -753,31 +753,6 @@ export type NoteParams = {
   };
 };
 
-type Transaction = {
-  /** ID транзакции */
-  id: number;
-  /** Комментарий к покупке */
-  comment: string;
-  /** Сумма покупки */
-  price: number;
-  /** Когда транзакция была проведена. Данные в Unix Timestamp */
-  completed_at: number;
-  /** ID покупателя, в котором находится транзакция */
-  customer_id: number;
-  /** ID пользователя, создавший транзакцию */
-  created_by: number;
-  /** ID пользователя, изменивший транзакцию */
-  updated_by: number;
-  /** Дата создания транзакции, передается в Unix Timestamp */
-  created_at: number;
-  /** Дата изменения транзакции, передается в Unix Timestamp */
-  updated_at: number;
-  /** Удалена ли транзакция */
-  is_deleted: boolean;
-  /** ID аккаунта, в котором находится транзакция */
-  account_id: number;
-};
-
 export type Note = {
   /** ID примечания */
   id: number;
@@ -804,45 +779,6 @@ export type Note = {
 };
 
 export type NoteEntityType = "leads" | "contacts" | "companies" | "customers";
-
-export type Customer = {
-  /** ID покупателя */
-  id: number;
-  /** Название покупателя */
-  name: string;
-  /** Ожидаемая сумма покупки */
-  next_price: number;
-  /** Ожидаемая дата следующей покупки. Данные в Unix Timestamp */
-  next_date: number;
-  /** ID пользователя, ответственного за покупателя */
-  responsible_user_id: number;
-  /** ID статуса покупателя в аккаунте подробнее здесь */
-  status_id: number;
-  /** Периодичность (данные необходимы для покупателей, при включенном функционале периодичности) */
-  periodicity: number;
-  /** ID пользователя, создавший покупателя */
-  created_by: number;
-  /** ID пользователя, изменивший покупателя */
-  updated_by: number;
-  /** Дата создания покупателя, передается в Unix Timestamp */
-  created_at: number;
-  /** Дата изменения покупателя, передается в Unix Timestamp */
-  updated_at: number;
-  /** Дата ближайшей задачи к выполнению, передается в Unix Timestamp */
-  closest_task_at: number;
-  /** Удален ли покупатель */
-  is_deleted: boolean;
-  /** Массив, содержащий информацию по значениям дополнительных полей, заданных для данного покупателя */
-  custom_fields_values: CustomFieldsValue[] | null;
-  /** Сумма покупок */
-  ltv: number;
-  /** Количество */
-  purchases_count: number;
-  /** Средний размер покупки */
-  average_check: number;
-  /** ID аккаунта, в котором находится покупатель */
-  account_id: number;
-};
 
 export type EntityLink = {
   /** ID главной сущности */
@@ -872,6 +808,70 @@ export type EntityLink = {
     | null;
 };
 
+export type Customer = {
+  /** ID покупателя */
+  id: number;
+  /** Название покупателя */
+  name: string;
+  /** Ожидаемая сумма покупки */
+  next_price: number;
+  /** Ожидаемая дата следующей покупки. Данные в Unix Timestamp */
+  next_date: number;
+  /** ID пользователя, ответственного за покупателя */
+  responsible_user_id: number;
+  /** ID статуса покупателя в аккаунте подробнее здесь */
+  status_id: number;
+  /** Периодичность (данные необходимы для покупателей, при включенном функционале периодичности) */
+  periodicity: number;
+  /** ID пользователя, создавший покупателя */
+  created_by: number;
+  /** ID пользователя, изменивший покупателя */
+  updated_by: number;
+  /** Дата создания покупателя, передается в Unix Timestamp */
+  created_at: number;
+  /** Дата изменения покупателя, передается в Unix Timestamp */
+  updated_at: number;
+  /** Дата ближайшей задачи к выполнению, передается в Unix Timestamp */
+  closest_task_at: number | null;
+  /** Удален ли покупатель */
+  is_deleted: boolean;
+  /** Массив, содержащий информацию по значениям дополнительных полей, заданных для данного покупателя */
+  custom_fields_values: CustomFieldsValue[] | null;
+  /** Сумма покупок */
+  ltv: number;
+  /** Количество */
+  purchases_count: number;
+  /** Средний размер покупки */
+  average_check: number;
+  /** ID аккаунта, в котором находится покупатель */
+  account_id: number;
+};
+
+export type Transaction = {
+  /** ID транзакции */
+  id: number;
+  /** Комментарий к покупке */
+  comment: string;
+  /** Сумма покупки */
+  price: number;
+  /** Когда транзакция была проведена. Данные в Unix Timestamp */
+  completed_at: number;
+  /** ID покупателя, в котором находится транзакция */
+  customer_id: number;
+  /** ID пользователя, создавший транзакцию */
+  created_by: number;
+  /** ID пользователя, изменивший транзакцию */
+  updated_by: number;
+  /** Дата создания транзакции, передается в Unix Timestamp */
+  created_at: number;
+  /** Дата изменения транзакции, передается в Unix Timestamp */
+  updated_at: number;
+  /** Удалена ли транзакция */
+  is_deleted: boolean;
+  /** ID аккаунта, в котором находится транзакция */
+  account_id: number;
+};
+
 // TODO: what is Condition?
 type Status = {
   id: number;
@@ -884,7 +884,7 @@ type Status = {
   account_id: number;
 };
 
-type Segment = {
+export type Segment = {
   id: number;
   created_at: number;
   updated_at: number;
