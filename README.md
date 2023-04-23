@@ -17,7 +17,7 @@
   - [x] Catalogs
   - [x] Links
   - [x] Tasks
-  - [ ] Custom Fields
+  - [x] Custom Fields
   - [ ] Tags
   - [ ] Events and Notes
   - [ ] Customers
