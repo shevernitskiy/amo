@@ -9,8 +9,9 @@ import { UnsortedApi } from "@api/unsorted/client.ts";
 import { PipelineApi } from "@api/pipeline/client.ts";
 import { CatalogApi } from "@api/catalog/client.ts";
 import { LinkApi } from "@api/link/client.ts";
-import { TaskApi } from "./api/task/client.ts";
-import { CustomFieldsApi } from "./api/custom-fields/client.ts";
+import { TaskApi } from "@api/task/client.ts";
+import { CustomFieldsApi } from "@api/custom-fields/client.ts";
+import { TagApi } from "@api/tag/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -25,6 +26,7 @@ export class Amo {
   private _link: LinkApi;
   private _task: TaskApi;
   private _custom_fields: CustomFieldsApi;
+  private _tag: TagApi;
 
   constructor(
     subdomain: string,
@@ -43,6 +45,7 @@ export class Amo {
     this._link = new LinkApi(this.rest);
     this._task = new TaskApi(this.rest);
     this._custom_fields = new CustomFieldsApi(this.rest);
+    this._tag = new TagApi(this.rest);
   }
 
   /** Token struct */
@@ -89,5 +92,9 @@ export class Amo {
   /** Custom Fields Api */
   get custom_fields(): CustomFieldsApi {
     return this._custom_fields;
+  }
+  /** Tag Api */
+  get tag(): TagApi {
+    return this._tag;
   }
 }

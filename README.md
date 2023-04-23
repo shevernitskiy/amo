@@ -18,7 +18,7 @@
   - [x] Links
   - [x] Tasks
   - [x] Custom Fields
-  - [ ] Tags
+  - [x] Tags
   - [ ] Events and Notes
   - [ ] Customers
   - [ ] Statuses and Segments
