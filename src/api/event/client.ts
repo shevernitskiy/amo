@@ -14,10 +14,10 @@ export class EventApi {
     // TODO: special case value_before, value_after
     filter?: FilterLike<
       ["id", "created_at", "created_by", "entity", "entity_id", "type"],
-      ["id", "created_at", "created_by", "entity", "entity_id", "type"],
+      ["id", "created_by", "entity", "entity_id", "type"],
       ["created_at"],
-      number,
-      number
+      never,
+      never
     >;
   }): Promise<ReponseGetEvents> {
     return this.rest.get<ReponseGetEvents>({

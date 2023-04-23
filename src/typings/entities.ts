@@ -690,27 +690,68 @@ export type Event = {
   account_id: number;
 };
 
-type NoteTypes =
+export type NoteParams = {
   /** Текстовое примечание */
-  | "common"
+  common: {
+    text: string;
+  };
   /** Входящий звонок */
-  | "call_in"
+  call_in: {
+    uniq: string;
+    duration: number;
+    source: string;
+    link: string;
+    phone: string;
+    call_responsible: string;
+  };
   /** Исходящий звонок */
-  | "call_out"
+  call_out: {
+    uniq: string;
+    duration: number;
+    source: string;
+    link: string;
+    phone: string;
+    call_responsible: string;
+  };
   /** Системное сообщение (добавляется интеграциями) */
-  | "service_message"
-  /** Сообщение кассиру */
-  | "message_cashier"
-  /** Текстовое примечание с гео-координатами (добавляются мобильным приложением) */
-  | "geolocation"
-  /** Входящее SMS */
-  | "sms_in"
-  /** Исходящее SMS */
-  | "sms_out"
+  service_message: {
+    service: string;
+    text: string;
+  };
   /** Расширенное системное сообщение (поддерживает больше текста и сворачивается в интерфейсе) */
-  | "extended_service_message"
+  extended_service_message: {
+    service: string;
+    text: string;
+  };
+  /** Сообщение кассиру */
+  message_cashier: {
+    status: "created" | "shown" | "canceled";
+    text: string;
+  };
+  /** Текстовое примечание с гео-координатами (добавляются мобильным приложением) */
+  geolocation: {
+    text: string;
+    address: string;
+    longitude: string;
+    latitude: string;
+  };
+  /** Входящее SMS */
+  sms_in: {
+    text: string;
+    phone: string;
+  };
+  /** Исходящее SMS */
+  sms_out: {
+    text: string;
+    phone: string;
+  };
   /** Примечание с файлом */
-  | "attachment";
+  attachment: {
+    version_uuid: string;
+    file_uuid: string;
+    file_name: string;
+  };
+};
 
 type Transaction = {
   /** ID транзакции */
@@ -737,7 +778,7 @@ type Transaction = {
   account_id: number;
 };
 
-type Note = {
+export type Note = {
   /** ID примечания */
   id: number;
   /** ID родительской сущности примечания */
@@ -755,12 +796,14 @@ type Note = {
   /** ID группы, в которой состоит ответственны пользователь за примечание */
   group_id: number;
   /** Тип примечания */
-  note_type: NoteTypes;
+  note_type: keyof NoteParams;
   /** Свойства примечания, зависят от типа примечания. Подробней о свойствах читайте тут */
-  params: object;
+  params: NoteParams[keyof NoteParams];
   /** ID аккаунта, в котором находится примечание */
   account_id: number;
 };
+
+export type NoteEntityType = "leads" | "contacts" | "companies" | "customers";
 
 export type Customer = {
   /** ID покупателя */
