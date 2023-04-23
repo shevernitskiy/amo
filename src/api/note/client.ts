@@ -12,8 +12,8 @@ import type {
   ResponseUpdateNotes,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
-import { order } from "@helpers/order.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class NoteApi {
   constructor(private rest: RestClient) {}
@@ -33,11 +33,7 @@ export class NoteApi {
   }): Promise<ReponseGetNotesByEntityType> {
     return this.rest.get<ReponseGetNotesByEntityType>({
       url: `/api/v4/${entity_type}/notes`,
-      query: params === undefined ? undefined : {
-        ...params,
-        order: params.order === undefined ? undefined : order(params.order),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -50,11 +46,7 @@ export class NoteApi {
   }): Promise<ReponseGetNotesByEntityId> {
     return this.rest.get<ReponseGetNotesByEntityId>({
       url: `/api/v4/${entity_type}/${entity_id}/notes`,
-      query: params === undefined ? undefined : {
-        ...params,
-        order: params.order === undefined ? undefined : order(params.order),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 

@@ -11,8 +11,8 @@ import type {
   ResponseLinkUnsorted,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { order } from "@helpers/order.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class UnsortedApi {
   constructor(private rest: RestClient) {}
@@ -26,11 +26,7 @@ export class UnsortedApi {
   }): Promise<ReponseGetUnsorted> {
     return this.rest.get<ReponseGetUnsorted>({
       url: "/api/v4/leads/unsorted",
-      query: params === undefined ? undefined : {
-        ...params,
-        order: params.order === undefined ? undefined : order(params.order),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -101,10 +97,7 @@ export class UnsortedApi {
   }): Promise<ReponseGetUnsortedSummary> {
     return this.rest.get<ReponseGetUnsortedSummary>({
       url: "/api/v4/leads/unsorted/summary",
-      query: params === undefined ? undefined : {
-        ...params,
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 }

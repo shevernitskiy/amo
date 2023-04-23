@@ -15,7 +15,8 @@ import type {
   ResponseUpdateCustomers,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class CustomerApi {
   constructor(private rest: RestClient) {}
@@ -47,11 +48,7 @@ export class CustomerApi {
   }): Promise<ReponseGetCustomers> {
     return this.rest.get<ReponseGetCustomers>({
       url: "/api/v4/customers",
-      query: params === undefined ? undefined : {
-        ...params,
-        with: params.with === undefined ? undefined : params.with.join(","),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -97,10 +94,7 @@ export class CustomerApi {
   }): Promise<ReponseGetTransactions> {
     return this.rest.get<ReponseGetTransactions>({
       url: "/api/v4/customers/transactions",
-      query: params === undefined ? undefined : {
-        ...params,
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -112,10 +106,7 @@ export class CustomerApi {
   }): Promise<ReponseGetCustomerById> {
     return this.rest.get<ReponseGetCustomerById>({
       url: `/api/v4/customers/${customer_id}/transactions`,
-      query: params === undefined ? undefined : {
-        ...params,
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 

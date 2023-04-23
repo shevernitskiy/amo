@@ -9,7 +9,8 @@ import type {
   ResponseDeleteTagsToEntities,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class TagApi {
   constructor(private rest: RestClient) {}
@@ -23,10 +24,7 @@ export class TagApi {
   }): Promise<ReponseGetTags> {
     return this.rest.get<ReponseGetTags>({
       url: `/api/v4/${entity_type}/tags`,
-      query: params === undefined ? undefined : {
-        ...params,
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 

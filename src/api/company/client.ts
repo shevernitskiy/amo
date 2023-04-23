@@ -9,8 +9,8 @@ import type {
   ResponseUpdateCompany,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { order } from "@helpers/order.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class CompanyApi {
   constructor(private rest: RestClient) {}
@@ -32,12 +32,7 @@ export class CompanyApi {
   }): Promise<ReponseGetCompanies> {
     return this.rest.get<ReponseGetCompanies>({
       url: "/api/v4/companies",
-      query: params === undefined ? undefined : {
-        ...params,
-        with: params.with === undefined ? undefined : params.with.join(","),
-        order: params.order === undefined ? undefined : order(params.order),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -47,7 +42,7 @@ export class CompanyApi {
   }): Promise<ReponseGetCompanyById> {
     return this.rest.get<ReponseGetCompanyById>({
       url: `/api/v4/companies/${id}`,
-      query: params?.with === undefined ? undefined : { with: params.with.join(",") },
+      query: query(params),
     });
   }
 

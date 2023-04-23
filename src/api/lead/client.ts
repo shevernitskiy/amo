@@ -11,8 +11,8 @@ import type {
   ResponseUpdateLeads,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { order } from "@helpers/order.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
+import { FilterLike } from "@helpers/filter.ts";
 
 export class LeadApi {
   constructor(private rest: RestClient) {}
@@ -36,12 +36,7 @@ export class LeadApi {
   }): Promise<ReponseGetLeads> {
     return this.rest.get<ReponseGetLeads>({
       url: "/api/v4/leads",
-      query: params === undefined ? undefined : {
-        ...params,
-        with: params.with === undefined ? undefined : params.with.join(","),
-        order: params.order === undefined ? undefined : order(params.order),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -53,7 +48,7 @@ export class LeadApi {
   }): Promise<ReponseGetLeadById> {
     return this.rest.get<ReponseGetLeadById>({
       url: `/api/v4/leads/${id}`,
-      query: params?.with === undefined ? undefined : { with: params.with.join(",") },
+      query: query(params),
     });
   }
 

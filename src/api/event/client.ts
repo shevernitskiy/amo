@@ -1,7 +1,8 @@
 import type { With } from "@typings/utility.ts";
 import type { ReponseGetEventById, ReponseGetEvents, ReponseGetEventsTypes } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class EventApi {
   constructor(private rest: RestClient) {}
@@ -22,11 +23,7 @@ export class EventApi {
   }): Promise<ReponseGetEvents> {
     return this.rest.get<ReponseGetEvents>({
       url: "/api/v4/events",
-      query: params === undefined ? undefined : {
-        ...params,
-        with: params.with === undefined ? undefined : params.with.join(","),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 

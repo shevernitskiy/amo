@@ -14,8 +14,8 @@ import type {
   ResponseUpdateTasks,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
-import { order } from "@helpers/order.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class TaskApi {
   constructor(private rest: RestClient) {}
@@ -36,11 +36,7 @@ export class TaskApi {
   }): Promise<ReponseGetTasks> {
     return this.rest.get<ReponseGetTasks>({
       url: "/api/v4/tasks",
-      query: params === undefined ? undefined : {
-        ...params,
-        order: params.order === undefined ? undefined : order(params.order),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 

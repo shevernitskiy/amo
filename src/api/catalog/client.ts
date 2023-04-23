@@ -16,7 +16,8 @@ import type {
   ResponseUpdateCatalogs,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class CatalogApi {
   constructor(private rest: RestClient) {}
@@ -73,11 +74,7 @@ export class CatalogApi {
   }): Promise<ReponseGetCatalogElements> {
     return this.rest.get<ReponseGetCatalogElements>({
       url: `/api/v4/catalogs/${catalog_id}/elements`,
-      query: params === undefined ? undefined : {
-        ...params,
-        with: params.with === undefined ? undefined : params.with.join(","),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -87,10 +84,7 @@ export class CatalogApi {
   }): Promise<ReponseGetCatalogElement> {
     return this.rest.get<ReponseGetCatalogElement>({
       url: `/api/v4/catalogs/${catalog_id}/elements/${id}`,
-      query: params === undefined ? undefined : {
-        ...params,
-        with: params.with === undefined ? undefined : params.with.join(","),
-      },
+      query: query(params),
     });
   }
 

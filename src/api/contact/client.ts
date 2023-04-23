@@ -12,8 +12,8 @@ import type {
   ResponseUpdateContacts,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { order } from "@helpers/order.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class ContactApi {
   constructor(private rest: RestClient) {}
@@ -35,12 +35,7 @@ export class ContactApi {
   }): Promise<ResponseGetContacts> {
     return this.rest.get<ResponseGetContacts>({
       url: "/api/v4/contacts",
-      query: params === undefined ? undefined : {
-        ...params,
-        with: params.with === undefined ? undefined : params.with.join(","),
-        order: params.order === undefined ? undefined : order(params.order),
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -50,7 +45,7 @@ export class ContactApi {
   }): Promise<ResponseGetContactById> {
     return this.rest.get<ResponseGetContactById>({
       url: `/api/v4/contacts/${id}`,
-      query: params?.with === undefined ? undefined : { with: params.with.join(",") },
+      query: query(params),
     });
   }
 

@@ -10,7 +10,8 @@ import type {
   ResponseAddLinksByEntityType,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
-import { FilterLike, filterLikeToString } from "@helpers/filter.ts";
+import { FilterLike } from "@helpers/filter.ts";
+import { query } from "@helpers/query.ts";
 
 export class LinkApi {
   constructor(private rest: RestClient) {}
@@ -21,9 +22,7 @@ export class LinkApi {
   }): Promise<ReponseGetLinksByEntityType> {
     return this.rest.get<ReponseGetLinksByEntityType>({
       url: `/api/v4/${entity_type}/links`,
-      query: params === undefined ? undefined : {
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
@@ -33,9 +32,7 @@ export class LinkApi {
   }): Promise<ReponseGetLinksByEntityId> {
     return this.rest.get<ReponseGetLinksByEntityId>({
       url: `/api/v4/${entity_type}/${id}/links`,
-      query: params === undefined ? undefined : {
-        filter: params.filter === undefined ? undefined : filterLikeToString(params.filter),
-      },
+      query: query(params),
     });
   }
 
