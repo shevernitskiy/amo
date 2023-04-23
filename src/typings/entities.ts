@@ -521,7 +521,7 @@ export type Tag = {
   color: Color | null;
 };
 
-enum Color {
+export enum Color {
   BRIGHT_GRAY = "EBEBEB",
   AMERICAN_SILVER = "D0D0D0",
   PINK_LACE = "F2DDF7",
@@ -547,7 +547,7 @@ enum Color {
   LAPIS_LAZULI = "247BA0",
 }
 
-type EventTypes =
+export type EventTypes =
   /** Новая сделка */
   | "lead_added"
   /** Сделка удалена */
@@ -669,7 +669,7 @@ type EventTypes =
   /** Изменение поля c переданным ID. Если вы передаете данный тип, то другие типы не могут быть переданы. */
   | string;
 
-type Event = {
+export type Event = {
   /** ID события */
   id: string;
   /** Тип события */
@@ -683,9 +683,9 @@ type Event = {
   /** Дата создания события, передается в Unix Timestamp */
   created_at: number;
   /** Массив с изменениями по событию. Подробней о свойствах изменения читайте тут */
-  value_after: any[];
+  value_after: any[]; // TODO: eto pzdc, kto takoe pridumal voobshe?
   /** Массив с изменениями по событию. Подробней о свойствах изменения читайте тут */
-  value_before: any[];
+  value_before: any[]; // TODO: eto pzdc, kto takoe pridumal voobshe?
   /** ID аккаунта, в котором находится событие */
   account_id: number;
 };

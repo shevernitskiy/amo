@@ -12,6 +12,7 @@ import { LinkApi } from "@api/link/client.ts";
 import { TaskApi } from "@api/task/client.ts";
 import { CustomFieldsApi } from "@api/custom-fields/client.ts";
 import { TagApi } from "@api/tag/client.ts";
+import { EventApi } from "@api/event/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -27,6 +28,7 @@ export class Amo {
   private _task: TaskApi;
   private _custom_fields: CustomFieldsApi;
   private _tag: TagApi;
+  private _event: EventApi;
 
   constructor(
     subdomain: string,
@@ -46,6 +48,7 @@ export class Amo {
     this._task = new TaskApi(this.rest);
     this._custom_fields = new CustomFieldsApi(this.rest);
     this._tag = new TagApi(this.rest);
+    this._event = new EventApi(this.rest);
   }
 
   /** Token struct */
@@ -96,5 +99,9 @@ export class Amo {
   /** Tag Api */
   get tag(): TagApi {
     return this._tag;
+  }
+  /** Event Api */
+  get event(): EventApi {
+    return this._event;
   }
 }
