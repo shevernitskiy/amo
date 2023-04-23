@@ -802,17 +802,28 @@ export type Customer = {
 };
 
 export type EntityLink = {
+  /** ID главной сущности */
   entity_id: number;
+  /** Тип главной сущности (leads, contacts, companies, customers) */
   entity_type: "leads" | "contacts" | "companies" | "customers" | "catalog_elements";
+  /** ID связанной сущности */
   to_entity_id: number;
+  /** Тип связанной сущности (leads, contacts, companies, customers, catalog_elements) */
   to_entity_type: "leads" | "contacts" | "companies" | "customers" | "catalog_elements";
+  /** Метаданные связанной сущности */
   metadata:
     | Partial<{
+      /** Является ли привязанный контакт главным */
       main_contact: boolean;
+      /** Является ли контакт главным */
       is_main: boolean;
+      /** Количество прикрепленных элементов каталогов */
       quantity: number;
+      /** ID каталога */
       catalog_id: number;
+      /** ID пользователя, от имени которого осуществляется прикрепление */
       updated_by: number;
+      /** ID поля типа Цена, которое установлено для привязанного элемента в контексте сущности */
       price_id: number | null;
     }>
     | null;
