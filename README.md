@@ -19,7 +19,8 @@
   - [x] Tasks
   - [x] Custom Fields
   - [x] Tags
-  - [ ] Events and Notes
+  - [x] Events
+  - [x] Notes
   - [ ] Customers
   - [ ] Statuses and Segments
   - [ ] Users
