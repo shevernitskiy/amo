@@ -68,7 +68,7 @@ export class RestClient {
       });
     }
 
-    const target = `${this.url_base}${init?.url}${init.query ? "?" + this.params(init.query) : ""}`;
+    const target = `${this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
 
     console.log("REQUEST", target, init.payload);
 
@@ -110,19 +110,6 @@ export class RestClient {
 
   delete<T>(init: RequestInit): Promise<T> {
     return this.request<T>("DELETE", init);
-  }
-
-  // deno-lint-ignore no-explicit-any
-  private params(query: Record<string, any>): string {
-    const result = new URLSearchParams(
-      Object.entries(query)
-        .filter((item) => item[1] !== undefined && item[0] !== "filter")
-        .map<string[]>((item) => {
-          if (item[0] === "order") return [item[1][0], item[1][1]];
-          return [item[0], item[1].toString()];
-        }),
-    );
-    return query.filter !== undefined ? result.toString() + "&" + query.filter : result.toString();
   }
 
   isOAuthCode(

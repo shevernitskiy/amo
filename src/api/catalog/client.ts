@@ -29,7 +29,7 @@ export class CatalogApi {
   }): Promise<ReponseGetCatalogs> {
     return this.rest.get<ReponseGetCatalogs>({
       url: "/api/v4/catalogs",
-      query: params,
+      query: query(params),
     });
   }
 

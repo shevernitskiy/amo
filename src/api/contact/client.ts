@@ -88,10 +88,7 @@ export class ContactApi {
   }): Promise<ResponseGetContactToChat> {
     return this.rest.get<ResponseGetContactToChat>({
       url: "/api/v4/contacts/chats",
-      query: {
-        chat_id: params.chat_id === undefined ? undefined : params.chat_id.join(","),
-        contact_id: params.contact_id === undefined ? undefined : params.contact_id.join(","),
-      },
+      query: query(params),
     });
   }
 }

@@ -58,7 +58,7 @@ export class CustomerApi {
   }): Promise<ReponseGetCustomerById> {
     return this.rest.get<ReponseGetCustomerById>({
       url: `/api/v4/customers/${id}`,
-      query: params?.with === undefined ? undefined : { with: params.with.join(",") },
+      query: query(params),
     });
   }
 

@@ -33,7 +33,7 @@ export class EventApi {
   }): Promise<ReponseGetEventById> {
     return this.rest.get<ReponseGetEventById>({
       url: `/api/v4/events/${id}`,
-      query: params?.with === undefined ? undefined : { with: params.with.join(",") },
+      query: query(params),
     });
   }
 
@@ -41,7 +41,7 @@ export class EventApi {
   getEventsTypes(language_code: string): Promise<ReponseGetEventsTypes> {
     return this.rest.get<ReponseGetEventsTypes>({
       url: `/api/v4/events/types`,
-      query: language_code === undefined ? undefined : { language_code: language_code },
+      query: query({ language_code: language_code }),
     });
   }
 }
