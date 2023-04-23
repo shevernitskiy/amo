@@ -1,13 +1,13 @@
 export class Filter<
-  TSimple extends string[] | never,
+  TSingle extends string[] | never,
   TMulti extends string[] | never,
   TRange extends string[] | never,
   TStatus extends number | never,
-  TCuctomField extends number | never,
+  TCustomField extends number | never,
 > {
   private current: string[] = [];
 
-  simple(key: TSimple[keyof TSimple], value: string | number): this {
+  single(key: TSingle[keyof TSingle], value: string | number): this {
     this.current.push(`filter[${key}]=${value}`);
     return this;
   }
@@ -35,12 +35,12 @@ export class Filter<
     return this;
   }
 
-  custom_field(field_id: TCuctomField, value: string | number): this {
+  custom_field(field_id: TCustomField, value: string | number): this {
     this.current.push(`filter[custom_fields_values][${field_id}][]=${value}`);
     return this;
   }
 
-  custom_field_range(field_id: TCuctomField, from: string | number, to: string | number): this {
+  custom_field_range(field_id: TCustomField, from: string | number, to: string | number): this {
     this.current.push(
       `filter[custom_fields_values][${field_id}][from]=${from}&filter[custom_fields_values][${field_id}][to]=${to}`,
     );
@@ -53,24 +53,24 @@ export class Filter<
 }
 
 export type FilterLike<
-  TSimple extends string[] | never,
+  TSingle extends string[] | never,
   TMulti extends string[] | never,
   TRange extends string[] | never,
   TStatus extends number | never,
-  TCuctomField extends number | never,
+  TCustomField extends number | never,
 > =
-  | Filter<TSimple, TMulti, TRange, TStatus, TCuctomField>
+  | Filter<TSingle, TMulti, TRange, TStatus, TCustomField>
   | ((
-    filter: Filter<TSimple, TMulti, TRange, TStatus, TCuctomField>,
-  ) => Filter<TSimple, TMulti, TRange, TStatus, TCuctomField>);
+    filter: Filter<TSingle, TMulti, TRange, TStatus, TCustomField>,
+  ) => Filter<TSingle, TMulti, TRange, TStatus, TCustomField>);
 
 export function filterLikeToString<
-  TSimple extends string[] | never,
+  TSingle extends string[] | never,
   TMulti extends string[] | never,
   TRange extends string[] | never,
   TStatus extends number | never,
-  TCuctomField extends number | never,
->(filter_like: FilterLike<TSimple, TMulti, TRange, TStatus, TCuctomField>): string {
-  if (filter_like instanceof Filter<TSimple, TMulti, TRange, TStatus, TCuctomField>) return filter_like.toString();
+  TCustomField extends number | never,
+>(filter_like: FilterLike<TSingle, TMulti, TRange, TStatus, TCustomField>): string {
+  if (filter_like instanceof Filter<TSingle, TMulti, TRange, TStatus, TCustomField>) return filter_like.toString();
   return filter_like(new Filter()).toString();
 }
