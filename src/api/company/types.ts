@@ -1,5 +1,5 @@
 import type { Company } from "@typings/entities.ts";
-import type { Embedded, Links, Page } from "@typings/utility.ts";
+import type { Embedded, Links, Page, RequestId } from "@typings/utility.ts";
 
 export type ReponseGetCompanies = Links & Page & {
   _embedded: {
@@ -13,24 +13,22 @@ export type ReponseGetCompanyById = Links & Company & {
   _embedded: Pick<Embedded, "tags" | "contacts" | "customers" | "leads" | "catalog_elements">;
 };
 
-export type RequestAddCompany = Partial<
-  Pick<Company, "name" | "responsible_user_id" | "created_by" | "updated_by" | "custom_fields_values"> & {
-    _embedded?: {
-      tags?: {
-        id?: number;
-        name?: string;
-      }[];
-    };
-    request_id?: string;
-  }
->;
+export type RequestAddCompany =
+  & RequestId
+  & Partial<
+    Pick<Company, "name" | "responsible_user_id" | "created_by" | "updated_by" | "custom_fields_values"> & {
+      _embedded?: {
+        tags?: {
+          id?: number;
+          name?: string;
+        }[];
+      };
+    }
+  >;
 
 export type ResponseAddCompanies = Links & {
   _embedded: {
-    companies: (Links & {
-      id: number;
-      request_id: string;
-    })[];
+    companies: (Links & RequestId & { id: number })[];
   };
 };
 

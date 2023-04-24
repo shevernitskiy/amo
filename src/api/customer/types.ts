@@ -1,5 +1,5 @@
 import type { Customer, Transaction } from "@typings/entities.ts";
-import type { Embedded, Links, Page } from "@typings/utility.ts";
+import type { Embedded, Links, Page, RequestId } from "@typings/utility.ts";
 
 export type ReponseGetCustomers = Page & Links & {
   _embedded: {
@@ -45,7 +45,7 @@ export type ResponseUpdateCustomers = Links & {
 };
 
 export type RequestUpdateCustomerById = RequestAddCustomer;
-export type ResponseUpdateCustomerById = Links & Pick<Customer, "id"> & { request_id?: string };
+export type ResponseUpdateCustomerById = Links & Pick<Customer, "id"> & RequestId;
 
 export type ReponseGetTransactions = Page & Links & {
   _embedded: {
@@ -56,11 +56,11 @@ export type ReponseGetTransactions = Page & Links & {
 export type RequestAddTransactionsToCustomer =
   & Partial<Pick<Transaction, "comment" | "price" | "completed_at" | "created_by">>
   & Pick<Embedded, "catalog_elements">
-  & { request_id?: string };
+  & RequestId;
 
 export type ResponseAddTransactionsToCustomer = Links & {
   _embedded: {
-    customers: (Pick<Customer, "id"> & { request_id?: string })[];
+    customers: (Pick<Customer, "id"> & RequestId)[];
   };
 };
 

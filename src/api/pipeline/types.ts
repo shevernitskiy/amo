@@ -1,4 +1,4 @@
-import type { Links, Total } from "@typings/utility.ts";
+import type { Links, RequestId, Total } from "@typings/utility.ts";
 import type { Pipeline, PipelineStatus } from "@typings/entities.ts";
 
 export type ReponseGetPipelines = Links & Total & {
@@ -15,8 +15,8 @@ export type ReponseGetPipeline = Links & Pipeline & {
 
 export type RequestAddPipeline =
   & Partial<Pick<Pipeline, "name" | "sort" | "is_main" | "is_unsorted_on">>
+  & RequestId
   & {
-    request_id?: string;
     _embedded?: {
       statuses?: Partial<PipelineStatus>[];
     };
@@ -40,11 +40,10 @@ export type ReponseGetStatusesPipeline = ReponseGetPipelines;
 
 export type ReponseGetStatus = Links & PipelineStatus;
 
-export type RequestAddStatus = {
+export type RequestAddStatus = RequestId & {
   name: string;
   sort: number;
   color?: string;
-  request_id?: string;
 };
 
 export type ResponseAddStatuses = Total & {

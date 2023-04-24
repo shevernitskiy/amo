@@ -1,4 +1,4 @@
-import type { Links, Page } from "@typings/utility.ts";
+import type { Links, Page, RequestId } from "@typings/utility.ts";
 import type { Catalog, CatalogElement } from "@typings/entities.ts";
 
 export type ReponseGetCatalogs = Page & Links & {
@@ -11,19 +11,17 @@ export type ReponseGetCatalog = Links & Catalog;
 
 export type RequestAddCatalog =
   & Partial<Pick<Catalog, "name" | "type" | "sort" | "can_add_elements" | "can_link_multiple">>
-  & { request_id: string };
+  & RequestId;
 
 export type ResponseAddCatalogs = Links & {
   _embedded: {
-    catalogs: (Links & Catalog & {
-      request_id: string;
-    })[];
+    catalogs: (Links & Catalog & RequestId)[];
   };
 };
 
 export type RequestUpdateCatalog =
   & Partial<Pick<Catalog, "name" | "can_add_elements" | "can_link_multiple">>
-  & { request_id: string };
+  & RequestId;
 
 export type ResponseUpdateCatalogs = Links & {
   _embedded: {
@@ -31,7 +29,7 @@ export type ResponseUpdateCatalogs = Links & {
   };
 };
 
-export type ResponseUpdateCatalog = Links & Catalog & { request_id: string };
+export type ResponseUpdateCatalog = Links & Catalog & RequestId;
 
 export type ReponseGetCatalogElements = Page & Links & {
   _embedded: {
@@ -41,9 +39,7 @@ export type ReponseGetCatalogElements = Page & Links & {
 
 export type ReponseGetCatalogElement = Links & CatalogElement;
 
-export type RequestAddCatalogElement = Partial<Pick<CatalogElement, "name" | "custom_fields_values">> & {
-  request_id: string;
-};
+export type RequestAddCatalogElement = Partial<Pick<CatalogElement, "name" | "custom_fields_values">> & RequestId;
 
 export type ResponseAddCatalogElements = Links & {
   _embedded: {

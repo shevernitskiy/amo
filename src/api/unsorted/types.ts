@@ -1,4 +1,4 @@
-import type { Embedded, Links, Page, Total } from "@typings/utility.ts";
+import type { Embedded, Links, Page, RequestId, Total } from "@typings/utility.ts";
 import type { Company, Contact, Lead, Unsorted, UnsrotedMetadataForm, UnsrotedMetadataSip } from "@typings/entities.ts";
 
 export type ReponseGetUnsorted = Links & Page & {
@@ -15,6 +15,7 @@ export type ReponseGetUnsortedByUid = Links & Unsorted & {
 
 export type RequestAddUnsorted<T> =
   & Partial<Pick<Unsorted, "source_uid" | "source_name" | "pipeline_id" | "created_at">>
+  & RequestId
   & {
     metadata?: T;
     _embedded?: {
@@ -22,7 +23,6 @@ export type RequestAddUnsorted<T> =
       companies?: Partial<Company>[];
       leads?: Partial<Lead>[];
     };
-    request_id?: string;
   };
 
 export type RequestAddUnsortedSip = RequestAddUnsorted<UnsrotedMetadataSip>;
@@ -30,10 +30,9 @@ export type RequestAddUnsortedForm = RequestAddUnsorted<UnsrotedMetadataForm>;
 
 export type ResponseAddUnsorted = Total & {
   _embedded: {
-    unsorted: (Links & {
+    unsorted: (Links & RequestId & {
       uid: string;
       account_id: number;
-      request_id: string;
       _embedded: Pick<Embedded, "leads" | "contacts" | "companies">;
     })[];
   };

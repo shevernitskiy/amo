@@ -1,5 +1,5 @@
 import { Contact } from "@typings/entities.ts";
-import { Embedded, Links, Page, Total } from "@typings/utility.ts";
+import { Embedded, Links, Page, RequestId, Total } from "@typings/utility.ts";
 
 export type ResponseGetContacts = Page & Links & {
   _embedded: {
@@ -13,61 +13,60 @@ export type ResponseGetContactById = Contact & Links & {
   _embedded: Pick<Embedded, "tags" | "companies" | "customers" | "leads" | "catalog_elements">;
 };
 
-export type RequestAddContact = Partial<
-  Pick<
-    Contact,
-    | "name"
-    | "first_name"
-    | "last_name"
-    | "responsible_user_id"
-    | "created_by"
-    | "updated_by"
-    | "created_at"
-    | "updated_at"
-    | "custom_fields_values"
-  > & {
-    _embedded?: {
-      tags?: {
-        id?: number;
-        name?: string;
-      }[];
-    };
-    request_id?: string;
-  }
->;
+export type RequestAddContact =
+  & RequestId
+  & Partial<
+    Pick<
+      Contact,
+      | "name"
+      | "first_name"
+      | "last_name"
+      | "responsible_user_id"
+      | "created_by"
+      | "updated_by"
+      | "created_at"
+      | "updated_at"
+      | "custom_fields_values"
+    > & {
+      _embedded?: {
+        tags?: {
+          id?: number;
+          name?: string;
+        }[];
+      };
+    }
+  >;
 
 export type ResponseAddContacts = Links & {
   _embedded: {
-    contacts: (Links & {
-      id: number;
-      request_id: string;
-    })[];
+    contacts: (Links & RequestId & { id: number })[];
   };
 };
 
-export type RequestUpdateContact = Partial<
-  Pick<
-    Contact,
-    | "id"
-    | "name"
-    | "first_name"
-    | "last_name"
-    | "responsible_user_id"
-    | "created_by"
-    | "updated_by"
-    | "created_at"
-    | "updated_at"
-    | "custom_fields_values"
-  > & {
-    _embedded?: {
-      tags?: {
-        id?: number;
-        name?: string;
-      }[];
-    };
-    request_id?: string;
-  }
->;
+export type RequestUpdateContact =
+  & RequestId
+  & Partial<
+    Pick<
+      Contact,
+      | "id"
+      | "name"
+      | "first_name"
+      | "last_name"
+      | "responsible_user_id"
+      | "created_by"
+      | "updated_by"
+      | "created_at"
+      | "updated_at"
+      | "custom_fields_values"
+    > & {
+      _embedded?: {
+        tags?: {
+          id?: number;
+          name?: string;
+        }[];
+      };
+    }
+  >;
 
 export type ResponseUpdateContact = Links & {
   id: number;
@@ -81,20 +80,18 @@ export type ResponseUpdateContacts = Links & {
   };
 };
 
-export type RequestLinkContactToChat = {
+export type RequestLinkContactToChat = RequestId & {
   char_id: string;
   contact_id: number;
-  request_id?: string;
 };
 
 export type ResponseLinkContactToChat = Total & {
   _embedded: {
-    chats: {
+    chats: (RequestId & {
       chat_id: string;
       contact_id: number;
       id: number;
-      request_id: string;
-    }[];
+    })[];
   };
 };
 

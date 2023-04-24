@@ -1,5 +1,5 @@
 import type { Note } from "@typings/entities.ts";
-import type { DeepPartial, Links, Page } from "@typings/utility.ts";
+import type { DeepPartial, Links, Page, RequestId } from "@typings/utility.ts";
 
 export type ReponseGetNotesByEntityType = Page & Links & {
   _embedded: {
@@ -9,14 +9,16 @@ export type ReponseGetNotesByEntityType = Page & Links & {
 
 export type ReponseGetNotesByEntityId = ReponseGetNotesByEntityType;
 export type ReponseGetNotesById = Links & Note;
-export type RequestAddNote = DeepPartial<Pick<Note, "entity_id" | "created_by" | "note_type" | "params">> & {
-  request_id?: string;
-  is_need_to_trigger_digital_pipeline?: boolean;
-};
+export type RequestAddNote =
+  & DeepPartial<Pick<Note, "entity_id" | "created_by" | "note_type" | "params">>
+  & RequestId
+  & {
+    is_need_to_trigger_digital_pipeline?: boolean;
+  };
 
 export type ResponseAddNotes = Links & {
   _ebmedded: {
-    notes: (Links & Pick<Note, "id" | "entity_id"> & { request_id?: string })[];
+    notes: (Links & Pick<Note, "id" | "entity_id"> & RequestId)[];
   };
 };
 

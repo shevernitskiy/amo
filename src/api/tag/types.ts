@@ -1,5 +1,5 @@
 import type { Tag } from "@typings/entities.ts";
-import type { Links, Page, Total } from "@typings/utility.ts";
+import type { Links, Page, RequestId, Total } from "@typings/utility.ts";
 
 export type ReponseGetTags = Page & Links & {
   _embedded: {
@@ -7,10 +7,10 @@ export type ReponseGetTags = Page & Links & {
   };
 };
 
-export type RequestAddTag = Pick<Tag, "name" | "color"> & { request_id?: string };
+export type RequestAddTag = Pick<Tag, "name" | "color"> & RequestId;
 export type ResponseAddTags = Total & {
   _embedded: {
-    tags: (Tag & { request_id?: string })[];
+    tags: (Tag & RequestId)[];
   };
 };
 

@@ -1,4 +1,4 @@
-import type { Links, Page } from "@typings/utility.ts";
+import type { Links, Page, RequestId } from "@typings/utility.ts";
 import type { Task } from "@typings/entities.ts";
 
 export type ReponseGetTasks = Page & Links & {
@@ -24,24 +24,24 @@ export type RequestAddTask = Partial<
     | "updated_by"
     | "created_at"
     | "updated_at"
-  > & { request_id?: string }
+  > & RequestId
 >;
 
 export type ResponseAddTasks = Links & {
   _embedded: {
-    tasks: (Links & Pick<Task, "id"> & { request_id?: string })[];
+    tasks: (Links & Pick<Task, "id"> & RequestId)[];
   };
 };
 
 export type RequestUpdateTask = RequestAddTask & Pick<Task, "id">;
 export type ResponseUpdateTasks = Links & {
   _embedded: {
-    tasks: (Links & Pick<Task, "id" | "updated_at"> & { request_id?: string })[];
+    tasks: (Links & Pick<Task, "id" | "updated_at"> & RequestId)[];
   };
 };
 
 export type RequestUpdateTaskById = RequestAddTask;
-export type ResponseUpdateTaskById = Links & Pick<Task, "id" | "updated_at"> & { request_id?: string };
+export type ResponseUpdateTaskById = Links & Pick<Task, "id" | "updated_at"> & RequestId;
 export type RequestCompleteTask = Partial<Pick<Task, "is_completed" | "result" | "id">>;
 export type ResponseCompleteTasks = ResponseUpdateTasks;
 export type RequestCompleteTaskById = Partial<Pick<Task, "is_completed" | "result">>;
