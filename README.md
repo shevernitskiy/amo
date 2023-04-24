@@ -24,7 +24,7 @@
   - [x] Customers
   - [x] Statuses
   - [x] Segments
-  - [ ] Users
+  - [x] Users
   - [ ] Products
   - [ ] Webhooks
   - [ ] Widgets
