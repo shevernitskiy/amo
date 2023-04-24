@@ -22,7 +22,8 @@
   - [x] Events
   - [x] Notes
   - [x] Customers
-  - [ ] Statuses and Segments
+  - [x] Statuses
+  - [x] Segments
   - [ ] Users
   - [ ] Products
   - [ ] Webhooks

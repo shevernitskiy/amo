@@ -16,6 +16,7 @@ import { EventApi } from "@api/event/client.ts";
 import { NoteApi } from "@api/note/client.ts";
 import { CustomerApi } from "@api/customer/client.ts";
 import { StatusApi } from "@api/status/client.ts";
+import { SegmentApi } from "@api/segment/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -35,6 +36,7 @@ export class Amo {
   private _note: NoteApi;
   private _customer: CustomerApi;
   private _status: StatusApi;
+  private _segment: SegmentApi;
 
   constructor(
     subdomain: string,
@@ -58,6 +60,7 @@ export class Amo {
     this._note = new NoteApi(this.rest);
     this._customer = new CustomerApi(this.rest);
     this._status = new StatusApi(this.rest);
+    this._segment = new SegmentApi(this.rest);
   }
 
   /** Token struct */
@@ -124,5 +127,9 @@ export class Amo {
   /** Status Api */
   get status(): StatusApi {
     return this._status;
+  }
+  /** Segment Api */
+  get segment(): SegmentApi {
+    return this._segment;
   }
 }
