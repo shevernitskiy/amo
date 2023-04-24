@@ -39,9 +39,6 @@ export type RequestId = {
   request_id?: string;
 };
 
-// TODO: make filter builder
-export type Filter = string;
-
 export type Order<T extends string[]> = {
   param: T[keyof T];
   type: "asc" | "desc";
