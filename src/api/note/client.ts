@@ -1,13 +1,13 @@
 import type { JSONValue, Order } from "@typings/utility.ts";
 import type { NoteEntityType } from "@typings/entities.ts";
 import type {
-  ReponseGetNotesByEntityId,
-  ReponseGetNotesByEntityType,
-  ReponseGetNotesById,
   RequestAddNote,
   RequestUpdateNote,
   RequestUpdateNoteById,
   ResponseAddNotes,
+  ResponseGetNotesByEntityId,
+  ResponseGetNotesByEntityType,
+  ResponseGetNotesById,
   ResponseUpdateNoteById,
   ResponseUpdateNotes,
 } from "./types.ts";
@@ -30,8 +30,8 @@ export class NoteApi {
       never
     >;
     order?: Order<["updated_at", "id"]>;
-  }): Promise<ReponseGetNotesByEntityType> {
-    return this.rest.get<ReponseGetNotesByEntityType>({
+  }): Promise<ResponseGetNotesByEntityType> {
+    return this.rest.get<ResponseGetNotesByEntityType>({
       url: `/api/v4/${entity_type}/notes`,
       query: query(params),
     });
@@ -43,8 +43,8 @@ export class NoteApi {
     limit?: number;
     filter?: FilterLike<["id", "note_type", "updated_at"], ["id", "note_type"], ["updated_at"], never, never>;
     order?: Order<["updated_at", "id"]>;
-  }): Promise<ReponseGetNotesByEntityId> {
-    return this.rest.get<ReponseGetNotesByEntityId>({
+  }): Promise<ResponseGetNotesByEntityId> {
+    return this.rest.get<ResponseGetNotesByEntityId>({
       url: `/api/v4/${entity_type}/${entity_id}/notes`,
       query: query(params),
     });
@@ -54,8 +54,8 @@ export class NoteApi {
   getNotesById(
     note_id: number,
     entity_type: NoteEntityType,
-  ): Promise<ReponseGetNotesById> {
-    return this.rest.get<ReponseGetNotesById>({
+  ): Promise<ResponseGetNotesById> {
+    return this.rest.get<ResponseGetNotesById>({
       url: `/api/v4/${entity_type}/notes/${note_id}`,
     });
   }

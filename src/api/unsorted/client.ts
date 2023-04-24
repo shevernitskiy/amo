@@ -1,13 +1,13 @@
 import type { JSONValue, Order } from "@typings/utility.ts";
 import type {
-  ReponseGetUnsorted,
-  ReponseGetUnsortedByUid,
-  ReponseGetUnsortedSummary,
   RequestAddUnsortedForm,
   RequestAddUnsortedSip,
   ResponseAcceptUnsorted,
   ResponseAddUnsorted,
   ResponseDeclineUnsorted,
+  ResponseGetUnsorted,
+  ResponseGetUnsortedByUid,
+  ResponseGetUnsortedSummary,
   ResponseLinkUnsorted,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
@@ -23,16 +23,16 @@ export class UnsortedApi {
     limit?: number;
     filter?: FilterLike<["uid", "pipeline_id"], ["uid", "category"], never, never, never>;
     order?: Order<["created_at", "updated_at", "id"]>;
-  }): Promise<ReponseGetUnsorted> {
-    return this.rest.get<ReponseGetUnsorted>({
+  }): Promise<ResponseGetUnsorted> {
+    return this.rest.get<ResponseGetUnsorted>({
       url: "/api/v4/leads/unsorted",
       query: query(params),
     });
   }
 
   /** Метод позволяет получить данные конкретного неразобранного по UID. */
-  getUnsortedByUid(uid: string): Promise<ReponseGetUnsortedByUid> {
-    return this.rest.get<ReponseGetUnsortedByUid>({
+  getUnsortedByUid(uid: string): Promise<ResponseGetUnsortedByUid> {
+    return this.rest.get<ResponseGetUnsortedByUid>({
       url: `/api/v4/leads/unsorted/${uid}`,
     });
   }
@@ -94,8 +94,8 @@ export class UnsortedApi {
   /** Метод позволяет получить сводную информацию о неразобранном в аккаунте. */
   getUnsortedSummary(params?: {
     filter?: FilterLike<["uid", "pipeline_id, created_at"], ["uid"], ["created_at"], never, never>;
-  }): Promise<ReponseGetUnsortedSummary> {
-    return this.rest.get<ReponseGetUnsortedSummary>({
+  }): Promise<ResponseGetUnsortedSummary> {
+    return this.rest.get<ResponseGetUnsortedSummary>({
       url: "/api/v4/leads/unsorted/summary",
       query: query(params),
     });

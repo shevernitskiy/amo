@@ -1,13 +1,13 @@
 import type { Links, Page, RequestId } from "@typings/utility.ts";
 import type { Catalog, CatalogElement } from "@typings/entities.ts";
 
-export type ReponseGetCatalogs = Page & Links & {
+export type ResponseGetCatalogs = Page & Links & {
   _embedded: {
-    catalogs: ReponseGetCatalog[];
+    catalogs: ResponseGetCatalog[];
   };
 };
 
-export type ReponseGetCatalog = Links & Catalog;
+export type ResponseGetCatalog = Links & Catalog;
 
 export type RequestAddCatalog =
   & Partial<Pick<Catalog, "name" | "type" | "sort" | "can_add_elements" | "can_link_multiple">>
@@ -31,13 +31,13 @@ export type ResponseUpdateCatalogs = Links & {
 
 export type ResponseUpdateCatalog = Links & Catalog & RequestId;
 
-export type ReponseGetCatalogElements = Page & Links & {
+export type ResponseGetCatalogElements = Page & Links & {
   _embedded: {
-    elements: ReponseGetCatalogElement[];
+    elements: ResponseGetCatalogElement[];
   };
 };
 
-export type ReponseGetCatalogElement = Links & CatalogElement;
+export type ResponseGetCatalogElement = Links & CatalogElement;
 
 export type RequestAddCatalogElement = Partial<Pick<CatalogElement, "name" | "custom_fields_values">> & RequestId;
 
@@ -47,7 +47,7 @@ export type ResponseAddCatalogElements = Links & {
   };
 };
 
-export type ResponseAddCatalogElement = ReponseGetCatalogElement;
+export type ResponseAddCatalogElement = ResponseGetCatalogElement;
 
 export type RequestUpdateCatalogElement = RequestAddCatalogElement;
 

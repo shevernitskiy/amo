@@ -1,7 +1,7 @@
 import type { Tag } from "@typings/entities.ts";
 import type { Links, Page, RequestId, Total } from "@typings/utility.ts";
 
-export type ReponseGetTags = Page & Links & {
+export type ResponseGetTags = Page & Links & {
   _embedded: {
     tags: Tag[];
   };

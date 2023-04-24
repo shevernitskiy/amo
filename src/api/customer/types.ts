@@ -1,13 +1,13 @@
 import type { Customer, Transaction } from "@typings/entities.ts";
 import type { Embedded, Links, Page, RequestId } from "@typings/utility.ts";
 
-export type ReponseGetCustomers = Page & Links & {
+export type ResponseGetCustomers = Page & Links & {
   _embedded: {
-    customers: ReponseGetCustomerById[];
+    customers: ResponseGetCustomerById[];
   };
 };
 
-export type ReponseGetCustomerById = Links & Customer & {
+export type ResponseGetCustomerById = Links & Customer & {
   _embedded: Pick<Embedded, "segments" | "tags" | "contacts" | "companies" | "catalog_elements">;
 };
 
@@ -47,7 +47,7 @@ export type ResponseUpdateCustomers = Links & {
 export type RequestUpdateCustomerById = RequestAddCustomer;
 export type ResponseUpdateCustomerById = Links & Pick<Customer, "id"> & RequestId;
 
-export type ReponseGetTransactions = Page & Links & {
+export type ResponseGetTransactions = Page & Links & {
   _embedded: {
     transactions: Links & Transaction & Pick<Embedded, "customers" | "catalog_elements">;
   };

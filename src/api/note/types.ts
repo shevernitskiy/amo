@@ -1,14 +1,14 @@
 import type { Note } from "@typings/entities.ts";
 import type { DeepPartial, Links, Page, RequestId } from "@typings/utility.ts";
 
-export type ReponseGetNotesByEntityType = Page & Links & {
+export type ResponseGetNotesByEntityType = Page & Links & {
   _embedded: {
-    notes: ReponseGetNotesById[];
+    notes: ResponseGetNotesById[];
   };
 };
 
-export type ReponseGetNotesByEntityId = ReponseGetNotesByEntityType;
-export type ReponseGetNotesById = Links & Note;
+export type ResponseGetNotesByEntityId = ResponseGetNotesByEntityType;
+export type ResponseGetNotesById = Links & Note;
 export type RequestAddNote =
   & DeepPartial<Pick<Note, "entity_id" | "created_by" | "note_type" | "params">>
   & RequestId

@@ -1,5 +1,5 @@
 import type { With } from "@typings/utility.ts";
-import type { ReponseGetEventById, ReponseGetEvents, ReponseGetEventsTypes } from "./types.ts";
+import type { ResponseGetEventById, ResponseGetEvents, ResponseGetEventsTypes } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
 import { FilterLike } from "@helpers/filter.ts";
 import { query } from "@helpers/query.ts";
@@ -20,8 +20,8 @@ export class EventApi {
       never,
       never
     >;
-  }): Promise<ReponseGetEvents> {
-    return this.rest.get<ReponseGetEvents>({
+  }): Promise<ResponseGetEvents> {
+    return this.rest.get<ResponseGetEvents>({
       url: "/api/v4/events",
       query: query(params),
     });
@@ -30,16 +30,16 @@ export class EventApi {
   /** Метод позволяет получить данные конкретного события по ID. */
   getEventById(id: number, params?: {
     with?: With<["contact_name", "lead_name", "company_name", "catalog_element_name", "customer_name", "catalog_name"]>;
-  }): Promise<ReponseGetEventById> {
-    return this.rest.get<ReponseGetEventById>({
+  }): Promise<ResponseGetEventById> {
+    return this.rest.get<ResponseGetEventById>({
       url: `/api/v4/events/${id}`,
       query: query(params),
     });
   }
 
   /** Метод позволяет получить все доступные для аккаунта типы событий. */
-  getEventsTypes(language_code: string): Promise<ReponseGetEventsTypes> {
-    return this.rest.get<ReponseGetEventsTypes>({
+  getEventsTypes(language_code: string): Promise<ResponseGetEventsTypes> {
+    return this.rest.get<ResponseGetEventsTypes>({
       url: `/api/v4/events/types`,
       query: query({ language_code: language_code }),
     });

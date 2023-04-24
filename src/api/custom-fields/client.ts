@@ -1,16 +1,16 @@
 import type { JSONValue } from "@typings/utility.ts";
 import type {
-  ReponseAddCustomFieldGroups,
-  ReponseAddCustomFields,
-  ReponseGetCustomFieldById,
-  ReponseGetCustomFields,
-  ReponseGetCustomFieldsGroupById,
-  ReponseGetCustomFieldsGroups,
   RequestAddCustomField,
   RequestAddCustomFieldsGroup,
   RequestUpdateCustomField,
   RequestUpdateCustomFieldById,
   RequestUpdateCustomFieldsGroupById,
+  ResponseAddCustomFieldGroups,
+  ResponseAddCustomFields,
+  ResponseGetCustomFieldById,
+  ResponseGetCustomFields,
+  ResponseGetCustomFieldsGroupById,
+  ResponseGetCustomFieldsGroups,
   ResponseUpdateCustomFieldById,
   ResponseUpdateCustomFields,
   ResponseUpdateCustomFieldsGroupById,
@@ -21,37 +21,37 @@ export class CustomFieldsApi {
   constructor(private rest: RestClient) {}
 
   /** Метод позволяет получить список полей сущности в аккаунте. */
-  getCustomFields(entity_type: "catalogs", catalog_id: number): Promise<ReponseGetCustomFields>;
+  getCustomFields(entity_type: "catalogs", catalog_id: number): Promise<ResponseGetCustomFields>;
   getCustomFields(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
-  ): Promise<ReponseGetCustomFields>;
+  ): Promise<ResponseGetCustomFields>;
   getCustomFields(
     entity_type: string,
     catalog_id?: number,
-  ): Promise<ReponseGetCustomFields> {
+  ): Promise<ResponseGetCustomFields> {
     let url = `/api/v4/${entity_type}/custom_fields`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields`;
     }
-    return this.rest.get<ReponseGetCustomFields>({ url: url });
+    return this.rest.get<ResponseGetCustomFields>({ url: url });
   }
 
   /** Метод позволяет получить поля сущности в аккаунте по ID. */
-  getCustomFieldById(id: number, entity_type: "catalogs", catalog_id: number): Promise<ReponseGetCustomFieldById>;
+  getCustomFieldById(id: number, entity_type: "catalogs", catalog_id: number): Promise<ResponseGetCustomFieldById>;
   getCustomFieldById(
     id: number,
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
-  ): Promise<ReponseGetCustomFieldById>;
+  ): Promise<ResponseGetCustomFieldById>;
   getCustomFieldById(
     id: number,
     entity_type: string,
     catalog_id?: number,
-  ): Promise<ReponseGetCustomFieldById> {
+  ): Promise<ResponseGetCustomFieldById> {
     let url = `/api/v4/${entity_type}/custom_fields/${id}`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields/${id}`;
     }
-    return this.rest.get<ReponseGetCustomFieldById>({ url: url });
+    return this.rest.get<ResponseGetCustomFieldById>({ url: url });
   }
 
   /** Метод позволяет создавать поля сущности пакетно. */
@@ -59,21 +59,21 @@ export class CustomFieldsApi {
     entity_type: "catalogs",
     custom_fields: RequestAddCustomField[],
     catalog_id: number,
-  ): Promise<ReponseAddCustomFields>;
+  ): Promise<ResponseAddCustomFields>;
   addCustomFields(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
     custom_fields: RequestAddCustomField[],
-  ): Promise<ReponseAddCustomFields>;
+  ): Promise<ResponseAddCustomFields>;
   addCustomFields(
     entity_type: string,
     custom_fields: RequestAddCustomField[],
     catalog_id?: number,
-  ): Promise<ReponseAddCustomFields> {
+  ): Promise<ResponseAddCustomFields> {
     let url = `/api/v4/${entity_type}/custom_fields`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields`;
     }
-    return this.rest.post<ReponseAddCustomFields>({
+    return this.rest.post<ResponseAddCustomFields>({
       url: url,
       payload: custom_fields as JSONValue,
     });
@@ -147,16 +147,16 @@ export class CustomFieldsApi {
   }
 
   /** Метод позволяет получить список групп полей сущности в аккаунте. */
-  getCustomFieldsGroups(entity_type: "catalogs", catalog_id: number): Promise<ReponseGetCustomFieldsGroups>;
+  getCustomFieldsGroups(entity_type: "catalogs", catalog_id: number): Promise<ResponseGetCustomFieldsGroups>;
   getCustomFieldsGroups(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
-  ): Promise<ReponseGetCustomFieldsGroups>;
-  getCustomFieldsGroups(entity_type: string, catalog_id?: number): Promise<ReponseGetCustomFieldsGroups> {
+  ): Promise<ResponseGetCustomFieldsGroups>;
+  getCustomFieldsGroups(entity_type: string, catalog_id?: number): Promise<ResponseGetCustomFieldsGroups> {
     let url = `/api/v4/${entity_type}/custom_fields/groups`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields/groups`;
     }
-    return this.rest.get<ReponseGetCustomFieldsGroups>({ url: url });
+    return this.rest.get<ResponseGetCustomFieldsGroups>({ url: url });
   }
 
   /** Метод позволяет получить группу полей сущности в аккаунте по ID. */
@@ -164,21 +164,21 @@ export class CustomFieldsApi {
     id: number,
     entity_type: "catalogs",
     catalog_id: number,
-  ): Promise<ReponseGetCustomFieldsGroupById>;
+  ): Promise<ResponseGetCustomFieldsGroupById>;
   getCustomFieldsByGroupId(
     id: number,
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
-  ): Promise<ReponseGetCustomFieldsGroupById>;
+  ): Promise<ResponseGetCustomFieldsGroupById>;
   getCustomFieldsByGroupId(
     id: number,
     entity_type: string,
     catalog_id?: number,
-  ): Promise<ReponseGetCustomFieldsGroupById> {
+  ): Promise<ResponseGetCustomFieldsGroupById> {
     let url = `/api/v4/${entity_type}/custom_fields/groups/${id}`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields/groups/${id}`;
     }
-    return this.rest.get<ReponseGetCustomFieldsGroupById>({ url: url });
+    return this.rest.get<ResponseGetCustomFieldsGroupById>({ url: url });
   }
 
   /** Метод позволяет добавлять группы полей сущности в аккаунт пакетно. */
@@ -186,21 +186,21 @@ export class CustomFieldsApi {
     entity_type: "catalogs",
     custom_fields_groups: RequestAddCustomFieldsGroup[],
     catalog_id: number,
-  ): Promise<ReponseAddCustomFieldGroups>;
+  ): Promise<ResponseAddCustomFieldGroups>;
   addCustomFieldsGroups(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
     custom_fields: RequestAddCustomFieldsGroup[],
-  ): Promise<ReponseAddCustomFieldGroups>;
+  ): Promise<ResponseAddCustomFieldGroups>;
   addCustomFieldsGroups(
     entity_type: string,
     custom_fields_groups: RequestAddCustomFieldsGroup[],
     catalog_id?: number,
-  ): Promise<ReponseAddCustomFieldGroups> {
+  ): Promise<ResponseAddCustomFieldGroups> {
     let url = `/api/v4/${entity_type}/custom_fields`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields`;
     }
-    return this.rest.post<ReponseAddCustomFieldGroups>({
+    return this.rest.post<ResponseAddCustomFieldGroups>({
       url: url,
       payload: custom_fields_groups as JSONValue,
     });

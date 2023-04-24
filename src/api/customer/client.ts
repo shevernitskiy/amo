@@ -1,8 +1,5 @@
 import type { JSONValue, With } from "@typings/utility.ts";
 import type {
-  ReponseGetCustomerById,
-  ReponseGetCustomers,
-  ReponseGetTransactions,
   RequestAddCustomer,
   RequestAddTransactionsToCustomer,
   RequestUpdateBonusPoints,
@@ -10,6 +7,9 @@ import type {
   RequestUpdateCustomerById,
   ResponseAddCustomers,
   ResponseAddTransactionsToCustomer,
+  ResponseGetCustomerById,
+  ResponseGetCustomers,
+  ResponseGetTransactions,
   ResponseUpdateBonusPoints,
   ResponseUpdateCustomerById,
   ResponseUpdateCustomers,
@@ -45,8 +45,8 @@ export class CustomerApi {
       never,
       number
     >;
-  }): Promise<ReponseGetCustomers> {
-    return this.rest.get<ReponseGetCustomers>({
+  }): Promise<ResponseGetCustomers> {
+    return this.rest.get<ResponseGetCustomers>({
       url: "/api/v4/customers",
       query: query(params),
     });
@@ -55,8 +55,8 @@ export class CustomerApi {
   /** Метод позволяет получить данные конкретного покупателя по ID. */
   getCustomerById(id: number, params?: {
     with?: With<["catalog_elements", "contacts", "companies"]>;
-  }): Promise<ReponseGetCustomerById> {
-    return this.rest.get<ReponseGetCustomerById>({
+  }): Promise<ResponseGetCustomerById> {
+    return this.rest.get<ResponseGetCustomerById>({
       url: `/api/v4/customers/${id}`,
       query: query(params),
     });
@@ -91,8 +91,8 @@ export class CustomerApi {
     page?: number;
     limit?: number;
     filter?: FilterLike<["id"], ["id"], never, never, never>;
-  }): Promise<ReponseGetTransactions> {
-    return this.rest.get<ReponseGetTransactions>({
+  }): Promise<ResponseGetTransactions> {
+    return this.rest.get<ResponseGetTransactions>({
       url: "/api/v4/customers/transactions",
       query: query(params),
     });
@@ -103,8 +103,8 @@ export class CustomerApi {
     page?: number;
     limit?: number;
     filter?: FilterLike<["id"], ["id"], never, never, never>;
-  }): Promise<ReponseGetCustomerById> {
-    return this.rest.get<ReponseGetCustomerById>({
+  }): Promise<ResponseGetCustomerById> {
+    return this.rest.get<ResponseGetCustomerById>({
       url: `/api/v4/customers/${customer_id}/transactions`,
       query: query(params),
     });

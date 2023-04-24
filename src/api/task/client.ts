@@ -1,7 +1,5 @@
 import type { JSONValue, Order } from "@typings/utility.ts";
 import type {
-  ReponseGetTaskById,
-  ReponseGetTasks,
   RequestAddTask,
   RequestCompleteTask,
   RequestCompleteTaskById,
@@ -10,6 +8,8 @@ import type {
   ResponseAddTasks,
   ResponseCompleteTaskById,
   ResponseCompleteTasks,
+  ResponseGetTaskById,
+  ResponseGetTasks,
   ResponseUpdateTaskById,
   ResponseUpdateTasks,
 } from "./types.ts";
@@ -33,16 +33,16 @@ export class TaskApi {
       never
     >;
     order?: Order<["created_at", "complete_till", "id"]>;
-  }): Promise<ReponseGetTasks> {
-    return this.rest.get<ReponseGetTasks>({
+  }): Promise<ResponseGetTasks> {
+    return this.rest.get<ResponseGetTasks>({
       url: "/api/v4/tasks",
       query: query(params),
     });
   }
 
   /** Метод позволяет получить данные конкретной задачи по ID. */
-  getTaskById(id: number): Promise<ReponseGetTaskById> {
-    return this.rest.get<ReponseGetTaskById>({
+  getTaskById(id: number): Promise<ResponseGetTaskById> {
+    return this.rest.get<ResponseGetTaskById>({
       url: `/api/v4/tasks/${id}`,
     });
   }

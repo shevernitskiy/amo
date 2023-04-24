@@ -1,8 +1,8 @@
 import type { DeepPartial, Links, Total } from "@typings/utility.ts";
 import type { EntityLink } from "@typings/entities.ts";
 
-export type ReponseGetLinksByEntityType = ResponseAddLinksByEntityId;
-export type ReponseGetLinksByEntityId = Total & Links & {
+export type ResponseGetLinksByEntityType = ResponseAddLinksByEntityId;
+export type ResponseGetLinksByEntityId = Total & Links & {
   _embedded: {
     links: Pick<EntityLink, "to_entity_id" | "to_entity_type" | "metadata">[];
   };

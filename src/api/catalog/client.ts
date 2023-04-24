@@ -1,15 +1,15 @@
 import type { JSONValue, With } from "@typings/utility.ts";
 import type {
-  ReponseGetCatalog,
-  ReponseGetCatalogElement,
-  ReponseGetCatalogElements,
-  ReponseGetCatalogs,
   RequestAddCatalog,
   RequestAddCatalogElement,
   RequestUpdateCatalog,
   RequestUpdateCatalogElement,
   ResponseAddCatalogElements,
   ResponseAddCatalogs,
+  ResponseGetCatalog,
+  ResponseGetCatalogElement,
+  ResponseGetCatalogElements,
+  ResponseGetCatalogs,
   ResponseUpdateCatalog,
   ResponseUpdateCatalogElement,
   ResponseUpdateCatalogElements,
@@ -26,16 +26,16 @@ export class CatalogApi {
   getCatalogs(params?: {
     page?: number;
     limit?: number;
-  }): Promise<ReponseGetCatalogs> {
-    return this.rest.get<ReponseGetCatalogs>({
+  }): Promise<ResponseGetCatalogs> {
+    return this.rest.get<ResponseGetCatalogs>({
       url: "/api/v4/catalogs",
       query: query(params),
     });
   }
 
   /** Метод позволяет получить данные конкретного списка по ID. */
-  getCatalogById(id: number): Promise<ReponseGetCatalog> {
-    return this.rest.get<ReponseGetCatalog>({
+  getCatalogById(id: number): Promise<ResponseGetCatalog> {
+    return this.rest.get<ResponseGetCatalog>({
       url: `/api/v4/catalogs/${id}`,
     });
   }
@@ -71,8 +71,8 @@ export class CatalogApi {
     limit?: number;
     query?: string | number;
     filter?: FilterLike<["id"], ["id"], never, never, never>;
-  }): Promise<ReponseGetCatalogElements> {
-    return this.rest.get<ReponseGetCatalogElements>({
+  }): Promise<ResponseGetCatalogElements> {
+    return this.rest.get<ResponseGetCatalogElements>({
       url: `/api/v4/catalogs/${catalog_id}/elements`,
       query: query(params),
     });
@@ -81,8 +81,8 @@ export class CatalogApi {
   /** Метод позволяет получить элемент списка по его ID. */
   getCatalogElementById(id: number, catalog_id: number, params?: {
     with?: With<["invoice_link"]>;
-  }): Promise<ReponseGetCatalogElement> {
-    return this.rest.get<ReponseGetCatalogElement>({
+  }): Promise<ResponseGetCatalogElement> {
+    return this.rest.get<ResponseGetCatalogElement>({
       url: `/api/v4/catalogs/${catalog_id}/elements/${id}`,
       query: query(params),
     });

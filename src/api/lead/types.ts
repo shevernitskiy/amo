@@ -1,7 +1,7 @@
 import type { Company, Contact, Lead, UnsrotedMetadataForm, UnsrotedMetadataSip } from "@typings/entities.ts";
 import type { Embedded, Links, Page } from "@typings/utility.ts";
 
-export type ReponseGetLeads = Links & Page & {
+export type ResponseGetLeads = Links & Page & {
   _embedded: {
     leads: (Lead & Links & {
       _embedded: Pick<Embedded, "loss_reason" | "tags" | "contacts" | "companies" | "catalog_elements">;
@@ -9,7 +9,7 @@ export type ReponseGetLeads = Links & Page & {
   };
 };
 
-export type ReponseGetLeadById = Links & Lead & {
+export type ResponseGetLeadById = Links & Lead & {
   _embedded: Pick<Embedded, "loss_reason" | "tags" | "contacts" | "companies" | "catalog_elements">;
 };
 

@@ -1,10 +1,10 @@
 import type { JSONValue, Order, With } from "@typings/utility.ts";
 import type {
-  ReponseGetCompanies,
-  ReponseGetCompanyById,
   RequestAddCompany,
   RequestUpdateCompany,
   ResponseAddCompanies,
+  ResponseGetCompanies,
+  ResponseGetCompanyById,
   ResponseUpdateCompanies,
   ResponseUpdateCompany,
 } from "./types.ts";
@@ -29,8 +29,8 @@ export class CompanyApi {
       number
     >;
     order?: Order<["updated_at", "id"]>;
-  }): Promise<ReponseGetCompanies> {
-    return this.rest.get<ReponseGetCompanies>({
+  }): Promise<ResponseGetCompanies> {
+    return this.rest.get<ResponseGetCompanies>({
       url: "/api/v4/companies",
       query: query(params),
     });
@@ -39,8 +39,8 @@ export class CompanyApi {
   /** Метод позволяет получить данные конкретной компании по ID. */
   getCompanyById(id: number, params?: {
     with?: With<["catalog_elements", "leads", "customers", "contacts"]>;
-  }): Promise<ReponseGetCompanyById> {
-    return this.rest.get<ReponseGetCompanyById>({
+  }): Promise<ResponseGetCompanyById> {
+    return this.rest.get<ResponseGetCompanyById>({
       url: `/api/v4/companies/${id}`,
       query: query(params),
     });

@@ -1,7 +1,7 @@
 import type { Embedded, Links, Page, RequestId, Total } from "@typings/utility.ts";
 import type { Company, Contact, Lead, Unsorted, UnsrotedMetadataForm, UnsrotedMetadataSip } from "@typings/entities.ts";
 
-export type ReponseGetUnsorted = Links & Page & {
+export type ResponseGetUnsorted = Links & Page & {
   _embedded: {
     unsorted: (Unsorted & Links & {
       _embedded: Pick<Embedded, "contacts" | "companies" | "leads">;
@@ -9,7 +9,7 @@ export type ReponseGetUnsorted = Links & Page & {
   };
 };
 
-export type ReponseGetUnsortedByUid = Links & Unsorted & {
+export type ResponseGetUnsortedByUid = Links & Unsorted & {
   _embedded: Pick<Embedded, "contacts" | "companies" | "leads">;
 };
 
@@ -50,7 +50,7 @@ export type ResponseLinkUnsorted = Pick<Unsorted, "uid"> & {
   _embedded: Pick<Embedded, "contacts" | "leads" | "companies" | "customers">;
 };
 
-export type ReponseGetUnsortedSummary = {
+export type ResponseGetUnsortedSummary = {
   total: number;
   accepted: number;
   declined: number;

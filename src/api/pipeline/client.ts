@@ -1,15 +1,15 @@
 import type { JSONValue } from "@typings/utility.ts";
 import type {
-  ReponseGetPipeline,
-  ReponseGetPipelines,
-  ReponseGetStatus,
-  ReponseGetStatusesPipeline,
   RequestAddPipeline,
   RequestAddStatus,
   RequestUpdatePipeline,
   RequestUpdateStatus,
   ResponseAddPipelines,
   ResponseAddStatuses,
+  ResponseGetPipeline,
+  ResponseGetPipelines,
+  ResponseGetStatus,
+  ResponseGetStatusesPipeline,
   ResponseUpdatePipeline,
   ResponseUpdateStatus,
 } from "./types.ts";
@@ -19,15 +19,15 @@ export class PipelineApi {
   constructor(private rest: RestClient) {}
 
   /** Метод позволяет получить список воронок сделок в аккаунте. */
-  getPipelines(): Promise<ReponseGetPipelines> {
-    return this.rest.get<ReponseGetPipelines>({
+  getPipelines(): Promise<ResponseGetPipelines> {
+    return this.rest.get<ResponseGetPipelines>({
       url: "/api/v4/leads/pipelines",
     });
   }
 
   /** Метод позволяет получить модель воронки сделок по ID */
-  getPipelineById(id: number): Promise<ReponseGetPipeline> {
-    return this.rest.get<ReponseGetPipeline>({
+  getPipelineById(id: number): Promise<ResponseGetPipeline> {
+    return this.rest.get<ResponseGetPipeline>({
       url: `/api/v4/leads/pipelines/${id}`,
     });
   }
@@ -56,15 +56,15 @@ export class PipelineApi {
   }
 
   /** Метод позволяет получить список статусов воронки сделок в аккаунте по ID */
-  getStatusesByPipelineId(pipeline_id: number): Promise<ReponseGetStatusesPipeline> {
-    return this.rest.get<ReponseGetStatusesPipeline>({
+  getStatusesByPipelineId(pipeline_id: number): Promise<ResponseGetStatusesPipeline> {
+    return this.rest.get<ResponseGetStatusesPipeline>({
       url: `/api/v4/leads/pipelines/${pipeline_id}/statuses`,
     });
   }
 
   /** Метод позволяет получить модель статуса воронки сделок в аккаунте по ID статуса. */
-  getStatusesById(id: number, pipeline_id: number): Promise<ReponseGetStatus> {
-    return this.rest.get<ReponseGetStatus>({
+  getStatusesById(id: number, pipeline_id: number): Promise<ResponseGetStatus> {
+    return this.rest.get<ResponseGetStatus>({
       url: `/api/v4/leads/pipelines/${pipeline_id}/statuses/${id}`,
     });
   }

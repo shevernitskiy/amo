@@ -1,12 +1,12 @@
 import type { JSONValue } from "@typings/utility.ts";
 import type {
-  ReponseGetTags,
   RequesDeleteTagToEntity,
   RequestAddTag,
   RequestAddTagToEntity,
   ResponseAddTags,
   ResponseAddTagsToEntities,
   ResponseDeleteTagsToEntities,
+  ResponseGetTags,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
 import { FilterLike } from "@helpers/filter.ts";
@@ -21,8 +21,8 @@ export class TagApi {
     limit?: number;
     query?: string;
     filter?: FilterLike<["id", "name"], ["id"], never, never, never>;
-  }): Promise<ReponseGetTags> {
-    return this.rest.get<ReponseGetTags>({
+  }): Promise<ResponseGetTags> {
+    return this.rest.get<ResponseGetTags>({
       url: `/api/v4/${entity_type}/tags`,
       query: query(params),
     });

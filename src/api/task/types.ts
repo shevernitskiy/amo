@@ -1,13 +1,13 @@
 import type { Links, Page, RequestId } from "@typings/utility.ts";
 import type { Task } from "@typings/entities.ts";
 
-export type ReponseGetTasks = Page & Links & {
+export type ResponseGetTasks = Page & Links & {
   _embedded: {
-    tasks: ReponseGetTaskById[];
+    tasks: ResponseGetTaskById[];
   };
 };
 
-export type ReponseGetTaskById = Task & Links;
+export type ResponseGetTaskById = Task & Links;
 export type RequestAddTask = Partial<
   Pick<
     Task,

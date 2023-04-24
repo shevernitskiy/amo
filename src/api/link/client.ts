@@ -1,13 +1,13 @@
 import type { JSONValue } from "@typings/utility.ts";
 import type {
-  ReponseGetLinksByEntityId,
-  ReponseGetLinksByEntityType,
   RequestAddLinkByEntityId,
   RequestAddLinkByEntityType,
   RequestDeleteLinkByEntityId,
   RequestDeleteLinkByEntityType,
   ResponseAddLinksByEntityId,
   ResponseAddLinksByEntityType,
+  ResponseGetLinksByEntityId,
+  ResponseGetLinksByEntityType,
 } from "./types.ts";
 import { RestClient } from "@core/rest-client.ts";
 import { FilterLike } from "@helpers/filter.ts";
@@ -19,8 +19,8 @@ export class LinkApi {
   /** Метод позволяет получить связанные сущности по типу основной сущности. */
   getLinksByEntityType(entity_type: "leads" | "contacts" | "companies" | "customers", params?: {
     filter?: FilterLike<["to_entity_id", "to_entity_type", "to_catalog_id"], ["entity_id"], never, never, never>;
-  }): Promise<ReponseGetLinksByEntityType> {
-    return this.rest.get<ReponseGetLinksByEntityType>({
+  }): Promise<ResponseGetLinksByEntityType> {
+    return this.rest.get<ResponseGetLinksByEntityType>({
       url: `/api/v4/${entity_type}/links`,
       query: query(params),
     });
@@ -29,8 +29,8 @@ export class LinkApi {
   /** Метод позволяет получить связанные сущности по ID основной сущности. */
   getLinksByEntityId(id: number, entity_type: "leads" | "contacts" | "companies" | "customers", params?: {
     filter?: FilterLike<["to_entity_id", "to_entity_type", "to_catalog_id"], never, never, never, never>;
-  }): Promise<ReponseGetLinksByEntityId> {
-    return this.rest.get<ReponseGetLinksByEntityId>({
+  }): Promise<ResponseGetLinksByEntityId> {
+    return this.rest.get<ResponseGetLinksByEntityId>({
       url: `/api/v4/${entity_type}/${id}/links`,
       query: query(params),
     });

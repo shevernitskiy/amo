@@ -1,32 +1,32 @@
 import type { DeepPartial, Links, PageCount, RequestId, Total } from "@typings/utility.ts";
 import type { CustomFieldsValue, CustomFieldsValueGroup } from "@typings/entities.ts";
 
-export type ReponseGetCustomFields = Total & PageCount & Links & {
+export type ResponseGetCustomFields = Total & PageCount & Links & {
   _embedded: {
-    custom_fields: ReponseGetCustomFieldById[];
+    custom_fields: ResponseGetCustomFieldById[];
   };
 };
 
-export type ReponseGetCustomFieldById = Links & CustomFieldsValue;
+export type ResponseGetCustomFieldById = Links & CustomFieldsValue;
 export type RequestAddCustomField = DeepPartial<CustomFieldsValue>;
-export type ReponseAddCustomFields = Total & {
+export type ResponseAddCustomFields = Total & {
   _embedded: {
-    custom_fields: ReponseGetCustomFieldById[];
+    custom_fields: ResponseGetCustomFieldById[];
   };
 };
 
 export type RequestUpdateCustomField = RequestAddCustomField;
-export type ResponseUpdateCustomFields = ReponseAddCustomFields;
+export type ResponseUpdateCustomFields = ResponseAddCustomFields;
 export type RequestUpdateCustomFieldById = RequestAddCustomField;
-export type ResponseUpdateCustomFieldById = ReponseGetCustomFieldById;
-export type ReponseGetCustomFieldsGroups = Total & {
+export type ResponseUpdateCustomFieldById = ResponseGetCustomFieldById;
+export type ResponseGetCustomFieldsGroups = Total & {
   _embedded: {
-    custom_field_groups: ReponseGetCustomFieldsGroupById[];
+    custom_field_groups: ResponseGetCustomFieldsGroupById[];
   };
 };
 
-export type ReponseGetCustomFieldsGroupById = Links & CustomFieldsValueGroup;
+export type ResponseGetCustomFieldsGroupById = Links & CustomFieldsValueGroup;
 export type RequestAddCustomFieldsGroup = Pick<CustomFieldsValueGroup, "name" | "sort"> & RequestId;
-export type ReponseAddCustomFieldGroups = ReponseGetCustomFieldsGroups;
+export type ResponseAddCustomFieldGroups = ResponseGetCustomFieldsGroups;
 export type RequestUpdateCustomFieldsGroupById = Pick<CustomFieldsValueGroup, "name" | "sort"> & { fields: number[] };
 export type ResponseUpdateCustomFieldsGroupById = Links & CustomFieldsValue & { fields: number[] };

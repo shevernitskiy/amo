@@ -1,7 +1,7 @@
 import type { Company } from "@typings/entities.ts";
 import type { Embedded, Links, Page, RequestId } from "@typings/utility.ts";
 
-export type ReponseGetCompanies = Links & Page & {
+export type ResponseGetCompanies = Links & Page & {
   _embedded: {
     companies: (Company & Links & {
       _embedded: Pick<Embedded, "tags" | "contacts" | "customers" | "leads" | "catalog_elements">;
@@ -9,7 +9,7 @@ export type ReponseGetCompanies = Links & Page & {
   };
 };
 
-export type ReponseGetCompanyById = Links & Company & {
+export type ResponseGetCompanyById = Links & Company & {
   _embedded: Pick<Embedded, "tags" | "contacts" | "customers" | "leads" | "catalog_elements">;
 };
 

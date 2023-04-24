@@ -1,12 +1,12 @@
 import type { JSONValue, Order, With } from "@typings/utility.ts";
 import type {
-  ReponseGetLeadById,
-  ReponseGetLeads,
   RequestAddComplex,
   RequestAddLead,
   RequestUpdateLead,
   ResponseAddComplex,
   ResponseAddLeads,
+  ResponseGetLeadById,
+  ResponseGetLeads,
   ResponseUpdateLead,
   ResponseUpdateLeads,
 } from "./types.ts";
@@ -33,8 +33,8 @@ export class LeadApi {
       number
     >;
     order?: Order<["created_at", "updated_at", "id"]>;
-  }): Promise<ReponseGetLeads> {
-    return this.rest.get<ReponseGetLeads>({
+  }): Promise<ResponseGetLeads> {
+    return this.rest.get<ResponseGetLeads>({
       url: "/api/v4/leads",
       query: query(params),
     });
@@ -45,8 +45,8 @@ export class LeadApi {
     with?: With<
       ["catalog_elements", "is_price_modified_by_robot", "loss_reason", "contacts", "only_deleted", "source_id"]
     >;
-  }): Promise<ReponseGetLeadById> {
-    return this.rest.get<ReponseGetLeadById>({
+  }): Promise<ResponseGetLeadById> {
+    return this.rest.get<ResponseGetLeadById>({
       url: `/api/v4/leads/${id}`,
       query: query(params),
     });
