@@ -188,3 +188,9 @@ function writeTypes(data: string): void {
 // parseTableFromUrl("Transaction", "https://www.amocrm.ru/developers/content/crm_platform/customers-api", 18, {
 //   comment: true,
 // }).then(writeTypes);
+// parseTableFromUrl("Status", "https://www.amocrm.ru/developers/content/crm_platform/customers-statuses-api", 1, {
+//   comment: true,
+// }).then(writeTypes);
+parseTableFromUrl("Segment", "https://www.amocrm.ru/developers/content/crm_platform/customers-statuses-api", 11, {
+  comment: true,
+}).then(writeTypes);

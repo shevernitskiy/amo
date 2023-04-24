@@ -8,6 +8,7 @@ export type JSONValue =
   | { [x: string]: JSONValue }
   | Array<JSONValue>;
 
+// deno-lint-ignore ban-types
 export type DeepPartial<T> = T extends object ? {
     [P in keyof T]?: DeepPartial<T[P]>;
   }
@@ -34,14 +35,9 @@ export type PageCount = {
   _page_count: number;
 };
 
-// export type GenericGet = {
-//   with: string;
-//   page: number;
-//   limit: number;
-//   query: string | number;
-// filter: Filter[];
-// order: Order<K>;
-// };
+export type RequestId = {
+  request_id?: string;
+};
 
 // TODO: make filter builder
 export type Filter = string;

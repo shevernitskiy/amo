@@ -873,26 +873,66 @@ export type Transaction = {
 };
 
 // TODO: what is Condition?
-type Status = {
+export type Status = {
+  /** ID статуса */
   id: number;
+  /** Название статуса */
   name: string;
+  /** Сортировка статуса */
   sort: number;
+  /** Является ли статус стандартным */
   is_default: boolean;
-  color: string;
-  type: number;
-  conditions: [];
+  /** Цвет статуса. Доступные цвета */
+  color: StatusColor;
+  /** Тип статуса (0 – обычный статус, 1 – ожидается покупка, 2 – не купили, 3 – закрытый, 4 – купили недавно) */
+  type: 0 | 1 | 2 | 3 | 4;
+  /** Условия перехода в статус */
+  conditions: any[];
+  /** ID аккаунта, в котором находится статус */
   account_id: number;
 };
 
+export type StatusColor =
+  | "#fffeb2"
+  | "#fffd7f"
+  | "#fff000"
+  | "#ffeab2"
+  | "#ffdc7f"
+  | "#ffce5a"
+  | "#ffdbdb"
+  | "#ffc8c8"
+  | "#ff8f92"
+  | "#d6eaff"
+  | "#c1e0ff"
+  | "#98cbff"
+  | "#ebffb1"
+  | "#deff81"
+  | "#87f2c0"
+  | "#f9deff"
+  | "#f3beff"
+  | "#ccc8f9"
+  | "#eb93ff"
+  | "#f2f3f4"
+  | "#e6e8ea";
+
 export type Segment = {
+  /** ID статуса */
   id: number;
+  /** Дата создания сегмента, передается в Unix Timestamp */
   created_at: number;
+  /** Дата изменения сегмента, передается в Unix Timestamp */
   updated_at: number;
+  /** Название сегмента */
   name: string;
+  /** Количество покупателей в сегменте */
   customers_count: number;
+  /** Цвет статуса. Доступные цвета */
   color: string;
+  /** Массив, содержащий информацию по значениям дополнительных полей, заданных для данного сегмента */
   custom_fields_values: CustomFieldsValue[] | null;
+  /** Массив, содержащий ID дополнительных полей каталогов типа Цена, доступных для данного сегмента */
   available_products_price_types: number[] | null;
+  /** ID аккаунта, в котором находится сегмент */
   account_id: number;
 };
 
