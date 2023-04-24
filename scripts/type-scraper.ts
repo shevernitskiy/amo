@@ -191,6 +191,12 @@ function writeTypes(data: string): void {
 // parseTableFromUrl("Status", "https://www.amocrm.ru/developers/content/crm_platform/customers-statuses-api", 1, {
 //   comment: true,
 // }).then(writeTypes);
-parseTableFromUrl("Segment", "https://www.amocrm.ru/developers/content/crm_platform/customers-statuses-api", 11, {
-  comment: true,
-}).then(writeTypes);
+// parseTableFromUrl("Segment", "https://www.amocrm.ru/developers/content/crm_platform/customers-statuses-api", 11, {
+//   comment: true,
+// }).then(writeTypes);
+// parseTableFromUrl("User", "https://www.amocrm.ru/developers/content/crm_platform/users-api", 2, {
+//   comment: true,
+// }).then(writeTypes);
+// parseTableFromUrl("Role", "https://www.amocrm.ru/developers/content/crm_platform/users-api", 16, {
+//   comment: true,
+// }).then(writeTypes);

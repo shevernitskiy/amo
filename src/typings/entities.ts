@@ -978,34 +978,55 @@ export type SegmentColor =
   | "6461a0"
   | "4f517d";
 
-type User = {
+export type User = {
+  /** ID пользователя */
   id: number;
+  /** Полное имя пользователя */
   name: string;
+  /** E-mail пользователя */
   email: string;
-  lang: string;
+  /** Язык пользователя. Один из вариантов: ru, en, es */
+  lang: "ru" | "en" | "es";
+  /** Права пользователя */
   rights: {
+    /** Объект прав доступа к сделкам */
     leads: RightsType;
+    /** Объект прав доступа к контактам */
     contacts: RightsType;
+    /** Объект прав доступа к компаниям */
     companies: RightsType;
+    /** Объект прав доступа к задачам */
     tasks: RightsType;
+    /** Доступ к функционалу почты */
     mail_access: boolean;
+    /** Доступ к функционалу списков */
     catalog_access: boolean;
+    /** Является ли пользователь администратором */
     is_admin: boolean;
+    /** Является ли пользователь бесплатным */
     is_free: boolean;
+    /** Является ли пользователь активным */
     is_active: boolean;
+    /** ID группы, к которой относится пользователь */
     group_id: number | null;
+    /** ID роли, которая установлена у пользователя */
     role_id: number | null;
+    /** Массив из объектов, которые описывают права на статусы */
     status_rights: {
+      /** Тип сущности. В данный момент поддерживаются только сделки */
       entity_type: string;
+      /** ID воронки, в которой находится статус */
       pipeline_id: number;
+      /** ID статуса */
       status_id: number;
+      /** Объект прав */
       rights: RightsType;
     }[];
   };
 };
 
-type RightsValue = "A" | "G" | "M" | "D";
-type RightsType = {
+export type RightsValue = "A" | "G" | "M" | "D";
+export type RightsType = {
   add: RightsValue;
   edit: RightsValue;
   view: RightsValue;
@@ -1013,26 +1034,45 @@ type RightsType = {
   export: RightsValue;
 };
 
-type Role = {
+export type Role = {
+  /** ID роли */
   id: number;
+  /** Название роли */
   name: string;
+  /** Права пользователя */
   rights: {
-    leads: RightsType;
-    contacts: RightsType;
-    companies: RightsType;
-    tasks: RightsType;
+    /** Объект прав доступа к сделкам */
+    leads: RightsValue;
+    /** Объект прав доступа к контактам */
+    contacts: RightsValue;
+    /** Объект прав доступа к компаниям */
+    companies: RightsValue;
+    /** Объект прав доступа к задачам */
+    tasks: RightsValue;
+    /** Доступ к функционалу почты */
     mail_access: boolean;
+    /** Доступ к функционалу списков */
     catalog_access: boolean;
+    /** Является ли пользователь администратором */
     is_admin: boolean;
+    /** Является ли пользователь бесплатным */
     is_free: boolean;
+    /** Является ли пользователь активным */
     is_active: boolean;
+    /** ID группы, к которой относится пользователь */
     group_id: number | null;
+    /** ID роли, которая установлена у пользователя */
     role_id: number | null;
+    /** Массив из объектов, которые описывают права на статусы */
     status_rights: {
+      /** Тип сущности. В данный момент поддерживаются только сделки */
       entity_type: string;
+      /** ID воронки, в которой находится статус */
       pipeline_id: number;
+      /** ID статуса */
       status_id: number;
-      rights: RightsType;
+      /** Объект прав */
+      rights: RightsValue;
     }[];
   };
 };
