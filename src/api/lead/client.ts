@@ -7,6 +7,7 @@ import type {
   ResponseAddLeads,
   ResponseGetLeadById,
   ResponseGetLeads,
+  ResponseLeadSubscriptionById,
   ResponseUpdateLead,
   ResponseUpdateLeads,
 } from "./types.ts";
@@ -81,6 +82,17 @@ export class LeadApi {
     return this.rest.post<ResponseAddComplex[]>({
       url: "/api/v4/leads/complex",
       payload: leads as JSONValue,
+    });
+  }
+
+  /** Метод позволяет получить подписчиков конкретной сущности. */
+  getLeadSubscriptionById(lead_id: number, params?: {
+    page?: number;
+    limit?: number;
+  }): Promise<ResponseLeadSubscriptionById> {
+    return this.rest.get<ResponseLeadSubscriptionById>({
+      url: `/api/v4/leads/${lead_id}/subscriptions`,
+      query: query(params),
     });
   }
 }

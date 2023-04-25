@@ -1,5 +1,5 @@
 import type { Customer, Transaction } from "@typings/entities.ts";
-import type { Embedded, Links, Page, RequestId } from "@typings/utility.ts";
+import type { Embedded, Links, Page, PageCount, RequestId, Total } from "@typings/utility.ts";
 
 export type ResponseGetCustomers = Page & Links & {
   _embedded: {
@@ -68,6 +68,16 @@ export type RequestUpdateBonusPoints = {
   redeem?: number;
   earn?: number;
 };
+
 export type ResponseUpdateBonusPoints = {
   bonus_points: number;
+};
+
+export type ResponseCustomerSubscriptionById = Total & Page & PageCount & Links & {
+  _embedded: {
+    subscriptions: {
+      subscriber_id: number;
+      type: "user" | "group";
+    }[];
+  };
 };

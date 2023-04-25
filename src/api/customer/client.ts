@@ -7,6 +7,7 @@ import type {
   RequestUpdateCustomerById,
   ResponseAddCustomers,
   ResponseAddTransactionsToCustomer,
+  ResponseCustomerSubscriptionById,
   ResponseGetCustomerById,
   ResponseGetCustomers,
   ResponseGetTransactions,
@@ -133,6 +134,17 @@ export class CustomerApi {
     return this.rest.post<ResponseUpdateBonusPoints>({
       url: `/api/v4/customers/${id}/bonus_points`,
       payload: points as JSONValue,
+    });
+  }
+
+  /** Метод позволяет получить подписчиков конкретной сущности. */
+  getCustomerSubscriptionById(customer_id: number, params?: {
+    page?: number;
+    limit?: number;
+  }): Promise<ResponseCustomerSubscriptionById> {
+    return this.rest.get<ResponseCustomerSubscriptionById>({
+      url: `/api/v4/customers/${customer_id}/subscriptions`,
+      query: query(params),
     });
   }
 }

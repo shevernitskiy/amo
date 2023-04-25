@@ -1,5 +1,5 @@
 import type { Company, Contact, Lead, UnsrotedMetadataForm, UnsrotedMetadataSip } from "@typings/entities.ts";
-import type { Embedded, Links, Page } from "@typings/utility.ts";
+import type { Embedded, Links, Page, PageCount, Total } from "@typings/utility.ts";
 
 export type ResponseGetLeads = Links & Page & {
   _embedded: {
@@ -123,4 +123,13 @@ export type ResponseAddComplex = {
   company_id: number | null;
   request_id: string[];
   merged: boolean;
+};
+
+export type ResponseLeadSubscriptionById = Total & Page & PageCount & Links & {
+  _embedded: {
+    subscriptions: {
+      subscriber_id: number;
+      type: "user" | "group";
+    }[];
+  };
 };
