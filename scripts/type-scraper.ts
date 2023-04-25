@@ -200,3 +200,9 @@ function writeTypes(data: string): void {
 // parseTableFromUrl("Role", "https://www.amocrm.ru/developers/content/crm_platform/users-api", 16, {
 //   comment: true,
 // }).then(writeTypes);
+// parseTableFromUrl("Webhook", "https://www.amocrm.ru/developers/content/crm_platform/webhooks-api", 2, {
+//   comment: true,
+// }).then(writeTypes);
+// parseUnion("WebhookTypes", "https://www.amocrm.ru/developers/content/crm_platform/webhooks-api", 7, {
+//   comment: true,
+// }).then(writeTypes);

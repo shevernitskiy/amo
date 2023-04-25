@@ -25,8 +25,7 @@
   - [x] Statuses
   - [x] Segments
   - [x] Users
-  - [ ] Products
-  - [ ] Webhooks
+  - [x] Webhooks
   - [ ] Widgets
   - [ ] Calls
   - [ ] Chats
