@@ -20,6 +20,7 @@ import { SegmentApi } from "@api/segment/client.ts";
 import { UserApi } from "@api/user/client.ts";
 import { WebhookApi } from "@api/webhook/client.ts";
 import { WidgetApi } from "@api/widget/client.ts";
+import { CallApi } from "@api/call/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -43,6 +44,7 @@ export class Amo {
   private _user: UserApi;
   private _webhook: WebhookApi;
   private _widget: WidgetApi;
+  private _call: CallApi;
 
   constructor(
     subdomain: string,
@@ -70,6 +72,7 @@ export class Amo {
     this._user = new UserApi(this.rest);
     this._webhook = new WebhookApi(this.rest);
     this._widget = new WidgetApi(this.rest);
+    this._call = new CallApi(this.rest);
   }
 
   /** Token struct */
@@ -152,5 +155,9 @@ export class Amo {
   /** Widget Api */
   get widget(): WidgetApi {
     return this._widget;
+  }
+  /** Call Api */
+  get call(): CallApi {
+    return this._call;
   }
 }

@@ -27,7 +27,7 @@
   - [x] Users
   - [x] Webhooks
   - [x] Widgets
-  - [ ] Calls
+  - [x] Calls
   - [ ] Chats
   - [ ] Sources
 - [ ] Helpers
