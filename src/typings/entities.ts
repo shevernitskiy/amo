@@ -1225,3 +1225,32 @@ export type Call = {
   /** Дата изменения звонка, передается в Unix Timestamp */
   updated_at: number;
 };
+
+export type Talk = {
+  /** ID беседы */
+  talk_id: number;
+  /** Дата создания беседы, передается в Unix Timestamp */
+  created_at: number;
+  /** Дата изменения беседы, передается в Unix Timestamp */
+  updated_at: number;
+  /** Оценка беседы клиентом, выставляется в результате работы NPS-бота */
+  rate: number;
+  /** ID контакта, к которому принадлежит беседа */
+  contact_id: number;
+  /** ID чата, к которому принадлежит беседа */
+  chat_id: string;
+  /** ID сущности, по которой ведется беседа */
+  entity_id: number | null;
+  /** Тип сущности, по которой ведется беседа (lead, customer) */
+  entity_type: "lead" | "customer" | null;
+  /** В работе ли беседа (не закрыта) */
+  is_in_work: boolean;
+  /** Прочитана ли беседа */
+  is_read: boolean;
+  /** Тип источника, по которому была создана беседа (telegram, viber, и т.д.) */
+  origin: string;
+  /** Дата когда беседа была пропущена (не отвечена за время, установленное в настройках аккаунта), передается в Unix Timestamp */
+  missed_at: number | null;
+  /** ID аккаунта */
+  account_id: number;
+};

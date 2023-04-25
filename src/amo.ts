@@ -21,6 +21,7 @@ import { UserApi } from "@api/user/client.ts";
 import { WebhookApi } from "@api/webhook/client.ts";
 import { WidgetApi } from "@api/widget/client.ts";
 import { CallApi } from "@api/call/client.ts";
+import { TalkApi } from "@api/talk/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -45,6 +46,7 @@ export class Amo {
   private _webhook: WebhookApi;
   private _widget: WidgetApi;
   private _call: CallApi;
+  private _talk: TalkApi;
 
   constructor(
     subdomain: string,
@@ -73,6 +75,7 @@ export class Amo {
     this._webhook = new WebhookApi(this.rest);
     this._widget = new WidgetApi(this.rest);
     this._call = new CallApi(this.rest);
+    this._talk = new TalkApi(this.rest);
   }
 
   /** Token struct */
@@ -159,5 +162,9 @@ export class Amo {
   /** Call Api */
   get call(): CallApi {
     return this._call;
+  }
+  /** Talk Api */
+  get talk(): TalkApi {
+    return this._talk;
   }
 }

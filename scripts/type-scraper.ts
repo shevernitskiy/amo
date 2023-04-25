@@ -212,3 +212,6 @@ function writeTypes(data: string): void {
 // parseTableFromUrl("Call", "https://www.amocrm.ru/developers/content/crm_platform/calls-api", 0, {
 //   comment: true,
 // }).then(writeTypes);
+// parseTableFromUrl("Talk", "https://www.amocrm.ru/developers/content/crm_platform/talks-api", 1, {
+//   comment: true,
+// }).then(writeTypes);

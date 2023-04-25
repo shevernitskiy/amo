@@ -28,7 +28,7 @@
   - [x] Webhooks
   - [x] Widgets
   - [x] Calls
-  - [ ] Chats
+  - [x] Talks
   - [ ] Sources
 - [ ] Helpers
   - [x] Filter builder
