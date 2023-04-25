@@ -29,7 +29,10 @@
   - [x] Widgets
   - [x] Calls
   - [x] Talks
-  - [ ] Sources
+  - [x] Sources
+  - [ ] Salesbot
+  - [ ] Short Links
+  - [ ] Chat Templates
 - [ ] Helpers
   - [x] Filter builder
   - [ ] Webhook handling
