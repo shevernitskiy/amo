@@ -26,7 +26,7 @@
   - [x] Segments
   - [x] Users
   - [x] Webhooks
-  - [ ] Widgets
+  - [x] Widgets
   - [ ] Calls
   - [ ] Chats
   - [ ] Sources

@@ -1160,3 +1160,37 @@ export type WebhookType =
   | "note_company"
   /** Примечание добавлено в покупателя */
   | "note_customer";
+
+export type Widget = {
+  /** ID виджета */
+  id: number;
+  /** Код виджета */
+  code: string;
+  /** Версия виджета */
+  version: string;
+  /** Рейтинг виджета */
+  rating: string | number;
+  /** Поля доступные для настройки */
+  settings_template: {
+    /** Ключ значения поля в настройках виджета */
+    key: string;
+    /** Название поля в настройках виджета */
+    name: string;
+    /** Тип данных в настройках виджета (text, pass, custom, users или users_lp) */
+    type: string;
+    /** Является ли настройка обязательной */
+    is_required: boolean;
+  }[];
+  /** Доступен ли виджет в качестве источника сделок */
+  is_lead_source: boolean;
+  /** Доступен ли виджет в Digital Pipeline */
+  is_work_with_dp: boolean;
+  /** Является ли виджет отраслевым решением */
+  is_crm_template: boolean;
+  /** UUID связанной с виджетом oAuth интеграции */
+  client_uuid: string | null;
+  /** Установлен ли виджет в аккаунте */
+  is_active_in_account: boolean;
+  /** ID воронки, в котором виджет установлен, как источник сделок */
+  pipeline_id: number | null;
+};

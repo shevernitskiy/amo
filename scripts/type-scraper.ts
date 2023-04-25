@@ -206,3 +206,6 @@ function writeTypes(data: string): void {
 // parseUnion("WebhookTypes", "https://www.amocrm.ru/developers/content/crm_platform/webhooks-api", 7, {
 //   comment: true,
 // }).then(writeTypes);
+// parseTableFromUrl("Widget", "https://www.amocrm.ru/developers/content/crm_platform/widgets-api", 2, {
+//   comment: true,
+// }).then(writeTypes);
