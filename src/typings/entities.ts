@@ -1343,3 +1343,63 @@ export type SalesBotTask = {
   /** Тип сущности, id которой передали */
   entity_type: string;
 };
+
+export type File = {
+  /** UUID файла */
+  uuid: string;
+  /** Тип файла. Возможные параметры – image, video, audio, document, file */
+  type: string;
+  /** Удален ли файл */
+  is_trashed: boolean;
+  /** Имя файла */
+  name: string;
+  /** Имя файла в ASCII кодировке */
+  sanitized_name: string;
+  /** Размер файла в байтах */
+  size: number;
+  /** Идентификатор источника из которого пришел файл */
+  source_id: number | null;
+  /** Идентификатор версии файла */
+  version_uuid: string;
+  /** Имеет ли файл множество версий */
+  has_multiple_versions: boolean;
+  /** Время создания файла Unix Timestamp */
+  created_at: number;
+  /** Пользователь создавший файл */
+  created_by: {
+    /** ID пользователя создавшего файла */
+    id: number;
+    /** Тип пользователя создавшего файла */
+    type: string;
+  };
+  /** Время последнего обновления файла Unix Timestamp */
+  updated_at: number;
+  /** Пользователь обновивший файл */
+  updated_by: {
+    /** ID пользователя создавшего файла */
+    id: number;
+    /** Тип пользователя создавшего файла */
+    type: string;
+  };
+  /** Время удаления файла Unix Timestamp */
+  deleted_at: number | null;
+  /** Пользователь удаливший файл */
+  deleted_by: null;
+  /** Метаданные файла */
+  metadata: {
+    /** Расширение файла */
+    extension: string;
+    /** MIME-тип файла */
+    mime_type: string;
+  } | null;
+  /** Массив превью для файла */
+  previews: {
+    /** Превью файла */
+    /** URL для загрузки превью */
+    download_link: string;
+    /** Ширина превью */
+    width: number;
+    /** Высота превью */
+    height: number;
+  }[] | null;
+};

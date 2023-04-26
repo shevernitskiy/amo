@@ -33,7 +33,7 @@
   - [x] Salesbot
   - [x] Short Links
   - [x] Chat Templates
-  - [ ] Files
+  - [x] Files
   - [ ] Chats
 - [ ] Helpers
   - [x] Filter builder

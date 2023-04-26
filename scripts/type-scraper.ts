@@ -221,3 +221,6 @@ function writeTypes(data: string): void {
 // parseTableFromUrl("ChatTemplate", "https://www.amocrm.ru/developers/content/crm_platform/chat-templates-api", 2, {
 //   comment: true,
 // }).then(writeTypes);
+// parseTableFromUrl("File", "https://www.amocrm.ru/developers/content/files/files-api", 5, {
+//   comment: true,
+// }).then(writeTypes);

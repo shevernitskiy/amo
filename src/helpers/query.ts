@@ -30,7 +30,5 @@ export function query(params?: any): string {
     result.push(query.filter.toString());
   }
 
-  console.log(result);
-
   return result.filter((item) => item !== "").join("&");
 }

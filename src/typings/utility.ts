@@ -35,6 +35,10 @@ export type PageCount = {
   _page_count: number;
 };
 
+export type Count = {
+  _count: number;
+};
+
 export type RequestId = {
   request_id?: string;
 };

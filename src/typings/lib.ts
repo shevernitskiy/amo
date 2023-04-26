@@ -10,6 +10,7 @@ export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 export type RequestInit = {
   url: string;
+  url_base?: string;
   query?: string;
   payload?: JSONValue;
 };

@@ -26,6 +26,7 @@ import { SourceApi } from "@api/source/client.ts";
 import { ShortLinkApi } from "@api/short-link/client.ts";
 import { ChatTemplateApi } from "@api/chat-template/client.ts";
 import { SalesBotApi } from "@api/salesbot/client.ts";
+import { FileApi } from "@api/file/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -55,6 +56,7 @@ export class Amo {
   private _short_link: ShortLinkApi;
   private _chat_template: ChatTemplateApi;
   private _salesbot: SalesBotApi;
+  private _file?: FileApi;
 
   constructor(
     subdomain: string,
@@ -194,5 +196,12 @@ export class Amo {
   /** Salesbot Api */
   get salesbot(): SalesBotApi {
     return this._salesbot;
+  }
+  /** File Api */
+  file(drive_url: string): FileApi {
+    if (this._file === undefined) {
+      this._file = new FileApi(this.rest, drive_url);
+    }
+    return this._file;
   }
 }

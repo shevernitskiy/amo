@@ -68,7 +68,7 @@ export class RestClient {
       });
     }
 
-    const target = `${this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
+    const target = `${init.url_base ?? this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
 
     console.log("REQUEST", target, init.payload);
 
@@ -110,6 +110,10 @@ export class RestClient {
 
   delete<T>(init: RequestInit): Promise<T> {
     return this.request<T>("DELETE", init);
+  }
+
+  put<T>(init: RequestInit): Promise<T> {
+    return this.request<T>("PUT", init);
   }
 
   isOAuthCode(
