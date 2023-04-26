@@ -1403,3 +1403,24 @@ export type File = {
     height: number;
   }[] | null;
 };
+
+export type Message = {
+  id: string;
+  chat_id: string;
+  talk_id: number;
+  contact_id: number;
+  text: string;
+  created_at: number;
+  element_type: number;
+  entity_type: string;
+  element_id: number;
+  entity_id: number;
+  type: string;
+  author: {
+    id: string;
+    type: string;
+    name: string;
+    avatar_url: string;
+  };
+  avito: string;
+};

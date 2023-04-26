@@ -1,7 +1,7 @@
 import type { HttpMethod, Options, RequestInit } from "@typings/lib.ts";
-import { OAuth, OAuthCode, OAuthRefresh } from "@typings/auth.ts";
+import type { OAuth, OAuthCode, OAuthRefresh } from "@typings/auth.ts";
 import { AsyncQueue } from "@core/async-queue.ts";
-import { AuthError } from "../errors/auth.ts";
+import { AuthError } from "@errors/auth.ts";
 
 export class RestClient {
   private url_base: string;
@@ -20,7 +20,7 @@ export class RestClient {
         expires_in: this.auth.expires_in,
         access_token: this.auth.access_token,
         refresh_token: this.auth.refresh_token,
-        expires_at: this.auth.expires_at,
+        expires_at: this.auth.expires_at ?? 0,
       };
     }
     this.queue = new AsyncQueue<Response>(options?.http_request_delay ?? 150);

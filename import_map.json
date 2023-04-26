@@ -3,6 +3,7 @@
     "@typings/": "./src/typings/",
     "@core/": "./src/core/",
     "@api/": "./src/api/",
-    "@helpers/": "./src/helpers/"
+    "@helpers/": "./src/helpers/",
+    "@errors/": "./src/errors/"
   }
 }

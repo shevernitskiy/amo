@@ -37,5 +37,6 @@
   - [ ] Chats
 - [ ] Helpers
   - [x] Filter builder
-  - [ ] Webhook handling
+  - [x] Webhook handling
   - [ ] Error handling
+  - [ ] Salesbot interactions
