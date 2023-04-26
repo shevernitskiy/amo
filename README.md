@@ -30,7 +30,7 @@
   - [x] Calls
   - [x] Talks
   - [x] Sources
-  - [ ] Salesbot
+  - [x] Salesbot
   - [x] Short Links
   - [x] Chat Templates
   - [ ] Files

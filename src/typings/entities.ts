@@ -1334,3 +1334,12 @@ export type ChatTemplate = {
   /** Внешний идентификатор шаблона. ID шаблона в вашей системе */
   external_id: string;
 };
+
+export type SalesBotTask = {
+  /** Id бота, которого нужно запустить */
+  bot_id: number;
+  /** Id сущности к которой привязан контакт с чатом или самого контакта с чатом. */
+  entity_id: number;
+  /** Тип сущности, id которой передали */
+  entity_type: string;
+};
