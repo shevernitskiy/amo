@@ -32,7 +32,7 @@
   - [x] Sources
   - [ ] Salesbot
   - [x] Short Links
-  - [ ] Chat Templates
+  - [x] Chat Templates
   - [ ] Files
   - [ ] Chats
 - [ ] Helpers

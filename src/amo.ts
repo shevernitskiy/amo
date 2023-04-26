@@ -24,6 +24,7 @@ import { CallApi } from "@api/call/client.ts";
 import { TalkApi } from "@api/talk/client.ts";
 import { SourceApi } from "@api/source/client.ts";
 import { ShortLinkApi } from "@api/short-link/client.ts";
+import { ChatTemplateApi } from "@api/chat-template/client.ts";
 
 export class Amo {
   private rest: RestClient;
@@ -51,6 +52,7 @@ export class Amo {
   private _talk: TalkApi;
   private _source: SourceApi;
   private _short_link: ShortLinkApi;
+  private _chat_template: ChatTemplateApi;
 
   constructor(
     subdomain: string,
@@ -82,6 +84,7 @@ export class Amo {
     this._talk = new TalkApi(this.rest);
     this._source = new SourceApi(this.rest);
     this._short_link = new ShortLinkApi(this.rest);
+    this._chat_template = new ChatTemplateApi(this.rest);
   }
 
   /** Token struct */
@@ -180,5 +183,9 @@ export class Amo {
   /** Short links Api */
   get short_link(): ShortLinkApi {
     return this._short_link;
+  }
+  /** Chat template Api */
+  get chat_template(): ChatTemplateApi {
+    return this._chat_template;
   }
 }
