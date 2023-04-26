@@ -1,4 +1,4 @@
-import { Catalog, Company, Contact, Customer, Lead, Task, Unsorted } from "@typings/entities.ts";
+import type { Catalog, Company, Contact, Customer, Lead, Talk, Task, Unsorted } from "@typings/entities.ts";
 
 const ENTITIES = [
   "leads",
@@ -22,10 +22,9 @@ const EVENTS = [
   "note",
 ] as const;
 
-type Talk = string; // remove
 type Message = string; // remove
 
-type EntityMap =
+export type WebhookEventMap =
   & Extender<"leads", WebhookEvent, Lead>
   & Extender<"contacts", WebhookEvent, Contact>
   & Extender<"companies", WebhookEvent, Company>

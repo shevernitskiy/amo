@@ -31,8 +31,10 @@
   - [x] Talks
   - [x] Sources
   - [ ] Salesbot
-  - [ ] Short Links
+  - [x] Short Links
   - [ ] Chat Templates
+  - [ ] Files
+  - [ ] Chats
 - [ ] Helpers
   - [x] Filter builder
   - [ ] Webhook handling
