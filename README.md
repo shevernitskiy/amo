@@ -105,7 +105,7 @@ try {
 
 ## Creating client instance
 
-To create a client instance, you should provide 2 or 3 values to the constructor:
+To create a client instance, you should provide 2 or 3 args to the constructor:
 
 - subdomain
 - auth data (may be different)
@@ -156,7 +156,7 @@ This method is used every time after the first authorization by code. The API do
 const amo = new Amo("mydomain", {
     client_id: "1111-2222-3333",
     client_secret: "myclientsecret",
-    redirect_uri: "https://myredirect.org"
+    redirect_uri: "https://myredirect.org",
     token_type: "Bearer",
     expires_in: 86400,
     access_token: "megatoken",
@@ -210,7 +210,7 @@ order: { param: "id", type: "asc" }
 Filter is a complex parameter that depends on the method. Lib provides a filter builder to construct filter queries
 depending on the method. Each filter can take different types of input conditions: single (property = value), multi
 (property = array of values), range (property = from-to), custom fields* , statuses* (*only for leads as I know?). To
-use the filter builder, depending on the constraits of the API method, you should pass the callback that receives filter
+use the filter builder depending on the constraits of the API method, you should pass the callback that receives filter
 instance and return it with your params. The instance will be typed, and you will not be able to set the value if it
 does not satisfy the method constraints (type of the value will be `never`).
 
