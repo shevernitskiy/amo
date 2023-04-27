@@ -1,4 +1,4 @@
-# amoCRM API client
+# ♿amoCRM API client
 
 This is a simple wrapper client for the amoCRM REST API. It covers almost all API modules and endpoints. Also, it
 manages to token refreshing and webhook handling.
