@@ -14,6 +14,13 @@ export type DeepPartial<T> = T extends object ? {
   }
   : T;
 
+export type Order<T extends string[]> = {
+  param: T[keyof T];
+  type: "asc" | "desc";
+};
+
+export type With<T extends string[]> = (T[keyof T])[];
+
 export type Links = {
   _links: {
     self: { href: string };
@@ -42,13 +49,6 @@ export type Count = {
 export type RequestId = {
   request_id?: string;
 };
-
-export type Order<T extends string[]> = {
-  param: T[keyof T];
-  type: "asc" | "desc";
-};
-
-export type With<T extends string[]> = (T[keyof T])[];
 
 export type Embedded = {
   tags?: Tag[];

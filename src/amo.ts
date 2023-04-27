@@ -228,47 +228,37 @@ export class Amo extends EventEmitter<WebhookEventMap> {
         const [entity, event, payload] = parseIncomingWebhook(data);
 
         if (event === "note") {
-          this.emit(event, payload as Note);
           this.emit(`${event}:${entity}`, payload as Note);
           return new Response("OK", { status: 200 });
         }
 
         switch (entity) {
           case "catalogs":
-            this.emit(entity, payload as Catalog);
             this.emit(`${entity}:${event}`, payload as Catalog);
             break;
           case "contacts":
-            this.emit(entity, payload as Contact);
             this.emit(`${entity}:${event}`, payload as Contact);
             break;
           case "companies":
-            this.emit(entity, payload as Company);
             this.emit(`${entity}:${event}`, payload as Company);
             break;
           case "customers":
-            this.emit(entity, payload as Customer);
             this.emit(`${entity}:${event}`, payload as Customer);
             break;
           case "leads":
-            this.emit(entity, payload as Lead);
             this.emit(`${entity}:${event}`, payload as Lead);
             break;
           case "message":
-            this.emit(entity, payload as Message);
             this.emit(`${entity}:${event}`, payload as Message);
             break;
           case "talk":
-            this.emit(entity, payload as Talk);
             this.emit(`${entity}:${event}`, payload as Talk);
             break;
           case "task":
-            this.emit(entity, payload as Task);
             this.emit(`${entity}:${event}`, payload as Task);
             break;
           // TODO: Unsorted has different type then Enity type itself
           case "unsorted":
-            this.emit(entity, payload as Unsorted);
             this.emit(`${entity}:${event}`, payload as Unsorted);
             break;
         }
