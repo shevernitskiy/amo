@@ -12,9 +12,11 @@ import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
+type Entities = "leads" | "contacts" | "companies" | "customers";
+
 export class TagApi extends Endpoint {
   /** Метод позволяет получить список тегов для сущности в аккаунте. */
-  getTags(entity_type: "leads" | "contacts" | "companies" | "customers", params?: {
+  getTags(entity_type: Entities, params?: {
     page?: number;
     limit?: number;
     query?: string;
@@ -28,7 +30,7 @@ export class TagApi extends Endpoint {
 
   /** Метод позволяет добавлять теги для указанной в URL сущности пакетно. */
   addTags(
-    entity_type: "leads" | "contacts" | "companies" | "customers",
+    entity_type: Entities,
     tags: RequestAddTag[],
   ): Promise<ResponseAddTags> {
     return this.rest.post<ResponseAddTags>({
@@ -38,7 +40,7 @@ export class TagApi extends Endpoint {
   }
 
   /** Метод позволяет добавлять теги к сущностям пакетно. */
-  addTagsToEntities<T extends "leads" | "contacts" | "companies" | "customers">(
+  addTagsToEntities<T extends Entities>(
     entity_type: T,
     tags: RequestAddTagToEntity[],
   ): Promise<ResponseAddTagsToEntities<T>> {
@@ -49,7 +51,7 @@ export class TagApi extends Endpoint {
   }
 
   /** Метод позволяет добавлять теги к сущностям по ID */
-  addTagsToEntitiesById<T extends "leads" | "contacts" | "companies" | "customers">(
+  addTagsToEntitiesById<T extends Entities>(
     id: number,
     entity_type: T,
     tag: RequestAddTagToEntity,
@@ -61,7 +63,7 @@ export class TagApi extends Endpoint {
   }
 
   /** Метод позволяет удалить теги у сущностей  пакетно. */
-  deleteTagsFromEntities<T extends "leads" | "contacts" | "companies" | "customers">(
+  deleteTagsFromEntities<T extends Entities>(
     entity_type: T,
     tags: RequesDeleteTagToEntity[],
   ): Promise<ResponseDeleteTagsToEntities<T>> {
@@ -72,7 +74,7 @@ export class TagApi extends Endpoint {
   }
 
   /** Метод позволяет удалить теги к сущности по ID */
-  deleteTagsToEntitiesById<T extends "leads" | "contacts" | "companies" | "customers">(
+  deleteTagsToEntitiesById<T extends Entities>(
     id: number,
     entity_type: T,
     tag: RequesDeleteTagToEntity,
