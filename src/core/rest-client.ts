@@ -23,7 +23,7 @@ export class RestClient {
         expires_at: this.auth.expires_at ?? 0,
       };
     }
-    this.queue = new AsyncQueue<Response>(options?.http_request_delay ?? 150);
+    this.queue = new AsyncQueue<Response>(options?.request_delay ?? 150);
   }
 
   get token(): OAuth | undefined {

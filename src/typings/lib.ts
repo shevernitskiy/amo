@@ -2,7 +2,7 @@ import { OAuth } from "@typings/auth.ts";
 import { JSONValue } from "@typings/utility.ts";
 
 export type Options = {
-  http_request_delay?: number;
+  request_delay?: number;
   on_token?: (token: OAuth) => void | Promise<void>;
 };
 
