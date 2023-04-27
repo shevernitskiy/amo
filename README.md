@@ -37,7 +37,7 @@ manages to token refreshing and webhook handling.
   - [x] Calls
   - [x] Talks
   - [x] Sources
-  - [x] Salesbot
+  - [x] Salesbot (api method)
   - [x] Short Links
   - [x] Chat Templates
   - [x] Files
@@ -58,7 +58,7 @@ manages to token refreshing and webhook handling.
 npm -i amo
 ```
 
-- Deno
+- Deno (direct import from repo atm)
 
 ```ts
 import { Amo } from "https://deno.land/x/amo/mod.ts";
