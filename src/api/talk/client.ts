@@ -1,5 +1,5 @@
 import type { ResponseGetTalkById } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
+import { RestClient } from "../../core/rest-client.ts";
 
 export class TalkApi {
   constructor(private rest: RestClient) {}

@@ -1,4 +1,4 @@
-import type { JSONValue } from "@typings/utility.ts";
+import type { JSONValue } from "../../typings/utility.ts";
 import type {
   RequestAddLinkByEntityId,
   RequestAddLinkByEntityType,
@@ -9,9 +9,9 @@ import type {
   ResponseGetLinksByEntityId,
   ResponseGetLinksByEntityType,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
 
 export class LinkApi {
   constructor(private rest: RestClient) {}

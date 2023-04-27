@@ -1,5 +1,5 @@
-import type { Company, Contact, Customer, File, Lead } from "@typings/entities.ts";
-import type { Count, Links } from "@typings/utility.ts";
+import type { Company, Contact, Customer, File, Lead } from "../../typings/entities.ts";
+import type { Count, Links } from "../../typings/utility.ts";
 
 export type RequestCreateSession = {
   file_name: string;

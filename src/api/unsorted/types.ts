@@ -1,5 +1,12 @@
-import type { Embedded, Links, Page, RequestId, Total } from "@typings/utility.ts";
-import type { Company, Contact, Lead, Unsorted, UnsrotedMetadataForm, UnsrotedMetadataSip } from "@typings/entities.ts";
+import type { Embedded, Links, Page, RequestId, Total } from "../../typings/utility.ts";
+import type {
+  Company,
+  Contact,
+  Lead,
+  Unsorted,
+  UnsrotedMetadataForm,
+  UnsrotedMetadataSip,
+} from "../../typings/entities.ts";
 
 export type ResponseGetUnsorted = Links & Page & {
   _embedded: {

@@ -1,5 +1,5 @@
-import type { ShortLink } from "@typings/entities.ts";
-import type { Links } from "@typings/utility.ts";
+import type { ShortLink } from "../../typings/entities.ts";
+import type { Links } from "../../typings/utility.ts";
 
 export type RequestCreateShortLink = ShortLink[];
 export type ResponseCreateShortLinks = Links & {

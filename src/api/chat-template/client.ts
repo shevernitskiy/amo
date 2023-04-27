@@ -1,4 +1,4 @@
-import type { JSONValue } from "@typings/utility.ts";
+import type { JSONValue } from "../../typings/utility.ts";
 import type {
   RequestAddChatTemplate,
   RequestDeleteChatTemplate,
@@ -9,9 +9,9 @@ import type {
   ResponseUpdateChatTemplate,
   ResponseUpdateChatTemplates,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
 
 export class ChatTemplateApi {
   constructor(private rest: RestClient) {}

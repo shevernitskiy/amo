@@ -1,5 +1,5 @@
-import type { Links, RequestId, Total } from "@typings/utility.ts";
-import type { Pipeline, PipelineStatus } from "@typings/entities.ts";
+import type { Links, RequestId, Total } from "../../typings/utility.ts";
+import type { Pipeline, PipelineStatus } from "../../typings/entities.ts";
 
 export type ResponseGetPipelines = Links & Total & {
   _embedded: {

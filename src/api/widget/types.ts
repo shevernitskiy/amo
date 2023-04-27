@@ -1,5 +1,5 @@
-import type { Widget } from "@typings/entities.ts";
-import type { JSONValue, Links, Page } from "@typings/utility.ts";
+import type { Widget } from "../../typings/entities.ts";
+import type { JSONValue, Links, Page } from "../../typings/utility.ts";
 
 export type ResponseGetWidgets = Page & Links & {
   _embedded: {

@@ -1,5 +1,5 @@
-import { Contact } from "@typings/entities.ts";
-import { Embedded, Links, Page, RequestId, Total } from "@typings/utility.ts";
+import { Contact } from "../../typings/entities.ts";
+import { Embedded, Links, Page, RequestId, Total } from "../../typings/utility.ts";
 
 export type ResponseGetContacts = Page & Links & {
   _embedded: {

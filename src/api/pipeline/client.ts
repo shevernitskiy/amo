@@ -1,4 +1,4 @@
-import type { JSONValue } from "@typings/utility.ts";
+import type { JSONValue } from "../../typings/utility.ts";
 import type {
   RequestAddPipeline,
   RequestAddStatus,
@@ -13,7 +13,7 @@ import type {
   ResponseUpdatePipeline,
   ResponseUpdateStatus,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
+import { RestClient } from "../../core/rest-client.ts";
 
 export class PipelineApi {
   constructor(private rest: RestClient) {}

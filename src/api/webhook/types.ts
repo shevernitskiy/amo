@@ -1,5 +1,5 @@
-import type { Webhook } from "@typings/entities.ts";
-import type { Total } from "@typings/utility.ts";
+import type { Webhook } from "../../typings/entities.ts";
+import type { Total } from "../../typings/utility.ts";
 
 export type ResponseGetWebhooks = Total & {
   _embedded: {

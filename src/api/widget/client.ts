@@ -1,6 +1,6 @@
 import type { RequestAddWidget, ResponseAddWidget, ResponseGetWidgetByCode, ResponseGetWidgets } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { query } from "../../helpers/query.ts";
 
 export class WidgetApi {
   constructor(private rest: RestClient) {}

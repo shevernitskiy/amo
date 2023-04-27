@@ -1,4 +1,4 @@
-import type { JSONValue, Order, With } from "@typings/utility.ts";
+import type { JSONValue, Order, With } from "../../typings/utility.ts";
 import type {
   RequestAddContact,
   RequestLinkContactToChat,
@@ -11,9 +11,9 @@ import type {
   ResponseUpdateContact,
   ResponseUpdateContacts,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
 
 export class ContactApi {
   constructor(private rest: RestClient) {}

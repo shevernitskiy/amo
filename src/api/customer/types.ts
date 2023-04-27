@@ -1,5 +1,5 @@
-import type { Customer, Transaction } from "@typings/entities.ts";
-import type { Embedded, Links, Page, PageCount, RequestId, Total } from "@typings/utility.ts";
+import type { Customer, Transaction } from "../../typings/entities.ts";
+import type { Embedded, Links, Page, PageCount, RequestId, Total } from "../../typings/utility.ts";
 
 export type ResponseGetCustomers = Page & Links & {
   _embedded: {

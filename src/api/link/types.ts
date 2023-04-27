@@ -1,5 +1,5 @@
-import type { DeepPartial, Links, Total } from "@typings/utility.ts";
-import type { EntityLink } from "@typings/entities.ts";
+import type { DeepPartial, Links, Total } from "../../typings/utility.ts";
+import type { EntityLink } from "../../typings/entities.ts";
 
 export type ResponseGetLinksByEntityType = ResponseAddLinksByEntityId;
 export type ResponseGetLinksByEntityId = Total & Links & {

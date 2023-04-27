@@ -1,5 +1,5 @@
-import type { JSONValue, Order } from "@typings/utility.ts";
-import type { NoteEntityType } from "@typings/entities.ts";
+import type { JSONValue, Order } from "../../typings/utility.ts";
+import type { NoteEntityType } from "../../typings/entities.ts";
 import type {
   RequestAddNote,
   RequestUpdateNote,
@@ -11,9 +11,9 @@ import type {
   ResponseUpdateNoteById,
   ResponseUpdateNotes,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
 
 export class NoteApi {
   constructor(private rest: RestClient) {}

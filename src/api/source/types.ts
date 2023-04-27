@@ -1,5 +1,5 @@
-import type { Source } from "@typings/entities.ts";
-import type { DeepPartial, Links, Total } from "@typings/utility.ts";
+import type { Source } from "../../typings/entities.ts";
+import type { DeepPartial, Links, Total } from "../../typings/utility.ts";
 
 export type ResponseGetSources = Total & Links & {
   _embedded: {

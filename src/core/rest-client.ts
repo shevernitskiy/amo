@@ -1,7 +1,7 @@
-import type { HttpMethod, Options, RequestInit } from "@typings/lib.ts";
-import type { OAuth, OAuthCode, OAuthRefresh } from "@typings/auth.ts";
-import { AsyncQueue } from "@core/async-queue.ts";
-import { AuthError } from "@errors/auth.ts";
+import type { HttpMethod, Options, RequestInit } from "../typings/lib.ts";
+import type { OAuth, OAuthCode, OAuthRefresh } from "../typings/auth.ts";
+import { AsyncQueue } from "./async-queue.ts";
+import { AuthError } from "../errors/auth.ts";
 
 export class RestClient {
   private url_base: string;

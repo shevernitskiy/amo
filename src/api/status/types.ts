@@ -1,5 +1,5 @@
-import type { Status } from "@typings/entities.ts";
-import type { Links, RequestId, Total } from "@typings/utility.ts";
+import type { Status } from "../../typings/entities.ts";
+import type { Links, RequestId, Total } from "../../typings/utility.ts";
 
 export type ResponseGetStatuses = Total & Links & {
   _embedded: {

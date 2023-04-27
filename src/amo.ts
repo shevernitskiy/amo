@@ -1,5 +1,5 @@
-import type { Options } from "@typings/lib.ts";
-import type { OAuth, OAuthCode, OAuthRefresh } from "@typings/auth.ts";
+import type { Options } from "./typings/lib.ts";
+import type { OAuth, OAuthCode, OAuthRefresh } from "./typings/auth.ts";
 import type {
   Catalog,
   Company,
@@ -11,37 +11,37 @@ import type {
   Talk,
   Task,
   Unsorted,
-} from "@typings/entities.ts";
-import { EventEmitter } from "@core/event-emitter.ts";
-import { parseIncomingWebhook, WebhookEventMap } from "@helpers/webhook.ts";
-import { WebhookError } from "@errors/webhook.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { LeadApi } from "@api/lead/client.ts";
-import { ContactApi } from "@api/contact/client.ts";
-import { AccountApi } from "@api/account/client.ts";
-import { CompanyApi } from "@api/company/client.ts";
-import { UnsortedApi } from "@api/unsorted/client.ts";
-import { PipelineApi } from "@api/pipeline/client.ts";
-import { CatalogApi } from "@api/catalog/client.ts";
-import { LinkApi } from "@api/link/client.ts";
-import { TaskApi } from "@api/task/client.ts";
-import { CustomFieldsApi } from "@api/custom-fields/client.ts";
-import { TagApi } from "@api/tag/client.ts";
-import { EventApi } from "@api/event/client.ts";
-import { NoteApi } from "@api/note/client.ts";
-import { CustomerApi } from "@api/customer/client.ts";
-import { StatusApi } from "@api/status/client.ts";
-import { SegmentApi } from "@api/segment/client.ts";
-import { UserApi } from "@api/user/client.ts";
-import { WebhookApi } from "@api/webhook/client.ts";
-import { WidgetApi } from "@api/widget/client.ts";
-import { CallApi } from "@api/call/client.ts";
-import { TalkApi } from "@api/talk/client.ts";
-import { SourceApi } from "@api/source/client.ts";
-import { ShortLinkApi } from "@api/short-link/client.ts";
-import { ChatTemplateApi } from "@api/chat-template/client.ts";
-import { SalesBotApi } from "@api/salesbot/client.ts";
-import { FileApi } from "@api/file/client.ts";
+} from "./typings/entities.ts";
+import { EventEmitter } from "./core/event-emitter.ts";
+import { parseIncomingWebhook, WebhookEventMap } from "./helpers/webhook.ts";
+import { WebhookError } from "./errors/webhook.ts";
+import { RestClient } from "./core/rest-client.ts";
+import { LeadApi } from "./api/lead/client.ts";
+import { ContactApi } from "./api/contact/client.ts";
+import { AccountApi } from "./api/account/client.ts";
+import { CompanyApi } from "./api/company/client.ts";
+import { UnsortedApi } from "./api/unsorted/client.ts";
+import { PipelineApi } from "./api/pipeline/client.ts";
+import { CatalogApi } from "./api/catalog/client.ts";
+import { LinkApi } from "./api/link/client.ts";
+import { TaskApi } from "./api/task/client.ts";
+import { CustomFieldsApi } from "./api/custom-fields/client.ts";
+import { TagApi } from "./api/tag/client.ts";
+import { EventApi } from "./api/event/client.ts";
+import { NoteApi } from "./api/note/client.ts";
+import { CustomerApi } from "./api/customer/client.ts";
+import { StatusApi } from "./api/status/client.ts";
+import { SegmentApi } from "./api/segment/client.ts";
+import { UserApi } from "./api/user/client.ts";
+import { WebhookApi } from "./api/webhook/client.ts";
+import { WidgetApi } from "./api/widget/client.ts";
+import { CallApi } from "./api/call/client.ts";
+import { TalkApi } from "./api/talk/client.ts";
+import { SourceApi } from "./api/source/client.ts";
+import { ShortLinkApi } from "./api/short-link/client.ts";
+import { ChatTemplateApi } from "./api/chat-template/client.ts";
+import { SalesBotApi } from "./api/salesbot/client.ts";
+import { FileApi } from "./api/file/client.ts";
 
 export class Amo extends EventEmitter<WebhookEventMap> {
   private rest: RestClient;

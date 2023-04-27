@@ -9,7 +9,7 @@ import type {
   Talk,
   Task,
   Unsorted,
-} from "@typings/entities.ts";
+} from "../typings/entities.ts";
 
 const ENTITIES = [
   "leads",

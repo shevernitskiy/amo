@@ -1,5 +1,5 @@
 import type { RequestAddCall, ResponseAddCalls } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
+import { RestClient } from "../../core/rest-client.ts";
 
 export class CallApi {
   constructor(private rest: RestClient) {}

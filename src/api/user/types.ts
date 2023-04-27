@@ -1,5 +1,5 @@
-import type { Role, User } from "@typings/entities.ts";
-import type { DeepPartial, Links, Page, PageCount, RequestId, Total } from "@typings/utility.ts";
+import type { Role, User } from "../../typings/entities.ts";
+import type { DeepPartial, Links, Page, PageCount, RequestId, Total } from "../../typings/utility.ts";
 
 export type ResponseGetUsers = Total & Page & PageCount & Links & {
   _embedded: {

@@ -1,4 +1,4 @@
-import type { Company, Contact, Customer, Lead, Segment, Tag } from "@typings/entities.ts";
+import type { Company, Contact, Customer, Lead, Segment, Tag } from "./entities.ts";
 
 export type JSONValue =
   | string

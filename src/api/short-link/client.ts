@@ -1,5 +1,5 @@
 import type { RequestCreateShortLink, ResponseCreateShortLinks } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
+import { RestClient } from "../../core/rest-client.ts";
 
 export class ShortLinkApi {
   constructor(private rest: RestClient) {}

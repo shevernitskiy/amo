@@ -1,5 +1,5 @@
-import type { Note } from "@typings/entities.ts";
-import type { DeepPartial, Links, Page, RequestId } from "@typings/utility.ts";
+import type { Note } from "../../typings/entities.ts";
+import type { DeepPartial, Links, Page, RequestId } from "../../typings/utility.ts";
 
 export type ResponseGetNotesByEntityType = Page & Links & {
   _embedded: {

@@ -1,4 +1,4 @@
-import type { JSONValue } from "@typings/utility.ts";
+import type { JSONValue } from "../../typings/utility.ts";
 import type {
   RequestAddSource,
   RequestDeleteSource,
@@ -10,9 +10,9 @@ import type {
   ResponseUpdateSourceById,
   ResponseUpdateSources,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
 
 export class SourceApi {
   constructor(private rest: RestClient) {}

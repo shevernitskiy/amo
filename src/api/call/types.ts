@@ -1,5 +1,5 @@
-import type { Links, RequestId, Total } from "@typings/utility.ts";
-import type { Call } from "@typings/entities.ts";
+import type { Links, RequestId, Total } from "../../typings/utility.ts";
+import type { Call } from "../../typings/entities.ts";
 
 export type RequestAddCall = Call & RequestId;
 export type ResponseAddCalls = Total & {

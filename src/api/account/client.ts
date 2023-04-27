@@ -1,7 +1,7 @@
-import type { With } from "@typings/utility.ts";
+import type { With } from "../../typings/utility.ts";
 import type { ResponseGetAccountInfo } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { query } from "../../helpers/query.ts";
 
 export class AccountApi {
   constructor(private rest: RestClient) {}

@@ -1,5 +1,5 @@
-import type { ChatTemplate } from "@typings/entities.ts";
-import type { DeepPartial, Links, Page, RequestId, Total } from "@typings/utility.ts";
+import type { ChatTemplate } from "../../typings/entities.ts";
+import type { DeepPartial, Links, Page, RequestId, Total } from "../../typings/utility.ts";
 
 export type ResponseGetChatTemplates = Page & Links & {
   _embedded: {

@@ -1,5 +1,5 @@
-import type { Links, Page, Total } from "@typings/utility.ts";
-import type { Event, EventTypes } from "@typings/entities.ts";
+import type { Links, Page, Total } from "../../typings/utility.ts";
+import type { Event, EventTypes } from "../../typings/entities.ts";
 
 export type ResponseGetEvents = Page & Links & {
   _embedded: {

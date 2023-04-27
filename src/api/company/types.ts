@@ -1,5 +1,5 @@
-import type { Company } from "@typings/entities.ts";
-import type { Embedded, Links, Page, RequestId } from "@typings/utility.ts";
+import type { Company } from "../../typings/entities.ts";
+import type { Embedded, Links, Page, RequestId } from "../../typings/utility.ts";
 
 export type ResponseGetCompanies = Links & Page & {
   _embedded: {

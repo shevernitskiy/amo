@@ -1,5 +1,5 @@
-import type { Segment } from "@typings/entities.ts";
-import type { Links, Page, PageCount, RequestId, Total } from "@typings/utility.ts";
+import type { Segment } from "../../typings/entities.ts";
+import type { Links, Page, PageCount, RequestId, Total } from "../../typings/utility.ts";
 
 export type ResponseGetSegments = Total & Links & Page & PageCount & {
   _embedded: {

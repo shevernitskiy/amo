@@ -1,4 +1,4 @@
-import type { JSONValue } from "@typings/utility.ts";
+import type { JSONValue } from "../../typings/utility.ts";
 import type {
   RequestAddCustomField,
   RequestAddCustomFieldsGroup,
@@ -15,7 +15,7 @@ import type {
   ResponseUpdateCustomFields,
   ResponseUpdateCustomFieldsGroupById,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
+import { RestClient } from "../../core/rest-client.ts";
 
 export class CustomFieldsApi {
   constructor(private rest: RestClient) {}

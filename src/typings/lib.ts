@@ -1,5 +1,5 @@
-import { OAuth } from "@typings/auth.ts";
-import { JSONValue } from "@typings/utility.ts";
+import { OAuth } from "./auth.ts";
+import { JSONValue } from "./utility.ts";
 
 export type Options = {
   request_delay?: number;

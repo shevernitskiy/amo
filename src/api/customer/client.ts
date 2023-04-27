@@ -1,4 +1,4 @@
-import type { JSONValue, With } from "@typings/utility.ts";
+import type { JSONValue, With } from "../../typings/utility.ts";
 import type {
   RequestAddCustomer,
   RequestAddTransactionsToCustomer,
@@ -15,9 +15,9 @@ import type {
   ResponseUpdateCustomerById,
   ResponseUpdateCustomers,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
 
 export class CustomerApi {
   constructor(private rest: RestClient) {}

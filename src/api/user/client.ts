@@ -1,4 +1,4 @@
-import type { JSONValue, With } from "@typings/utility.ts";
+import type { JSONValue, With } from "../../typings/utility.ts";
 import type {
   RequestAddRole,
   RequestAddUser,
@@ -11,8 +11,8 @@ import type {
   ResponseGetUsers,
   ResponseUpdateRole,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { query } from "../../helpers/query.ts";
 
 export class UserApi {
   constructor(private rest: RestClient) {}

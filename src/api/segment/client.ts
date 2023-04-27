@@ -6,7 +6,7 @@ import type {
   ResponseGetSegments,
   ResponseUpdateSegment,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
+import { RestClient } from "../../core/rest-client.ts";
 
 export class SegmentApi {
   constructor(private rest: RestClient) {}

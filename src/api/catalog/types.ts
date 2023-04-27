@@ -1,5 +1,5 @@
-import type { Links, Page, RequestId } from "@typings/utility.ts";
-import type { Catalog, CatalogElement } from "@typings/entities.ts";
+import type { Links, Page, RequestId } from "../../typings/utility.ts";
+import type { Catalog, CatalogElement } from "../../typings/entities.ts";
 
 export type ResponseGetCatalogs = Page & Links & {
   _embedded: {

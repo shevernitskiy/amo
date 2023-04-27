@@ -16,9 +16,9 @@ import type {
   ResponseUploadFileChunk,
   ResponseUploadFileLastChunk,
 } from "./types.ts";
-import type { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
-import { RestClient } from "@core/rest-client.ts";
+import type { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
 
 export class FileApi {
   constructor(private rest: RestClient, private drive_url: string) {}

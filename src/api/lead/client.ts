@@ -1,4 +1,4 @@
-import type { JSONValue, Order, With } from "@typings/utility.ts";
+import type { JSONValue, Order, With } from "../../typings/utility.ts";
 import type {
   RequestAddComplex,
   RequestAddLead,
@@ -11,9 +11,9 @@ import type {
   ResponseUpdateLead,
   ResponseUpdateLeads,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { query } from "@helpers/query.ts";
-import { FilterLike } from "@helpers/filter.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { query } from "../../helpers/query.ts";
+import { FilterLike } from "../../helpers/filter.ts";
 
 export class LeadApi {
   constructor(private rest: RestClient) {}

@@ -1,4 +1,4 @@
-import type { JSONValue, Order } from "@typings/utility.ts";
+import type { JSONValue, Order } from "../../typings/utility.ts";
 import type {
   RequestAddUnsortedForm,
   RequestAddUnsortedSip,
@@ -10,9 +10,9 @@ import type {
   ResponseGetUnsortedSummary,
   ResponseLinkUnsorted,
 } from "./types.ts";
-import { RestClient } from "@core/rest-client.ts";
-import { FilterLike } from "@helpers/filter.ts";
-import { query } from "@helpers/query.ts";
+import { RestClient } from "../../core/rest-client.ts";
+import { FilterLike } from "../../helpers/filter.ts";
+import { query } from "../../helpers/query.ts";
 
 export class UnsortedApi {
   constructor(private rest: RestClient) {}

@@ -1,5 +1,5 @@
-import { filterLikeToString } from "@helpers/filter.ts";
-import { order } from "@helpers/order.ts";
+import { filterLikeToString } from "../helpers/filter.ts";
+import { order } from "../helpers/order.ts";
 
 // deno-lint-ignore no-explicit-any
 export function query(params?: any): string {
