@@ -2,6 +2,9 @@ import type { HttpMethod, Options, RequestInit } from "../typings/lib.ts";
 import type { OAuth, OAuthCode, OAuthRefresh } from "../typings/auth.ts";
 import { AsyncQueue } from "./async-queue.ts";
 import { AuthError } from "../errors/auth.ts";
+import { ApiError } from "../errors/api.ts";
+import { NoContentError } from "../errors/no-content.ts";
+import { HttpError } from "../errors/http.ts";
 
 export class RestClient {
   private url_base: string;
@@ -39,7 +42,7 @@ export class RestClient {
         body: JSON.stringify(value),
       });
       if (res.ok === false) {
-        throw new AuthError(await res.json());
+        throw new AuthError(res.body ? await res.json() : "Empty");
       }
       const data = (await res.json()) as OAuth;
       this._token = { ...data, expires_at: Date.now() + (data.expires_in * 1000) };
@@ -81,19 +84,17 @@ export class RestClient {
       body: init.payload ? JSON.stringify(init.payload) : undefined,
     });
 
-    if (res.ok === false) {
+    if (res.ok === false || res.status === 204) {
       if (res.headers.get("Content-Type") === "application/problem+json") {
-        // TODO: make ApiError
-        console.log("API ERROR");
-        // throw new ApiError(await res.json(), `${res.status} ${res.statusText}, ${res.url}`);
+        throw new ApiError(res.body ? await res.json() : "Error", `${res.status} ${res.statusText}, ${res.url}`);
+      } else if (res.status === 204) {
+        throw new NoContentError(`${res.status} ${res.statusText}, ${res.url}`);
       } else {
-        // TODO: make HttpError
-        console.log("NE API ERROR");
-        // throw new HttpError("HttpError\n" + await res.text());
+        throw new HttpError(res.body ? await res.text() : `${res.status} ${res.statusText}, ${res.url}`);
       }
     }
 
-    return (await res.json()) as T;
+    return res.body ? (await res.json()) as T : null as T;
   }
 
   get<T>(init: RequestInit): Promise<T> {

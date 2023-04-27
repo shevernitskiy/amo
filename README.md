@@ -4,7 +4,7 @@ This is a simple wrapper client for the amoCRM REST API. It covers almost all AP
 manages to token refreshing and webhook handling.
 
 > ⚠️Due to awful API [docmentation](https://www.amocrm.ru/developers/content/crm_platform/api-reference) with tons of
-> mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR)
+> mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR),
 > WIP at this moment, api may changed.
 
 ## WIP
@@ -45,7 +45,7 @@ manages to token refreshing and webhook handling.
 - [ ] Helpers
   - [x] Filter builder
   - [x] Webhook handling
-  - [ ] Error handling
+  - [x] Error handling
   - [ ] Salesbot interactions
 
 # Usage
@@ -243,6 +243,41 @@ amo.on("leads:status", (lead) => console.log(lead.id));
 
 const handler = amo.webhookHandler();
 Deno.serve(handler, { port: 4545 });
+```
+
+---
+
+## Error handling
+
+The client throws several types of errors:
+
+- `ApiError`
+- `AuthError`
+- `HttpError`
+- `NoContentError`
+- `WebhookError`
+
+`ApiError` and `AuthError` has additional property response with API error message.
+
+Handling is simple:
+
+```ts
+try {
+  const amo = new Amo("subdomain", auth_object, opitons_object);
+  const lead = amo.lead.getLeadById(6969);
+} catch (err) {
+  if (err instanceof AuthError) {
+    console.error("AuthError", err.response);
+  } else if (err instanceof ApiError) {
+    console.error("ApiError", err.response);
+  } else if (err instanceof NoContentError) {
+    console.error("NoContentError", err.message);
+  } else if (err instanceof HttpError) {
+    console.error("HttpError", err.message);
+  } else {
+    console.error("UnknownError", err);
+  }
+}
 ```
 
 # Contribution

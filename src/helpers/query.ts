@@ -3,6 +3,8 @@ import { order } from "../helpers/order.ts";
 
 // deno-lint-ignore no-explicit-any
 export function query(params?: any): string {
+  if (params === undefined || params === null) return "";
+
   const query = params === undefined ? undefined : {
     ...params,
     with: params.with === undefined ? undefined : params.with.join(","),
