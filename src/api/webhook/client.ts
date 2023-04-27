@@ -1,11 +1,9 @@
 import type { RequestAddWebhook, RequestDeleteWebhook, ResponseAddWebhook, ResponseGetWebhooks } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class WebhookApi {
-  constructor(private rest: RestClient) {}
-
+export class WebhookApi extends Endpoint {
   /** Метод позволяет получить список установленных вебхуков в аккаунте. */
   getWebhooks(params?: {
     filter?: FilterLike<["destination"], never, never, never, never>;

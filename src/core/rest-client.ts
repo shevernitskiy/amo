@@ -74,7 +74,7 @@ export class RestClient {
 
     const res = await this.queue.push(fetch, target, {
       method: method,
-      headers: {
+      headers: init.headers ?? {
         "Authorization": `${this._token?.token_type} ${this._token?.access_token}`,
         "Content-Type": "application/json",
       },

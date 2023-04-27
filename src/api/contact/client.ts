@@ -11,13 +11,11 @@ import type {
   ResponseUpdateContact,
   ResponseUpdateContacts,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class ContactApi {
-  constructor(private rest: RestClient) {}
-
+export class ContactApi extends Endpoint {
   /** Метод позволяет получить список контактов в аккаунте. */
   getContacts(params?: {
     with?: With<["catalog_elements", "leads", "customers"]>;

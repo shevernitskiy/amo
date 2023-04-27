@@ -10,13 +10,11 @@ import type {
   ResponseUpdateSourceById,
   ResponseUpdateSources,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class SourceApi {
-  constructor(private rest: RestClient) {}
-
+export class SourceApi extends Endpoint {
   /** Метод позволяет получить список источников интеграции. */
   getSources(params?: {
     filter?: FilterLike<["external_id"], ["external_id"], never, never, never>;

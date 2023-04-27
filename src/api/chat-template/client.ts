@@ -9,13 +9,11 @@ import type {
   ResponseUpdateChatTemplate,
   ResponseUpdateChatTemplates,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class ChatTemplateApi {
-  constructor(private rest: RestClient) {}
-
+export class ChatTemplateApi extends Endpoint {
   /** Метод позволяет получить список шаблонов в аккаунте. */
   getChatTemplates(params?: {
     page?: number;

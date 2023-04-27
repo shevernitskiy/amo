@@ -15,13 +15,11 @@ import type {
   ResponseUpdateCatalogElements,
   ResponseUpdateCatalogs,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class CatalogApi {
-  constructor(private rest: RestClient) {}
-
+export class CatalogApi extends Endpoint {
   /** Метод позволяет получить доступные списки в аккаунте. */
   getCatalogs(params?: {
     page?: number;

@@ -1,9 +1,7 @@
 import type { ResponseGetTalkById } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 
-export class TalkApi {
-  constructor(private rest: RestClient) {}
-
+export class TalkApi extends Endpoint {
   /** Метод позволяет получить данные конкретной беседы по ID. */
   getTalkById(id: number): Promise<ResponseGetTalkById> {
     return this.rest.get<ResponseGetTalkById>({

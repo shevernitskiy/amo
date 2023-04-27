@@ -6,11 +6,9 @@ import type {
   ResponseGetSegments,
   ResponseUpdateSegment,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 
-export class SegmentApi {
-  constructor(private rest: RestClient) {}
-
+export class SegmentApi extends Endpoint {
   /** Метод позволяет получить список сегментов покупателей в аккаунте. */
   getSegments(): Promise<ResponseGetSegments> {
     return this.rest.get<ResponseGetSegments>({

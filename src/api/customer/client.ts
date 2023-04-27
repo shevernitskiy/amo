@@ -15,13 +15,11 @@ import type {
   ResponseUpdateCustomerById,
   ResponseUpdateCustomers,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class CustomerApi {
-  constructor(private rest: RestClient) {}
-
+export class CustomerApi extends Endpoint {
   /** Метод позволяет включать/выключать функционал покупателей, а также менять режим функционала. */
   updateCustomersMode(params: {
     mode: "segments" | "periodicity";

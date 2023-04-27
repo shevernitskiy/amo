@@ -13,4 +13,5 @@ export type RequestInit = {
   url_base?: string;
   query?: string;
   payload?: JSONValue;
+  headers?: Record<string, string | number | boolean>;
 };

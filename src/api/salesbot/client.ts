@@ -1,9 +1,7 @@
 import type { RequestRunSalesBotTask, ResponseRunSalesBotTasks } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 
-export class SalesBotApi {
-  constructor(private rest: RestClient) {}
-
+export class SalesBotApi extends Endpoint {
   /** Метод для запуска Salesbot. Ограничение, не более 100 задач за раз. */
   runTask(tasks: RequestRunSalesBotTask[]): Promise<ResponseRunSalesBotTasks> {
     return this.rest.post<ResponseRunSalesBotTasks>({

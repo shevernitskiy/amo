@@ -11,13 +11,11 @@ import type {
   ResponseUpdateNoteById,
   ResponseUpdateNotes,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class NoteApi {
-  constructor(private rest: RestClient) {}
-
+export class NoteApi extends Endpoint {
   /** Метод позволяет получить примечания по типу сущности. */
   getNotesByEntityType(entity_type: NoteEntityType, params?: {
     page?: number;

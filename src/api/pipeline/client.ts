@@ -13,11 +13,9 @@ import type {
   ResponseUpdatePipeline,
   ResponseUpdateStatus,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 
-export class PipelineApi {
-  constructor(private rest: RestClient) {}
-
+export class PipelineApi extends Endpoint {
   /** Метод позволяет получить список воронок сделок в аккаунте. */
   getPipelines(): Promise<ResponseGetPipelines> {
     return this.rest.get<ResponseGetPipelines>({

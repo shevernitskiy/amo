@@ -1,10 +1,8 @@
 import type { RequestAddWidget, ResponseAddWidget, ResponseGetWidgetByCode, ResponseGetWidgets } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { query } from "../../helpers/query.ts";
 
-export class WidgetApi {
-  constructor(private rest: RestClient) {}
-
+export class WidgetApi extends Endpoint {
   /** Метод возвращает агрегированный список публичных виджетов, виджетов установленных в аккаунте, а также загруженным текущим пользователем. */
   getWidgets(params?: {
     page?: number;

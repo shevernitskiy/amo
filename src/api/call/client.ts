@@ -1,9 +1,7 @@
 import type { RequestAddCall, ResponseAddCalls } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 
-export class CallApi {
-  constructor(private rest: RestClient) {}
-
+export class CallApi extends Endpoint {
   /** Данный метод позволяет пакетно добавлять звонки в карточки сущностей. */
   addCalls(calls: RequestAddCall[]): Promise<ResponseAddCalls> {
     return this.rest.post<ResponseAddCalls>({

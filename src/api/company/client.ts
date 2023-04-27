@@ -8,13 +8,11 @@ import type {
   ResponseUpdateCompanies,
   ResponseUpdateCompany,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class CompanyApi {
-  constructor(private rest: RestClient) {}
-
+export class CompanyApi extends Endpoint {
   /** Метод позволяет получить список компаний в аккаунте. */
   getCompanies(params?: {
     with?: With<["catalog_elements", "leads", "customers", "contacts"]>;

@@ -11,13 +11,11 @@ import type {
   ResponseUpdateLead,
   ResponseUpdateLeads,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { query } from "../../helpers/query.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 
-export class LeadApi {
-  constructor(private rest: RestClient) {}
-
+export class LeadApi extends Endpoint {
   /** Метод позволяет получить список сделок в аккаунте. */
   getLeads(params?: {
     with?: With<

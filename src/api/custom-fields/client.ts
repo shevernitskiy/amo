@@ -15,11 +15,9 @@ import type {
   ResponseUpdateCustomFields,
   ResponseUpdateCustomFieldsGroupById,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 
-export class CustomFieldsApi {
-  constructor(private rest: RestClient) {}
-
+export class CustomFieldsApi extends Endpoint {
   /** Метод позволяет получить список полей сущности в аккаунте. */
   getCustomFields(entity_type: "catalogs", catalog_id: number): Promise<ResponseGetCustomFields>;
   getCustomFields(

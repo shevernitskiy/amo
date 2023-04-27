@@ -6,11 +6,9 @@ import type {
   ResponseGetStatuses,
   ResponseUpdateStatus,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 
-export class StatusApi {
-  constructor(private rest: RestClient) {}
-
+export class StatusApi extends Endpoint {
   /** Метод позволяет получить список статусов покупателей в аккаунте. */
   getStatuses(): Promise<ResponseGetStatuses> {
     return this.rest.get<ResponseGetStatuses>({

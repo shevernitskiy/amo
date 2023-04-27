@@ -13,13 +13,11 @@ import type {
   ResponseUpdateTaskById,
   ResponseUpdateTasks,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class TaskApi {
-  constructor(private rest: RestClient) {}
-
+export class TaskApi extends Endpoint {
   /** Метод позволяет получить список задач в аккаунте. */
   getTasks(params?: {
     page?: number;

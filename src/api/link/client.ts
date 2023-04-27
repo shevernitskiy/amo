@@ -9,13 +9,11 @@ import type {
   ResponseGetLinksByEntityId,
   ResponseGetLinksByEntityType,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class LinkApi {
-  constructor(private rest: RestClient) {}
-
+export class LinkApi extends Endpoint {
   /** Метод позволяет получить связанные сущности по типу основной сущности. */
   getLinksByEntityType(entity_type: "leads" | "contacts" | "companies" | "customers", params?: {
     filter?: FilterLike<["to_entity_id", "to_entity_type", "to_catalog_id"], ["entity_id"], never, never, never>;

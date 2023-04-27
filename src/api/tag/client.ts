@@ -8,13 +8,11 @@ import type {
   ResponseDeleteTagsToEntities,
   ResponseGetTags,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
-export class TagApi {
-  constructor(private rest: RestClient) {}
-
+export class TagApi extends Endpoint {
   /** Метод позволяет получить список тегов для сущности в аккаунте. */
   getTags(entity_type: "leads" | "contacts" | "companies" | "customers", params?: {
     page?: number;

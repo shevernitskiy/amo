@@ -18,10 +18,13 @@ import type {
 } from "./types.ts";
 import type { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { RestClient } from "../../core/rest-client.ts";
 
-export class FileApi {
-  constructor(private rest: RestClient, private drive_url: string) {}
+export class FileApi extends Endpoint {
+  constructor(rest: RestClient, private drive_url: string) {
+    super(rest);
+  }
 
   /** Метод позволяет создать сессию для загрузки файла или версии файла. Если метод используется для загрузки новой версии файла, то загруженная версия автоматически станет активной версией файла. Запрос должен отправляться на хост сервиса файлов. */
   createSession(params: RequestCreateSession): Promise<ResponseCreateSession> {

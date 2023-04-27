@@ -11,12 +11,10 @@ import type {
   ResponseGetUsers,
   ResponseUpdateRole,
 } from "./types.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import { Endpoint } from "../../core/endpoint.ts";
 import { query } from "../../helpers/query.ts";
 
-export class UserApi {
-  constructor(private rest: RestClient) {}
-
+export class UserApi extends Endpoint {
   /** Метод позволяет получить список состоящих в аккаунте пользователей. */
   getUsers(params?: {
     with?: With<["role", "group", "uuid", "amojo_id"]>;
