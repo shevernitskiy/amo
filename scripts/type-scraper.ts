@@ -7,7 +7,7 @@ type ParseOptions = {
   comment?: boolean;
 };
 
-async function parseTableFromUrl(
+export async function parseTableFromUrl(
   type_name: string,
   url: string,
   element_number: number,
@@ -68,7 +68,7 @@ async function parseTableFromUrl(
   return result;
 }
 
-async function parseUnion(
+export async function parseUnion(
   type_name: string,
   url: string,
   element_number: number,
@@ -105,7 +105,7 @@ function typeReplacer(value: string): string {
     .replace(/string\(.+\)/, "string");
 }
 
-function writeTypes(data: string): void {
+export function writeTypes(data: string): void {
   console.log("write", data.split("type ")[1].split(" = ")[0].trim());
   Deno.writeTextFileSync("./amo.types.ts", data + "\n\n", { create: true }); // append: true to dump all
 }
