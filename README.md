@@ -52,14 +52,14 @@ manages to token refreshing and webhook handling.
 
 ## Installation
 
-<img height="20" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/nodejs.svg">Node.JS
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/nodejs.svg"> Node.JS
 (not supported atm)
 
 ```powershell
 npm -i amo
 ```
 
-<img height="20" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg">Deno
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg"> Deno
 (direct import from repo atm)
 
 ```ts
