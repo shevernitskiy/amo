@@ -185,7 +185,7 @@ So the real world example will:
 const lead = await amo.lead.getLeadById(6969);
 ```
 
-### Parameters of requests
+### Parameters
 
 Some methods can receive typical request parameters: _order, with, page, limit_ and _filter_
 
@@ -205,7 +205,7 @@ Can take the object.
 order: { param: "id", type: "asc" }
 ```
 
-### Filter
+#### Filter
 
 Filter is a complex parameter that depends on the method. Lib provides a filter builder to construct filter queries
 depending on the method. Each filter can take different types of input conditions: single (property = value), multi
