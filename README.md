@@ -52,13 +52,15 @@ manages to token refreshing and webhook handling.
 
 ## Installation
 
-- Node.JS (not supported atm)
+<img height="20" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/nodejs.svg">Node.JS
+(not supported atm)
 
 ```powershell
 npm -i amo
 ```
 
-- Deno (direct import from repo atm)
+<img height="20" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg">Deno
+(direct import from repo atm)
 
 ```ts
 import { Amo } from "https://deno.land/x/amo/mod.ts";
