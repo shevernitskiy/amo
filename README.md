@@ -57,7 +57,7 @@ manages to token refreshing and webhook handling.
 (not supported atm)
 
 ```powershell
-npm -i amo
+npm i @shevernitskiy/amo
 ```
 
 <img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg"> Deno
