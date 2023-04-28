@@ -111,108 +111,108 @@ export class Amo extends EventEmitter<WebhookEventMap> {
     this._salesbot = new SalesBotApi(this.rest);
   }
 
-  /** Token struct */
+  /** Текущий токен приложения */
   get token(): OAuth | undefined {
     return this.rest.token;
   }
 
-  /** Account Api */
+  /** Свойства акканта */
   get account(): AccountApi {
     return this._account;
   }
-  /** Lead Api */
+  /** API сделок (получение, создание, редактирование) */
   get lead(): LeadApi {
     return this._lead;
   }
-  /** Unsorted Api */
+  /** API неразобранного (получение, создание, принятие, отклонение, привязка) */
   get unsorted(): UnsortedApi {
     return this._unsorted;
   }
-  /** Pipelin Api */
+  /** API воронок (получение, создание, изменение, удаление). API этапов воронок (получение, создание, изменение, удаление). */
   get pipeline(): PipelineApi {
     return this._pipeline;
   }
-  /** Contact Api */
+  /** API контактов (получение, создание, редактирование) */
   get contact(): ContactApi {
     return this._contact;
   }
-  /** Comapny Api */
+  /** API компаний (получение, создание, редактирование) */
   get company(): CompanyApi {
     return this._company;
   }
-  /** Catalog Api */
+  /** API списков (получение, создание, редактирование). API элементов списков (получение, создание, редактирование). */
   get catalog(): CatalogApi {
     return this._catalog;
   }
-  /** Product Api */
+  /** API списков в контексте списка товаров */
   get product(): ProductApi {
     return this._product;
   }
-  /** Link Api */
+  /** API связей (получение, привязка, отвязка). Метод работает со связями контактов, компаний, сделок и покупателей. */
   get link(): LinkApi {
     return this._link;
   }
-  /** Task Api */
+  /** API задач (получение, создание, редактирование, выполнение) */
   get task(): TaskApi {
     return this._task;
   }
-  /** Custom Fields Api */
+  /** API полей (получение, создание, редактирование, удаление). API групп полей (получение, создание, редактирование, удаление). Доступные типы полей. */
   get custom_fields(): CustomFieldsApi {
     return this._custom_fields;
   }
-  /** Tag Api */
+  /** API тегов (получение, создание). */
   get tag(): TagApi {
     return this._tag;
   }
-  /** Event Api */
+  /** API событий (получение). */
   get event(): EventApi {
     return this._event;
   }
-  /** Note Api */
+  /** API примечаний (создание, редактирование) */
   get note(): NoteApi {
     return this._note;
   }
-  /** Customer Api */
+  /** API покупателей (получение, создание, редактирование). API транзакций (получение, добавление, удаление). */
   get customer(): CustomerApi {
     return this._customer;
   }
-  /** Status Api */
+  /** API статусов покупателей (получение, создание, редактирование, удаление). */
   get status(): StatusApi {
     return this._status;
   }
-  /** Segment Api */
+  /** API сегментов покупателей (получение, создание, редактирование, удаление) */
   get segment(): SegmentApi {
     return this._segment;
   }
-  /** User Api */
+  /** API пользователей (получение, добавление в аккаунт). API ролей (получение, создание, редактирование, удаление). */
   get user(): UserApi {
     return this._user;
   }
-  /** Webhook Api */
+  /** API вебхуков (список, подпись, отписка) */
   get webhook(): WebhookApi {
     return this._webhook;
   }
-  /** Widget Api */
+  /** API виджетов (список, установка, отключение) */
   get widget(): WidgetApi {
     return this._widget;
   }
-  /** Call Api */
+  /** API добавления звонков */
   get call(): CallApi {
     return this._call;
   }
-  /** Talk Api */
+  /** API бесед (получение, закрытие) */
   get talk(): TalkApi {
     return this._talk;
   }
-  /** Source Api */
+  /** API источников (получение, создание, редактирование, удаление) */
   get source(): SourceApi {
     return this._source;
   }
-  /** Short links Api */
+  /** API коротких ссылок (создание) */
   get short_link(): ShortLinkApi {
     return this._short_link;
   }
-  /** Chat template Api */
+  /** API шаблонов чатов (получение, создание, редактирование, удаление) */
   get chat_template(): ChatTemplateApi {
     return this._chat_template;
   }
@@ -220,7 +220,7 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   get salesbot(): SalesBotApi {
     return this._salesbot;
   }
-  /** File Api */
+  /** Через методы API файлов интеграция может загружать файлы, удалять их, создавать версии файлов, связывать файлы с сущностями. */
   file(drive_url: string): FileApi {
     if (this._file === undefined) {
       this._file = new FileApi(this.rest, drive_url);
