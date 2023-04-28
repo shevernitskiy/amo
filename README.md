@@ -22,6 +22,7 @@ manages to token refreshing and webhook handling.
   - [x] Contacts
   - [x] Companies
   - [x] Catalogs
+  - [x] Products
   - [x] Links
   - [x] Tasks
   - [x] Custom Fields

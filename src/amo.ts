@@ -23,6 +23,7 @@ import { CompanyApi } from "./api/company/client.ts";
 import { UnsortedApi } from "./api/unsorted/client.ts";
 import { PipelineApi } from "./api/pipeline/client.ts";
 import { CatalogApi } from "./api/catalog/client.ts";
+import { ProductApi } from "./api/product/client.ts";
 import { LinkApi } from "./api/link/client.ts";
 import { TaskApi } from "./api/task/client.ts";
 import { CustomFieldsApi } from "./api/custom-fields/client.ts";
@@ -53,6 +54,7 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   private _contact: ContactApi;
   private _company: CompanyApi;
   private _catalog: CatalogApi;
+  private _product: ProductApi;
   private _link: LinkApi;
   private _task: TaskApi;
   private _custom_fields: CustomFieldsApi;
@@ -88,6 +90,7 @@ export class Amo extends EventEmitter<WebhookEventMap> {
     this._contact = new ContactApi(this.rest);
     this._company = new CompanyApi(this.rest);
     this._catalog = new CatalogApi(this.rest);
+    this._product = new ProductApi(this.rest);
     this._link = new LinkApi(this.rest);
     this._task = new TaskApi(this.rest);
     this._custom_fields = new CustomFieldsApi(this.rest);
@@ -140,6 +143,10 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   /** Catalog Api */
   get catalog(): CatalogApi {
     return this._catalog;
+  }
+  /** Product Api */
+  get product(): ProductApi {
+    return this._product;
   }
   /** Link Api */
   get link(): LinkApi {
