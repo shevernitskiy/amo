@@ -5,7 +5,7 @@ manages to token refreshing and webhook handling.
 
 > ⚠️Due to awful API [docmentation](https://www.amocrm.ru/developers/content/crm_platform/api-reference) with tons of
 > mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR),
-> WIP at this moment, api may changed.
+> WIP at this moment.
 
 ## WIP
 
@@ -75,7 +75,7 @@ Here is the basic usage scenario. We use previously saved token object here (cau
 not need to refresh it often).
 
 ```ts
-import { Amo } from "./src/amo.ts";
+import { Amo } from "https://deno.land/x/amo/mod.ts";
 
 try {
   const auth = {
@@ -220,7 +220,10 @@ does not satisfy the method constraints (type of the value will be `never`).
 ```ts
 filter:
 ((filter) =>
-  filter.single("id", 6969).multi("created_by", ["john", "smith"]).range("closed_at", 2418124812, 123124712712));
+  filter
+    .single("id", 6969)
+    .multi("created_by", ["john", "smith"])
+    .range("closed_at", 2418124812, 123124712712));
 ```
 
 ---
