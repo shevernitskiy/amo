@@ -522,7 +522,7 @@ export type Tag = {
   color: Color | null;
 };
 
-export enum Color {
+export const enum Color {
   BRIGHT_GRAY = "EBEBEB",
   AMERICAN_SILVER = "D0D0D0",
   PINK_LACE = "F2DDF7",
