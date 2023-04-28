@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "./npm",
+    "declaration": true
+    // "target": "ESNext" // modules or not?
+  },
+  "include": ["./src/**/*", "./mod.ts"],
+  "deno2node": {}
+}

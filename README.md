@@ -10,7 +10,7 @@ manages to token refreshing and webhook handling.
 ## WIP
 
 - [ ] Lib
-  - [ ] NPM & Node support
+  - [x] NPM & Node support
   - [ ] examples
   - [ ] maybe some test
   - [x] readme (draft)

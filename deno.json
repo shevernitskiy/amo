@@ -1,12 +1,16 @@
 {
   "lock": false,
   "tasks": {
-    "start": "deno run -A ./src/app.ts",
-    "dev": "deno run -A --watch ./src/app.ts"
+    "start": "deno run -A run.ts",
+    "dev": "deno run -A --watch run.ts",
+    "npm": "deno run -A ./scripts/build-npm.ts"
   },
   "fmt": {
     "options": {
       "lineWidth": 120
     }
+  },
+  "lint": {
+    "exclude": ["./npm"]
   }
 }
