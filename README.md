@@ -12,7 +12,7 @@ manages to token refreshing and webhook handling.
 - [ ] Lib
   - [x] NPM & Node support
   - [ ] examples
-  - [ ] maybe some test
+  - [x] maybe some test (webhook atm)
   - [x] readme (draft)
 - [ ] API
   - [x] Account

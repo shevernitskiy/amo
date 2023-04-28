@@ -3,7 +3,8 @@
   "tasks": {
     "start": "deno run -A run.ts",
     "dev": "deno run -A --watch run.ts",
-    "npm": "deno run -A ./scripts/build-npm.ts"
+    "npm": "deno run -A ./scripts/build-npm.ts",
+    "test": "deno test -A --unstable ./tests"
   },
   "fmt": {
     "options": {
