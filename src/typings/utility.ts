@@ -60,12 +60,12 @@ export type Embedded = {
       price_id: number;
     };
   }[];
-  loss_reason: Links & {
+  loss_reason?: (Links & {
     id: number;
     name: string;
     created_at: number;
     updated_at: number;
-  }[];
+  })[];
   leads?: (Pick<Lead, "id"> & Links)[];
   customers?: (Pick<Customer, "id"> & Links)[];
   companies?: (Pick<Company, "id"> & Links)[];

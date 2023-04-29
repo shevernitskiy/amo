@@ -1,4 +1,5 @@
 deno.lock
 run.ts
+type-check.ts
 token.json
 /npm

@@ -30,39 +30,46 @@ export type AccountInfo = {
   drive_url: string;
   /** Требуется GET параметр with. Включена ли API фильтрация для аккаунта */
   is_api_filter_enabled: boolean;
+  created_at: number;
+  created_by: number;
+  updated_at: number;
+  updated_by: number;
+  currency: string;
+  currency_symbol: string;
+  mobile_feature_version: number;
 };
 
 export type Lead = {
   /** ID сделки */
   id: number;
   /** Название сделки */
-  name: string;
+  name: string | null;
   /** Бюджет сделки */
-  price: number;
+  price: number | null;
   /** ID пользователя, ответственного за сделку */
-  responsible_user_id: number;
+  responsible_user_id: number | null;
   /** ID группы, в которой состоит ответственны пользователь за сделку */
-  group_id: number;
+  group_id: number | null;
   /** ID статуса, в который добавляется сделка, по-умолчанию – первый этап главной воронки */
-  status_id: number;
+  status_id: number | null;
   /** ID воронки, в которую добавляется сделка */
-  pipeline_id: number;
+  pipeline_id: number | null;
   /** ID причины отказа */
-  loss_reason_id: number;
+  loss_reason_id: number | null;
   /** Требуется GET параметр with. ID источника сделки */
-  source_id: number;
+  source_id?: number | null;
   /** ID пользователя, создающий сделку */
-  created_by: number;
+  created_by: number | null;
   /** ID пользователя, изменяющий сделку */
   updated_by: number;
   /** Дата закрытия сделки, передается в Unix Timestamp */
-  closed_at: number;
+  closed_at: number | null;
   /** Дата создания сделки, передается в Unix Timestamp */
-  created_at: number;
+  created_at: number | null;
   /** Дата изменения сделки, передается в Unix Timestamp */
   updated_at: number;
   /** Дата ближайшей задачи к выполнению, передается в Unix Timestamp */
-  closest_task_at: number;
+  closest_task_at: number | null;
   /** Удалена ли сделка */
   is_deleted: boolean;
   /** Массив, содержащий информацию по значениям дополнительных полей, заданных для данной сделки */
@@ -72,9 +79,9 @@ export type Lead = {
   /** ID аккаунта, в котором находится сделка */
   account_id: number;
   /** Тип поля "стоимость труда"  показывает сколько времени было затрачено на работу со сделкой. Время исчисления в секундах */
-  labor_cost: number;
+  labor_cost: number | null;
   /** Требуется GET параметр with. Изменен ли в последний раз бюджет сделки роботом */
-  is_price_modified_by_robot: boolean;
+  is_price_modified_by_robot?: boolean;
 };
 
 export type Unsorted = {
@@ -367,17 +374,17 @@ export type Task = {
   account_id: number;
 };
 
-export type CustomFieldsValue = {
+export type CustomFieldsValue = Partial<{
   /** ID поля */
-  id: number;
+  field_id: number;
   /** Название поля */
-  name: string;
+  field_name: string;
   /** Код поля, по-которому можно обновлять значение в сущности, без передачи ID поля */
-  code: string;
+  field_code: string | null;
   /** Сортировка поля */
   sort: number;
   /** Тип поля. Список доступных полей */
-  type: CustomFieldsValueTypes;
+  field_type: CustomFieldsValueTypes;
   /** Тип сущности (leads, contacts, companies, segments, customers, catalogs) */
   entity_type: "leads" | "contacts" | "companies" | "segments" | "customers" | "catalogs";
   /** Параметр отвечает за определение типа поля как "вычисляемое" (computed) поле. Данный ключ возвращается только при получении списка полей сделки */
@@ -397,16 +404,16 @@ export type CustomFieldsValue = {
   /** Код валюты поля. Применимо только для типа поля – monetary. Для других типов полей – null. */
   currency: string | null;
   /** Доступные значения для поля. Значение данного поля доступно только для полей с поддержкой enum */
-  enums: {
+  values: Partial<{
     /** ID значения */
-    id: number;
+    enum_id: number;
     /** Значение */
     value: string;
     /** Сортировка значения */
     sort: number;
     /** Символьный код значения */
-    code: string | null;
-  }[] | null;
+    enum_code: string | null;
+  }>[] | null;
   /** Вложенные значения. Данные ключ возвращается только при получении списка полей каталогов и значение доступно только для поля category */
   nested: {
     /** ID вложенного значения. Данные ключ возвращается только при получении списка полей каталогов и значение доступно только для поля category */
@@ -450,7 +457,7 @@ export type CustomFieldsValue = {
   tracking_callback: string;
   /** ID списка или символьный код (contacts, companies, contacts_and_companies) для поля типа Связь с другим элементов (linked_entity). */
   search_in: string | null;
-};
+}>;
 
 export type CustomFieldsValueTypes =
   /** Текст */

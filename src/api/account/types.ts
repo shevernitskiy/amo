@@ -10,44 +10,45 @@ export type ResponseGetAccountInfo = AccountInfo & Links & {
     users_groups: {
       id: number;
       name: string;
-      uuid: string | null;
+      uuid?: string | null;
     }[];
+    task_types: {
+      id: number;
+      name: string;
+      color: string | null;
+      icon_id: number | null;
+      code: string;
+    }[];
+    datetime_settings: {
+      date_pattern: string;
+      short_date_pattern: string;
+      short_time_pattern: string;
+      date_format: string;
+      time_format: string;
+      timezone: string;
+      timezone_offset: string;
+    };
   };
-  task_types: {
-    id: number;
-    name: string;
-    color: string;
-    icon_id: number;
-    code: number;
-  }[];
-  datetime_settings: {
-    date_pattern: string;
-    short_date_pattern: string;
-    short_time_pattern: string;
-    date_formant: string;
-    time_format: string;
-    timezone: string;
-    timezone_offset: string;
-  };
-  entity_names: {
-    leads: Record<string, {
+  entity_names: Record<
+    string,
+    Record<string, {
       gender: "m" | "f";
-      singular_form: {
+      singular_form: Partial<{
         dative: string;
         default: string;
         genitive: string;
         accusative: string;
         instrumental: string;
         prepositional: string;
-      };
-      plural_form: {
+      }>;
+      plural_form: Partial<{
         dative: string;
         default: string;
         genitive: string;
         accusative: string;
         instrumental: string;
         prepositional: string;
-      };
-    }>;
-  };
+      }>;
+    }>
+  >;
 };
