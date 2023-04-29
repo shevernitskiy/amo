@@ -3,7 +3,7 @@
 This is a simple wrapper client for the amoCRM REST API. It covers almost all API modules and endpoints. Also, it
 manages to token refreshing and webhook handling.
 
-> ⚠️Due to awful API [docmentation](https://www.amocrm.ru/developers/content/crm_platform/api-reference) with tons of
+> ⚠️Due to awful API [documentation](https://www.amocrm.ru/developers/content/crm_platform/api-reference) with tons of
 > mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR),
 > WIP at this moment.
 
@@ -70,7 +70,7 @@ import { Amo } from "https://deno.land/x/amo/mod.ts";
 ## Basic example
 
 Here is the basic usage scenario. We use previously saved token object here (cause it valid for a long time, so we do
-not need to refresh it often). More [examples](https://github.com/shevernitskiy/amo/tree/main/examples)
+not need to refresh it often). More [examples](https://github.com/shevernitskiy/amo/tree/main/examples).
 
 ```ts
 import { readFileSync, writeFileSync } from "node:fs";
@@ -245,7 +245,7 @@ Webhook handling example. Remember that `webhookHandler()` is a function factory
 it.
 
 ```ts
-const amo = new Amo("subdomain", auth_object, opitons_object);
+const amo = new Amo("subdomain", auth_object, options_object);
 
 amo.on("leads:status", (lead) => console.log(lead.id));
 
@@ -271,7 +271,7 @@ Handling is simple:
 
 ```ts
 try {
-  const amo = new Amo("subdomain", auth_object, opitons_object);
+  const amo = new Amo("subdomain", auth_object, options_object);
   const lead = amo.lead.getLeadById(6969);
 } catch (err) {
   if (err instanceof AuthError) {
