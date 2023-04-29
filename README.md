@@ -70,10 +70,11 @@ import { Amo } from "https://deno.land/x/amo/mod.ts";
 ## Basic example
 
 Here is the basic usage scenario. We use previously saved token object here (cause it valid for a long time, so we do
-not need to refresh it often).
+not need to refresh it often). More [examples](https://github.com/shevernitskiy/amo/tree/main/examples)
 
 ```ts
-import { Amo } from "https://deno.land/x/amo/mod.ts";
+import { readFileSync, writeFileSync } from "node:fs";
+import { Amo, ApiError, AuthError } from "@shevernitskiy/amo";
 
 try {
   const auth = {
@@ -82,23 +83,26 @@ try {
     redirect_uri: "https://myredirect.org",
   };
 
-  // read previously saved token
-  const token = JSON.parse(Deno.readTextFileSync("./token.json"));
+  const token = JSON.parse(readFileSync("./token.json", "utf-8"));
 
   const amo = new Amo("mydomain", { ...auth, ...token }, {
     on_token: (new_token) => {
       console.log("New token obtained", new_token);
-      Deno.writeTextFileSync("./token.json", JSON.stringify(new_token, null, 2));
+      writeFileSync("./token.json", JSON.stringify(new_token, null, 2), "utf8");
     },
   });
 
   const data = await amo.account.getAccount({
-    with: ["drive_url", "amojo_id", "amojo_rights", "datetime_settings"],
+    with: ["amojo_id"],
   });
 
   console.log(data);
 } catch (err) {
-  console.error(err);
+  if (err instanceof ApiError || err instanceof AuthError) {
+    console.error(err.response);
+  } else {
+    console.error(err);
+  }
 }
 ```
 

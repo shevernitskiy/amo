@@ -12,6 +12,6 @@
     }
   },
   "lint": {
-    "exclude": ["./npm"]
+    "exclude": ["./npm/", "./examples/"]
   }
 }
