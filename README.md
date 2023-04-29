@@ -235,7 +235,7 @@ filter:
 The client could handle incoming webhook and acting as event emitter, that emits typed context depending on the event.
 To use this possibility, the client provides a typical handler that you could setup to handle incoming http requests.
 
-Hanlder signature is (maybe i'll add _(req, res)_ type for express enojyers later):
+Handler signature is (maybe i'll add _(req, res)_ type for express enojyers later):
 
 ```ts
 ((request: Request) => Promise<Response>);
