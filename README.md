@@ -117,7 +117,7 @@ To create a client instance, you should provide 2 or 3 args to the constructor:
 - options (optionally)
 
 ```ts
-const amo = new Amo("subdomain", auth_object, opitons_object);
+const amo = new Amo("subdomain", auth_object, options_object);
 ```
 
 ### Options
