@@ -7,14 +7,14 @@ manages to token refreshing and webhook handling.
 > mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR),
 > WIP at this moment.
 
-## WIP
+## Progress
 
-- [ ] Lib
+- ### Lib
   - [x] NPM & Node support
   - [ ] examples
   - [x] maybe some test (webhook atm)
   - [x] readme (draft)
-- [ ] API
+- ### API
   - [x] Account
   - [x] Leads
   - [x] Unsorted
@@ -43,7 +43,7 @@ manages to token refreshing and webhook handling.
   - [x] Chat Templates
   - [x] Files
   - [ ] Chats
-- [ ] Helpers
+- ### Helpers
   - [x] Filter builder
   - [x] Webhook handling
   - [x] Error handling
