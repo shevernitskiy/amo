@@ -251,7 +251,7 @@ const amo = new Amo("subdomain", auth_object, options_object);
 amo.on("leads:status", (lead) => console.log(lead.id));
 
 const handler = amo.webhookHandler();
-Deno.serve(handler, { port: 4545 });
+Deno.serve({ port: 4545 }, handler);
 ```
 
 ---
