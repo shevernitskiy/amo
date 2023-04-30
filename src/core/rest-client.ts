@@ -54,9 +54,7 @@ export class RestClient {
     }
   }
 
-  async request<T>(method: HttpMethod, init: RequestInit): Promise<T> {
-    console.log(init);
-
+  private async checkToken(): Promise<void> {
     if (this._token === undefined && this.isOAuthCode(this.auth)) {
       console.log("AUTH BY CODE");
       await this.authorization(this.auth);
@@ -70,9 +68,23 @@ export class RestClient {
         redirect_uri: this.auth.redirect_uri,
       });
     }
+  }
 
+  private async checkError(res: Response): Promise<void> {
+    if (res.ok !== false && res.status !== 204) return;
+    if (res.headers.get("Content-Type") === "application/problem+json") {
+      throw new ApiError(res.body ? await res.json() : "Error", `${res.status} ${res.statusText}, ${res.url}`);
+    } else if (res.status === 204) {
+      throw new NoContentError(`${res.status} ${res.statusText}, ${res.url}`);
+    } else {
+      throw new HttpError(res.body ? await res.text() : `${res.status} ${res.statusText}, ${res.url}`);
+    }
+  }
+
+  async request<T>(method: HttpMethod, init: RequestInit): Promise<T> {
+    console.log(init);
+    await this.checkToken();
     const target = `${init.url_base ?? this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
-
     console.log("REQUEST", target, init.payload);
 
     const res = await this.queue.push(fetch, target, {
@@ -84,16 +96,7 @@ export class RestClient {
       body: init.payload ? JSON.stringify(init.payload) : undefined,
     });
 
-    if (res.ok === false || res.status === 204) {
-      if (res.headers.get("Content-Type") === "application/problem+json") {
-        throw new ApiError(res.body ? await res.json() : "Error", `${res.status} ${res.statusText}, ${res.url}`);
-      } else if (res.status === 204) {
-        throw new NoContentError(`${res.status} ${res.statusText}, ${res.url}`);
-      } else {
-        throw new HttpError(res.body ? await res.text() : `${res.status} ${res.statusText}, ${res.url}`);
-      }
-    }
-
+    await this.checkError(res);
     return res.body ? (await res.json()) as T : null as T;
   }
 
