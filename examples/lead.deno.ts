@@ -16,13 +16,13 @@ try {
     },
   });
 
-  const lead = await amo.lead.addLeads({
+  const { _embedded: { leads: [lead] } } = await amo.lead.addLeads({
     name: "Test Lead",
   });
   console.log(lead);
 
   const updated_lead = await amo.lead.updateLeads([{
-    id: lead._embedded.leads[0].id,
+    id: lead.id,
     name: "Not, I want another Test Lead",
   }]);
   console.log(updated_lead);
