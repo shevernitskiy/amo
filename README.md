@@ -1,5 +1,10 @@
 # ♿amoCRM API client
 
+![npm](https://img.shields.io/npm/v/@shevernitskiy/amo?logo=npm&style=flat&labelColor=000)
+![deno module](https://shield.deno.dev/x/amo)
+![dependencies](https://img.shields.io/badge/dependencies-0-green?style=flat&labelColor=000)
+![license](https://img.shields.io/github/license/shevernitskiy/amo?style=flat&labelColor=000)
+
 This is a simple wrapper client for the amoCRM REST API. It covers almost all API modules and endpoints. Also, it
 manages to token refreshing and webhook handling.
 
