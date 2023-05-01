@@ -51,7 +51,7 @@ export type RequestId = {
 };
 
 export type Embedded = {
-  tags?: Tag[];
+  tags?: Partial<Tag>[];
   catalog_elements?: {
     id: number;
     metedata: {
@@ -66,9 +66,9 @@ export type Embedded = {
     created_at: number;
     updated_at: number;
   })[];
-  leads?: (Pick<Lead, "id"> & Links)[];
-  customers?: (Pick<Customer, "id"> & Links)[];
-  companies?: (Pick<Company, "id"> & Links)[];
-  contacts?: (Pick<Contact, "id"> & { is_main?: boolean } & Links)[];
-  segments?: (Pick<Segment, "id"> & Links)[];
+  leads?: (Pick<Lead, "id"> & Links & RequestId)[];
+  customers?: (Pick<Customer, "id"> & Links & RequestId)[];
+  companies?: (Pick<Company, "id"> & Links & RequestId)[];
+  contacts?: (Pick<Contact, "id"> & { is_main?: boolean } & Links & RequestId)[];
+  segments?: (Pick<Segment, "id"> & Links & RequestId)[];
 };

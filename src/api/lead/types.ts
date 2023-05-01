@@ -41,7 +41,7 @@ export type RequestAddLead =
   };
 
 export type ResponseAddLeads = Links & {
-  _embedded: Pick<Embedded, "leads">[];
+  _embedded: Pick<Embedded, "leads">;
 };
 
 export type RequestUpdateLead =
