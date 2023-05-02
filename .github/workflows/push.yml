@@ -1,0 +1,38 @@
+name: Push & PR
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      - name: Lint
+        run: deno lint
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, windows-latest, ubuntu-latest]
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      - name: Run Tests
+        run: deno task test

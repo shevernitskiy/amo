@@ -7,11 +7,9 @@
     "test": "deno test -A --unstable ./tests"
   },
   "fmt": {
-    "options": {
-      "lineWidth": 120
-    }
+    "lineWidth": 120
   },
   "lint": {
-    "exclude": ["./npm/", "./examples/"]
+    "exclude": ["./npm/", "./examples/", "./run.ts", "./type-check.ts"]
   }
 }
