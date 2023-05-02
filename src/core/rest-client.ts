@@ -35,7 +35,6 @@ export class RestClient {
 
   async authorization(value: OAuthCode | OAuthRefresh): Promise<void> {
     try {
-      console.log("authorization", value, `${this.url_base}/oauth2/access_token`);
       const res = await this.queue.push(fetch, `${this.url_base}/oauth2/access_token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
