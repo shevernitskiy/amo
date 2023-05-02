@@ -1,4 +1,4 @@
-import { createHash, createHmac } from "../../../deps.ts";
+import { createHash, createHmac } from "node:crypto";
 import { Endpoint } from "../../core/endpoint.ts";
 import { JSONValue } from "../../typings/utility.ts";
 
