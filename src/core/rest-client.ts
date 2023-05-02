@@ -56,10 +56,8 @@ export class RestClient {
 
   private async checkToken(): Promise<void> {
     if (this._token === undefined && this.isOAuthCode(this.auth)) {
-      console.log("AUTH BY CODE");
       await this.authorization(this.auth);
     } else if (this._token !== undefined && Date.now() >= this._token.expires_at) {
-      console.log("AUTH BY REFRESH");
       await this.authorization({
         client_id: this.auth.client_id,
         client_secret: this.auth.client_secret,
@@ -82,10 +80,8 @@ export class RestClient {
   }
 
   async request<T>(method: HttpMethod, init: RequestInit): Promise<T> {
-    console.log(init);
     await this.checkToken();
     const target = `${init.url_base ?? this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
-    console.log("REQUEST", target, init.payload);
 
     const res = await this.queue.push(fetch, target, {
       method: method,
