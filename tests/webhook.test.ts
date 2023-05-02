@@ -45,7 +45,7 @@ const test_task = {
 };
 
 Deno.test("webhook should work properly", async () => {
-  const amo = new Amo("gerda", { ...auth, ...token }, {
+  const amo = new Amo("mydomain", { ...auth, ...token }, {
     on_token: (new_token) => console.log("New token obtained", new_token),
   });
 
