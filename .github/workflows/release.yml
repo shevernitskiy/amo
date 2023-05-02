@@ -19,7 +19,6 @@ jobs:
         with:
           deno-version: v1.x
 
-      - run: npm install
       - run: deno task npm ${{ inputs.version }}
 
       - name: Publish to npm
