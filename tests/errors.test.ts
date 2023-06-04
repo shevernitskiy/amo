@@ -24,7 +24,7 @@ const token = {
 
 mf.install();
 
-const amo = new Amo("mydomain", { ...auth, ...token }, {
+const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token }, {
   on_token: (new_token) => console.log("New token obtained", new_token),
 });
 
@@ -109,7 +109,7 @@ Deno.test("should return AuthError", async () => {
     return new Response(null, { status: 403 });
   });
 
-  const amo = new Amo("mydomain", { ...auth, ...token, expires_at: 0 }, {
+  const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token, expires_at: 0 }, {
     on_token: (new_token) => console.log("New token obtained", new_token),
   });
 
