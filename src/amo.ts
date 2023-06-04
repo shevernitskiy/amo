@@ -76,12 +76,12 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   private _file?: FileApi;
 
   constructor(
-    baseUrl: string,
+    base_url: string,
     auth: OAuthCode | OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">,
     options?: Options,
   ) {
     super();
-    this.rest = new RestClient(baseUrl, auth, options);
+    this.rest = new RestClient(base_url, auth, options);
 
     this._account = new AccountApi(this.rest);
     this._lead = new LeadApi(this.rest);
