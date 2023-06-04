@@ -12,11 +12,11 @@ export class RestClient {
   private _token?: OAuth;
 
   constructor(
-    private subdomain: string,
+    private baseUrl: string,
     private auth: OAuthCode | OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">,
     private options?: Options,
   ) {
-    this.url_base = `https://${this.subdomain}.amocrm.ru`;
+    this.url_base = `https://${this.baseUrl}`; //subdomain.amocrm.ru || subdomain.kommo.com
     if (this.isOAuth(this.auth)) {
       this._token = {
         token_type: this.auth.token_type,
