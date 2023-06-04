@@ -376,6 +376,25 @@ export type Task = {
 
 export type CustomFieldsValue = Partial<{
   /** ID поля */
+  id: number;
+  /** Название поля */
+  name: string;
+  /** Код поля, по-которому можно обновлять значение в сущности, без передачи ID поля */
+  code: string | null;
+  /** Тип поля. Список доступных полей */
+  type: CustomFieldsValueTypes;
+  /** Доступные значения для поля. Значение данного поля доступно только для полей с поддержкой enum */
+  enums: Partial<{
+    /** ID значения */
+    enum_id: number;
+    /** Значение */
+    value: string;
+    /** Сортировка значения */
+    sort: number;
+    /** Символьный код значения */
+    enum_code: string | null;
+  }>[] | null;
+  /** ID поля */
   field_id: number;
   /** Название поля */
   field_name: string;
