@@ -89,7 +89,7 @@ try {
 
   const token = JSON.parse(readFileSync("./token.json", "utf-8"));
 
-  const amo = new Amo("mydomain", { ...auth, ...token }, {
+  const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token }, {
     on_token: (new_token) => {
       console.log("New token obtained", new_token);
       writeFileSync("./token.json", JSON.stringify(new_token, null, 2), "utf8");
@@ -116,12 +116,12 @@ try {
 
 To create a client instance, you should provide 2 or 3 args to the constructor:
 
-- subdomain
+- API domain
 - auth data (may be different)
 - options (optionally)
 
 ```ts
-const amo = new Amo("subdomain", auth_object, options_object);
+const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
 ```
 
 ### Options
@@ -144,7 +144,7 @@ expiration.
 Usually, this method is used just once while a fresh app is registered. You provide the code and get the token data.
 
 ```ts
-const amo = new Amo("mydomain", {
+const amo = new Amo("mydomain.amocrm.ru", {
     client_id: "1111-2222-3333",
     client_secret: "myclientsecret",
     grant_type: "authorization_code",
@@ -162,7 +162,7 @@ This method is used every time after the first authorization by code. The API do
 `expires_at`, but lib returns it in `on_token` callback value.
 
 ```ts
-const amo = new Amo("mydomain", {
+const amo = new Amo("mydomain.amocrm.ru", {
     client_id: "1111-2222-3333",
     client_secret: "myclientsecret",
     redirect_uri: "https://myredirect.org",
@@ -250,7 +250,7 @@ Webhook handling example. Remember that `webhookHandler()` is a function factory
 it.
 
 ```ts
-const amo = new Amo("subdomain", auth_object, options_object);
+const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
 
 amo.on("leads:status", (lead) => console.log(lead.id));
 
@@ -276,7 +276,7 @@ Handling is simple:
 
 ```ts
 try {
-  const amo = new Amo("subdomain", auth_object, options_object);
+  const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
   const lead = amo.lead.getLeadById(6969);
 } catch (err) {
   if (err instanceof AuthError) {
