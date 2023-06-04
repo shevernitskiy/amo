@@ -9,7 +9,7 @@ try {
 
   const token = JSON.parse(Deno.readTextFileSync("./token.json"));
 
-  const amo = new Amo("mydomain", { ...auth, ...token }, {
+  const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token }, {
     on_token: (new_token) => {
       console.log("New token obtained", new_token);
       Deno.writeTextFileSync("./token.json", JSON.stringify(new_token, null, 2));
