@@ -81,7 +81,7 @@ export type ResponseUpdateContacts = Links & {
 };
 
 export type RequestLinkContactToChat = RequestId & {
-  char_id: string;
+  chat_id: string;
   contact_id: number;
 };
 
