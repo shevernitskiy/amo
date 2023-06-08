@@ -1366,8 +1366,8 @@ export type SalesBotTask = {
   bot_id: number;
   /** Id сущности к которой привязан контакт с чатом или самого контакта с чатом. */
   entity_id: number;
-  /** Тип сущности, id которой передали */
-  entity_type: string;
+  /** Тип сущности, id которой передали. 1 - контакт, 2 - сделка */
+  entity_type: number;
 };
 
 export type File = {
