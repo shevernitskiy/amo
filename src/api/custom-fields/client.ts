@@ -16,22 +16,32 @@ import type {
   ResponseUpdateCustomFieldsGroupById,
 } from "./types.ts";
 import { Endpoint } from "../../core/endpoint.ts";
+import { query } from "../../helpers/query.ts";
 
 export class CustomFieldsApi extends Endpoint {
   /** Метод позволяет получить список полей сущности в аккаунте. */
-  getCustomFields(entity_type: "catalogs", catalog_id: number): Promise<ResponseGetCustomFields>;
+  getCustomFields(entity_type: "catalogs", catalog_id: number, params?: {
+    page?: number;
+    limit?: number;
+  }): Promise<ResponseGetCustomFields>;
   getCustomFields(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
-  ): Promise<ResponseGetCustomFields>;
+     params?: {
+    page?: number;
+    limit?: number;
+  }): Promise<ResponseGetCustomFields>;
   getCustomFields(
     entity_type: string,
     catalog_id?: number,
-  ): Promise<ResponseGetCustomFields> {
+     params?: {
+    page?: number;
+    limit?: number;
+  }): Promise<ResponseGetCustomFields> {
     let url = `/api/v4/${entity_type}/custom_fields`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields`;
     }
-    return this.rest.get<ResponseGetCustomFields>({ url: url });
+    return this.rest.get<ResponseGetCustomFields>({ url: url, query: query(params), });
   }
 
   /** Метод позволяет получить поля сущности в аккаунте по ID. */
