@@ -26,6 +26,7 @@ export class CustomFieldsApi extends Endpoint {
   }): Promise<ResponseGetCustomFields>;
   getCustomFields(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
+     catalog_id?: number, 
      params?: {
     page?: number;
     limit?: number;
