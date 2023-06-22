@@ -24,7 +24,7 @@ await cmd.output();
 console.log("writing package.json, version " + Deno.args[0] + "...");
 
 const pakcage = {
-  name: "@shevernitskiy/amo",
+  name: "@belyaev-dev/amo",
   description: "amoCRM API client",
   version: Deno.args[0],
   author: "shevernitskiy",
