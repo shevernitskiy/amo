@@ -1,7 +1,7 @@
 import type { DeepPartial, Links, PageCount, RequestId, Total } from "../../typings/utility.ts";
 import type { CustomFieldsValue, CustomFieldsValueGroup } from "../../typings/entities.ts";
 
-export type ResponseGetCustomFields = Total & PageCount & Links & {
+export type ResponseGetCustomFields = Total & Page & PageCount & Links & {
   _embedded: {
     custom_fields: ResponseGetCustomFieldById[];
   };
