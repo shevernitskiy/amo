@@ -71,6 +71,6 @@ export function filterLikeToString<
   TStatus extends number | never,
   TCustomField extends number | never,
 >(filter_like: FilterLike<TSingle, TMulti, TRange, TStatus, TCustomField>): string {
-  if (filter_like instanceof Filter<TSingle, TMulti, TRange, TStatus, TCustomField>) return filter_like.toString();
+  if (filter_like instanceof Filter) return filter_like.toString();
   return filter_like(new Filter()).toString();
 }
