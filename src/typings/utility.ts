@@ -1,3 +1,4 @@
+// deno-lint-ignore-file
 import type { Company, Contact, Customer, Lead, Segment, Tag } from "./entities.ts";
 
 export type JSONValue =
@@ -8,7 +9,6 @@ export type JSONValue =
   | { [x: string]: JSONValue }
   | Array<JSONValue>;
 
-// deno-lint-ignore ban-types
 export type DeepPartial<T> = T extends object ? {
     [P in keyof T]?: DeepPartial<T[P]>;
   }
