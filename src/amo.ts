@@ -115,6 +115,7 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   get token(): OAuth | undefined {
     return this.rest.token;
   }
+
   /** Кастомные запорсы к апи */
   get raw(): RestClient {
     return this.rest;
