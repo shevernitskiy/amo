@@ -5,7 +5,7 @@ import { AuthError } from "../errors/auth.ts";
 import { ApiError } from "../errors/api.ts";
 import { NoContentError } from "../errors/no-content.ts";
 import { HttpError } from "../errors/http.ts";
-import { isJsonObject } from "../helpers/isJson.ts";
+import { isJsonObject } from "../helpers/is-json.ts";
 
 export class RestClient {
   private url_base: string;

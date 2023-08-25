@@ -1,4 +1,5 @@
 import { OAuth } from "./auth.ts";
+import { JSONValue } from './utility.ts';
 
 export type Options = {
   request_delay?: number;
@@ -11,6 +12,6 @@ export type RequestInit = {
   url: string;
   url_base?: string;
   query?: string;
-  payload?: BodyInit;
+  payload?: BodyInit | JSONValue;
   headers?: Record<string, string | number | boolean>;
 };
