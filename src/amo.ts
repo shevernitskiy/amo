@@ -1,4 +1,4 @@
-import type { HttpMethod, Options } from "./typings/lib.ts";
+import type { Options } from "./typings/lib.ts";
 import type { OAuth, OAuthCode, OAuthRefresh } from "./typings/auth.ts";
 import type {
   Catalog,
