@@ -3,7 +3,7 @@ import type { HttpMethod, RequestInit } from "../../typings/lib.ts";
 
 export class CustomRequestApi extends Endpoint {
   /** Кастомный Request */
-  request<T>(method: HttpMethod, init: RequestInit): Promise<T> {
+  req<T>(method: HttpMethod, init: RequestInit): Promise<T> {
     return this.rest.request(method, init);
   }
   /** Метод позволяет сделать кастомный GET запрос*/

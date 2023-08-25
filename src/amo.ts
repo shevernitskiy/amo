@@ -283,7 +283,7 @@ export class Amo extends EventEmitter<WebhookEventMap> {
     };
   }
   /** Кастомные запросы. Например, для работы с приватным api */
-  get custom() {
+  get request() {
     return this._custom_request;
   }
 }
