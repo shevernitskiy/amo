@@ -1,5 +1,4 @@
 import { OAuth } from "./auth.ts";
-import { JSONValue } from "./utility.ts";
 
 export type Options = {
   request_delay?: number;
