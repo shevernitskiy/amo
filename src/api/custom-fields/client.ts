@@ -26,23 +26,25 @@ export class CustomFieldsApi extends Endpoint {
   }): Promise<ResponseGetCustomFields>;
   getCustomFields(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
-     catalog_id?: number, 
-     params?: {
-    page?: number;
-    limit?: number;
-  }): Promise<ResponseGetCustomFields>;
+    catalog_id?: number,
+    params?: {
+      page?: number;
+      limit?: number;
+    },
+  ): Promise<ResponseGetCustomFields>;
   getCustomFields(
     entity_type: string,
     catalog_id?: number,
-     params?: {
-    page?: number;
-    limit?: number;
-  }): Promise<ResponseGetCustomFields> {
+    params?: {
+      page?: number;
+      limit?: number;
+    },
+  ): Promise<ResponseGetCustomFields> {
     let url = `/api/v4/${entity_type}/custom_fields`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
       url = `/api/v4/${entity_type}/${catalog_id}/custom_fields`;
     }
-    return this.rest.get<ResponseGetCustomFields>({ url: url, query: query(params), });
+    return this.rest.get<ResponseGetCustomFields>({ url: url, query: query(params) });
   }
 
   /** Метод позволяет получить поля сущности в аккаунте по ID. */

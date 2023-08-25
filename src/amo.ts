@@ -43,7 +43,6 @@ import { ShortLinkApi } from "./api/short-link/client.ts";
 import { ChatTemplateApi } from "./api/chat-template/client.ts";
 import { SalesBotApi } from "./api/salesbot/client.ts";
 import { FileApi } from "./api/file/client.ts";
-import { CustomRequestApi } from "./api/custom-request/client";
 
 export class Amo extends EventEmitter<WebhookEventMap> {
   private rest: RestClient;
@@ -75,15 +74,11 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   private _chat_template: ChatTemplateApi;
   private _salesbot: SalesBotApi;
   private _file?: FileApi;
-  private _custom_request?: CustomRequestApi;
 
   constructor(
     base_url: string,
-    auth:
-      | OAuthCode
-      | (OAuth &
-          Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">),
-    options?: Options
+    auth: OAuthCode | (OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">),
+    options?: Options,
   ) {
     super();
     this.rest = new RestClient(base_url, auth, options);
@@ -114,12 +109,15 @@ export class Amo extends EventEmitter<WebhookEventMap> {
     this._short_link = new ShortLinkApi(this.rest);
     this._chat_template = new ChatTemplateApi(this.rest);
     this._salesbot = new SalesBotApi(this.rest);
-    this._custom_request = new CustomRequestApi(this.rest);
   }
 
   /** Текущий токен приложения */
   get token(): OAuth | undefined {
     return this.rest.token;
+  }
+  /** Кастомные запорсы к апи */
+  get raw(): RestClient {
+    return this.rest;
   }
 
   /** Свойства акканта */
@@ -281,9 +279,5 @@ export class Amo extends EventEmitter<WebhookEventMap> {
         throw new WebhookError(err);
       }
     };
-  }
-  /** Кастомные запросы. Например, для работы с приватным api */
-  get request() {
-    return this._custom_request;
   }
 }

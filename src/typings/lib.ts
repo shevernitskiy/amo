@@ -12,6 +12,6 @@ export type RequestInit = {
   url: string;
   url_base?: string;
   query?: string;
-  payload?: JSONValue;
+  payload?: BodyInit;
   headers?: Record<string, string | number | boolean>;
 };

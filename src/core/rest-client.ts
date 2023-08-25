@@ -5,6 +5,7 @@ import { AuthError } from "../errors/auth.ts";
 import { ApiError } from "../errors/api.ts";
 import { NoContentError } from "../errors/no-content.ts";
 import { HttpError } from "../errors/http.ts";
+import { isJsonObject } from "../helpers/isJson.ts";
 
 export class RestClient {
   private url_base: string;
@@ -13,11 +14,8 @@ export class RestClient {
 
   constructor(
     private base_url: string,
-    private auth:
-      | OAuthCode
-      | (OAuth &
-          Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">),
-    private options?: Options
+    private auth: OAuthCode | (OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">),
+    private options?: Options,
   ) {
     this.url_base = `https://${this.base_url}`; //subdomain.amocrm.ru | subdomain.kommo.com
     if (this.isOAuth(this.auth)) {
@@ -36,25 +34,18 @@ export class RestClient {
     return this._token;
   }
 
-  async authorization(value: OAuthCode | OAuthRefresh): Promise<void> {
+  private async authorization(value: OAuthCode | OAuthRefresh): Promise<void> {
     try {
-      const res = await this.queue.push(
-        fetch,
-        `${this.url_base}/oauth2/access_token`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(value),
-        }
-      );
+      const res = await this.queue.push(fetch, `${this.url_base}/oauth2/access_token`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(value),
+      });
       if (res.ok === false) {
         throw new AuthError(res.body ? await res.json() : "Empty");
       }
       const data = (await res.json()) as OAuth;
-      this._token = {
-        ...data,
-        expires_at: Date.now() + data.expires_in * 1000,
-      };
+      this._token = { ...data, expires_at: Date.now() + (data.expires_in * 1000) };
       if (this.options?.on_token !== undefined) {
         this.options.on_token(this._token);
       }
@@ -66,10 +57,7 @@ export class RestClient {
   private async checkToken(): Promise<void> {
     if (this._token === undefined && this.isOAuthCode(this.auth)) {
       await this.authorization(this.auth);
-    } else if (
-      this._token !== undefined &&
-      Date.now() >= this._token.expires_at
-    ) {
+    } else if (this._token !== undefined && Date.now() >= this._token.expires_at) {
       await this.authorization({
         client_id: this.auth.client_id,
         client_secret: this.auth.client_secret,
@@ -83,26 +71,17 @@ export class RestClient {
   private async checkError(res: Response): Promise<void> {
     if (res.ok !== false && res.status !== 204) return;
     if (res.headers.get("Content-Type") === "application/problem+json") {
-      throw new ApiError(
-        res.body ? await res.json() : "Error",
-        `${res.status} ${res.statusText}, ${res.url}`
-      );
+      throw new ApiError(res.body ? await res.json() : "Error", `${res.status} ${res.statusText}, ${res.url}`);
     } else if (res.status === 204) {
       throw new NoContentError(`${res.status} ${res.statusText}, ${res.url}`);
     } else {
-      throw new HttpError(
-        res.body
-          ? await res.text()
-          : `${res.status} ${res.statusText}, ${res.url}`
-      );
+      throw new HttpError(res.body ? await res.text() : `${res.status} ${res.statusText}, ${res.url}`);
     }
   }
 
   async request<T>(method: HttpMethod, init: RequestInit): Promise<T> {
     await this.checkToken();
-    const target = `${init.url_base ?? this.url_base}${init?.url}${
-      init.query ? "?" + init.query : ""
-    }`;
+    const target = `${init.url_base ?? this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
 
     const res = await this.queue.push(fetch, target, {
       method: method,
@@ -111,14 +90,11 @@ export class RestClient {
         "Content-Type": "application/json",
         ...init.headers,
       },
-      body:
-        init.payload && typeof init.payload === "string"
-          ? JSON.stringify(init.payload)
-          : init.payload,
+      body: isJsonObject(init.payload) ? JSON.stringify(init.payload) : init.payload,
     });
 
     await this.checkError(res);
-    return res.body ? ((await res.json()) as T) : (null as T);
+    return res.body ? (await res.json()) as T : null as T;
   }
 
   get<T>(init: RequestInit): Promise<T> {
@@ -141,20 +117,14 @@ export class RestClient {
     return this.request<T>("PUT", init);
   }
 
-  isOAuthCode(
-    auth:
-      | OAuthCode
-      | (OAuth &
-          Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">)
+  private isOAuthCode(
+    auth: OAuthCode | OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">,
   ): auth is OAuthCode {
     return (auth as OAuthCode).code !== undefined;
   }
 
-  isOAuth(auth: OAuthCode | OAuth): auth is OAuth {
-    return (
-      (auth as OAuth).access_token !== undefined &&
-      (auth as OAuth).expires_at !== undefined &&
-      (auth as OAuth).refresh_token !== undefined
-    );
+  private isOAuth(auth: OAuthCode | OAuth): auth is OAuth {
+    return (auth as OAuth).access_token !== undefined && (auth as OAuth).expires_at !== undefined &&
+      (auth as OAuth).refresh_token !== undefined;
   }
 }
