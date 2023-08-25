@@ -9,7 +9,8 @@ This is a simple wrapper client for the amoCRM REST API. It covers almost all AP
 manages to token refreshing and webhook handling.
 
 > ⚠️Due to awful API [documentation](https://www.amocrm.ru/developers/content/crm_platform/api-reference) with tons of
-> mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR or issue at least).
+> mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR or
+> issue at least).
 
 ## Progress
 

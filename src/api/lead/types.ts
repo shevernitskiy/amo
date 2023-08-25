@@ -33,17 +33,17 @@ export type RequestAddLead =
   >
   & {
     _embedded?: {
-        tags?: {
-            id?: number;
-            name?: string;
-        }[];
-        contacts?: Partial<Contact>[];
-        companies?: Partial<Company>[];
-        metadata?: Partial<UnsrotedMetadataForm> | Partial<UnsrotedMetadataSip>;
-        source?: {
-            external_id?: number;
-            type?: string;
-        };
+      tags?: {
+        id?: number;
+        name?: string;
+      }[];
+      contacts?: Partial<Contact>[];
+      companies?: Partial<Company>[];
+      metadata?: Partial<UnsrotedMetadataForm> | Partial<UnsrotedMetadataSip>;
+      source?: {
+        external_id?: number;
+        type?: string;
+      };
     };
   };
 

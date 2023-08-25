@@ -77,7 +77,7 @@ export class Amo extends EventEmitter<WebhookEventMap> {
 
   constructor(
     base_url: string,
-    auth: OAuthCode | OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">,
+    auth: OAuthCode | (OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">),
     options?: Options,
   ) {
     super();
@@ -114,6 +114,10 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   /** Текущий токен приложения */
   get token(): OAuth | undefined {
     return this.rest.token;
+  }
+  /** Кастомные запорсы к апи */
+  get raw(): RestClient {
+    return this.rest;
   }
 
   /** Свойства акканта */

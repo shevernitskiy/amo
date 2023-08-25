@@ -33,7 +33,7 @@ export class RestClient {
     return this._token;
   }
 
-  async authorization(value: OAuthCode | OAuthRefresh): Promise<void> {
+  private async authorization(value: OAuthCode | OAuthRefresh): Promise<void> {
     try {
       const res = await this.queue.push(fetch, `${this.url_base}/oauth2/access_token`, {
         method: "POST",
@@ -84,9 +84,10 @@ export class RestClient {
 
     const res = await this.queue.push(fetch, target, {
       method: method,
-      headers: init.headers ?? {
-        "Authorization": `${this._token?.token_type} ${this._token?.access_token}`,
+      headers: {
+        Authorization: `${this._token?.token_type} ${this._token?.access_token}`,
         "Content-Type": "application/json",
+        ...init.headers,
       },
       body: init.payload ? JSON.stringify(init.payload) : undefined,
     });
@@ -115,13 +116,13 @@ export class RestClient {
     return this.request<T>("PUT", init);
   }
 
-  isOAuthCode(
+  private isOAuthCode(
     auth: OAuthCode | OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">,
   ): auth is OAuthCode {
     return (auth as OAuthCode).code !== undefined;
   }
 
-  isOAuth(auth: OAuthCode | OAuth): auth is OAuth {
+  private isOAuth(auth: OAuthCode | OAuth): auth is OAuth {
     return (auth as OAuth).access_token !== undefined && (auth as OAuth).expires_at !== undefined &&
       (auth as OAuth).refresh_token !== undefined;
   }
