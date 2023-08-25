@@ -5,7 +5,6 @@ import { AuthError } from "../errors/auth.ts";
 import { ApiError } from "../errors/api.ts";
 import { NoContentError } from "../errors/no-content.ts";
 import { HttpError } from "../errors/http.ts";
-import { isJsonObject } from "../helpers/is-json.ts";
 
 export class RestClient {
   private url_base: string;
@@ -14,7 +13,7 @@ export class RestClient {
 
   constructor(
     private base_url: string,
-    private auth: OAuthCode | (OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">),
+    private auth: OAuthCode | OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">,
     private options?: Options,
   ) {
     this.url_base = `https://${this.base_url}`; //subdomain.amocrm.ru | subdomain.kommo.com
@@ -90,7 +89,7 @@ export class RestClient {
         "Content-Type": "application/json",
         ...init.headers,
       },
-      body: isJsonObject(init.payload) ? JSON.stringify(init.payload) : init.payload,
+      body: init.payload ? JSON.stringify(init.payload) : undefined,
     });
 
     await this.checkError(res);
