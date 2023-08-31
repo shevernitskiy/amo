@@ -38,7 +38,7 @@ export class UnsortedApi extends Endpoint {
   /** Метод позволяет добавлять неразобранное в аккаунт пакетно. */
   addUnsortedSip(unsorted: RequestAddUnsortedSip[]): Promise<ResponseAddUnsorted> {
     return this.rest.post<ResponseAddUnsorted>({
-      url: "/api/v4/unsorted/sip",
+      url: "/api/v4/leads/unsorted/sip",
       payload: unsorted as JSONValue,
     });
   }
@@ -46,7 +46,7 @@ export class UnsortedApi extends Endpoint {
   /** Метод позволяет добавлять неразобранное в аккаунт пакетно. */
   addUnsortedForm(unsorted: RequestAddUnsortedForm[]): Promise<ResponseAddUnsorted> {
     return this.rest.post<ResponseAddUnsorted>({
-      url: "/api/v4/unsorted/forms",
+      url: "/api/v4/leads/unsorted/forms",
       payload: unsorted as JSONValue,
     });
   }
@@ -57,7 +57,7 @@ export class UnsortedApi extends Endpoint {
     status_id?: number;
   }): Promise<ResponseAcceptUnsorted> {
     return this.rest.post<ResponseAcceptUnsorted>({
-      url: `/api/v4/unsorted/${uid}/accept`,
+      url: `/api/v4/leads/unsorted/${uid}/accept`,
       payload: params,
     });
   }
@@ -67,7 +67,7 @@ export class UnsortedApi extends Endpoint {
     user_id?: number;
   }): Promise<ResponseDeclineUnsorted> {
     return this.rest.delete<ResponseDeclineUnsorted>({
-      url: `/api/v4/unsorted/${uid}/decline`,
+      url: `/api/v4/leads/unsorted/${uid}/decline`,
       payload: params,
     });
   }
@@ -84,7 +84,7 @@ export class UnsortedApi extends Endpoint {
     };
   }): Promise<ResponseLinkUnsorted> {
     return this.rest.post<ResponseLinkUnsorted>({
-      url: `/api/v4/unsorted/${uid}/link`,
+      url: `/api/v4/leads/unsorted/${uid}/link`,
       payload: params,
     });
   }
