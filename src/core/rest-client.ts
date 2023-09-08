@@ -67,8 +67,9 @@ export class RestClient {
     }
   }
 
-  private async checkError(res: Response): Promise<void> {
+  private async checkError(res: Response, method: HttpMethod): Promise<void> {
     if (res.ok !== false && res.status !== 204) return;
+    if (res.status === 204 && method === "DELETE") return;
     if (res.headers.get("Content-Type") === "application/problem+json") {
       throw new ApiError(res.body ? await res.json() : "Error", `${res.status} ${res.statusText}, ${res.url}`);
     } else if (res.status === 204) {
@@ -92,7 +93,7 @@ export class RestClient {
       body: init.payload ? JSON.stringify(init.payload) : undefined,
     });
 
-    await this.checkError(res);
+    await this.checkError(res, method);
     return res.body ? (await res.json()) as T : null as T;
   }
 
