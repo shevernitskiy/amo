@@ -60,10 +60,7 @@ Deno.test("webhook should work properly", async () => {
     );
   });
 
-  const serve_close = new AbortController();
-
-  Deno.serve({
-    signal: serve_close.signal,
+  const server = Deno.serve({
     port: 4545,
   }, amo.webhookHandler());
 
@@ -72,8 +69,8 @@ Deno.test("webhook should work properly", async () => {
     body: JSON.stringify(test_task),
   });
 
+  await server.shutdown();
+
   assertEquals(res.status, 200);
   assertEquals(await res.text(), "OK");
-
-  serve_close.abort();
 });
