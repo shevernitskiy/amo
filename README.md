@@ -59,6 +59,7 @@ manages to token refreshing and webhook handling.
 ## Installation
 
 <img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/nodejs.svg"> Node.JS
+(versions >=18 are supported because of Fetch API)
 
 ```powershell
 npm i @shevernitskiy/amo
