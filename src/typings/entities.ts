@@ -522,7 +522,9 @@ export type CustomFieldsValueTypes =
   /** Денежное (платная опция Супер-поля) */
   | "monetary"
   /** Файл */
-  | "file";
+  | "file"
+  /** Мультитекст для контактов (поля с телефоном и email) */
+  | "multitext";
 
 export type CustomFieldsValueGroup = {
   /** ID группы полей */
