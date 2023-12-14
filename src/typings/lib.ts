@@ -4,6 +4,7 @@ import { JSONValue } from "./utility.ts";
 export type Options = {
   request_delay?: number;
   on_token?: (token: OAuth) => void | Promise<void>;
+  no_content_no_error?: boolean;
 };
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
