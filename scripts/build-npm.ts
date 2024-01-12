@@ -39,7 +39,6 @@ const pakcage = {
   files: ["./src", "./mod.js", "./mod.d.ts"],
   main: "./mod.js",
   types: "./mod.d.ts",
-  type: "module",
   keywords: [
     "amo",
     "amoCRM",
