@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./npm",
     "declaration": true,
-    "target": "ES2023"
+    "target": "ESNext"
   },
   "include": ["./src/**/*", "./mod.ts"],
   "deno2node": {}
