@@ -121,3 +121,18 @@ Deno.test("should return AuthError", async () => {
 
   await sleep(200);
 });
+
+Deno.test("should return AuthError to error handler", async () => {
+  mf.mock("POST@/oauth2/access_token", () => {
+    return new Response(null, { status: 403 });
+  });
+
+  const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token, expires_at: 0 }, {
+    on_token: (new_token) => console.log("New token obtained", new_token),
+    on_error: (err) => assertInstanceOf(err, AuthError),
+  });
+
+  await amo.lead.getLeadById(69);
+
+  await sleep(200);
+});

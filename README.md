@@ -130,9 +130,11 @@ const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
 
 - `request_delay: number` (ms) - amo backend limits you to _7 reqs/sec_, so the client manages with it by performing
   requests sequentially with delay (_150ms_ by default). You could set your own delay number (or zero, if you want).
-- `on_token: (new_token: OAuth) => void | Promise<void>` - callback, that will be called on _new token_ event (during
+- `on_token?: (new_token: OAuth) => void | Promise<void>` - callback, that will be called on _new token_ event (during
   receiving from a code or refreshing). Lib manages the auth/token stuff for you, but it is strongly recommended to
   store the new token persistently somewhere you want (fs, db) to provide it on the next app start.
+- `on_error?: (error: Error) => void | Promise<void>;` - default error handler. If provided, it will be called instead
+  of throwing errors. Request lifycycle will not be interrupted and you receive `null` as a response.
 
 ---
 
@@ -292,6 +294,18 @@ try {
   } else {
     console.error("UnknownError", err);
   }
+}
+```
+
+Also you could use default non-intercepted error handler passed with the `options` to client constructor:
+
+```ts
+const amo = new Amo("mydomain.amocrm.ru", auth_object, {
+  on_error: (err) => console.error("Amo emits error", err);
+});
+const lead = amo.lead.getLeadById(6969);
+if (lead) {
+  // do logic
 }
 ```
 

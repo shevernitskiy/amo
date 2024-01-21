@@ -34,22 +34,18 @@ export class RestClient {
   }
 
   private async authorization(value: OAuthCode | OAuthRefresh): Promise<void> {
-    try {
-      const res = await this.queue.push(fetch, `${this.url_base}/oauth2/access_token`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(value),
-      });
-      if (res.ok === false) {
-        throw new AuthError(res.body ? await res.json() : "Empty");
-      }
-      const data = (await res.json()) as OAuth;
-      this._token = { ...data, expires_at: Date.now() + (data.expires_in * 1000) };
-      if (this.options?.on_token !== undefined) {
-        this.options.on_token(this._token);
-      }
-    } catch (err) {
-      throw err;
+    const res = await this.queue.push(fetch, `${this.url_base}/oauth2/access_token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(value),
+    });
+    if (res.ok === false) {
+      throw new AuthError(res.body ? await res.json() : "Empty");
+    }
+    const data = (await res.json()) as OAuth;
+    this._token = { ...data, expires_at: Date.now() + (data.expires_in * 1000) };
+    if (this.options?.on_token !== undefined) {
+      this.options.on_token(this._token);
     }
   }
 
@@ -80,21 +76,30 @@ export class RestClient {
   }
 
   async request<T>(method: HttpMethod, init: RequestInit): Promise<T> {
-    await this.checkToken();
-    const target = `${init.url_base ?? this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
+    try {
+      await this.checkToken();
+      const target = `${init.url_base ?? this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
 
-    const res = await this.queue.push(fetch, target, {
-      method: method,
-      headers: {
-        "Authorization": `${this._token?.token_type} ${this._token?.access_token}`,
-        "Content-Type": "application/json",
-        ...init.headers,
-      },
-      body: init.payload ? JSON.stringify(init.payload) : undefined,
-    });
+      const res = await this.queue.push(fetch, target, {
+        method: method,
+        headers: {
+          "Authorization": `${this._token?.token_type} ${this._token?.access_token}`,
+          "Content-Type": "application/json",
+          ...init.headers,
+        },
+        body: init.payload ? JSON.stringify(init.payload) : undefined,
+      });
 
-    await this.checkError(res, method);
-    return res.body ? (await res.json()) as T : null as T;
+      await this.checkError(res, method);
+      return res.body ? (await res.json()) as T : null as T;
+    } catch (err) {
+      if (this.options?.on_error) {
+        this.options.on_error(err);
+        return null as T;
+      } else {
+        throw err;
+      }
+    }
   }
 
   get<T>(init: RequestInit): Promise<T> {
