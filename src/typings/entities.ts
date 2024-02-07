@@ -1187,7 +1187,9 @@ export type WebhookType =
   /** Примечание добавлено в компанию */
   | "note_company"
   /** Примечание добавлено в покупателя */
-  | "note_customer";
+  | "note_customer"
+  /** Шаблон WhatsApp отправлен на одобрение */
+  | "add_chat_template_review";
 
 export type Widget = {
   /** ID виджета */
@@ -1300,6 +1302,11 @@ export type Source = {
   services: {
     /** тип сервиса, на данный момент поддерживается только один тип: "whatsapp" */
     type: string;
+    /** Объект с настройками источника. Поле не является обязательным. */
+    params: {
+      /** Является ли источник белым whatsapp. Следует добавить для возможности работы с одобренными шаблонами whatsapp в salesbot в новом шаге отправки сообщения. Поле не является обязательным. */
+      waba: boolean;
+    };
     /** Для whatsapp сервиса содержит список элементов, которые можно выбрать при настройке CRM Plugin (кнопки на сайт) */
     pages: {
       /** Отображаемое пользователю название пункта в выпадающем списке при настройке кнопки на сайте */
@@ -1310,6 +1317,25 @@ export type Source = {
       link: string;
     }[];
   }[];
+};
+
+export type CRMPlugin = {
+  /** ID аккаунта */
+  account_id: number;
+  /** ID источника */
+  source_id: number;
+  /** ID кнопки, связанной с источником */
+  button_id: number;
+  /** статус наличия контроля дублей для источников */
+  is_duplication_control_enabled: boolean;
+  /** название истчника */
+  name: string;
+  /** статус создания источника ("created" или "creation_pending") */
+  creation_status: "created" | "creation_pending";
+  /** ID воронки */
+  pipeline_id: number | null;
+  /** скрипт CRM Plugin */
+  script: string | null;
 };
 
 export type ShortLink = {

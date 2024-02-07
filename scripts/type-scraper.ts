@@ -224,3 +224,6 @@ export function writeTypes(data: string): void {
 // parseTableFromUrl("File", "https://www.amocrm.ru/developers/content/files/files-api", 5, {
 //   comment: true,
 // }).then(writeTypes);
+// parseTableFromUrl("CRMPlugin", "https://www.amocrm.ru/developers/content/crm_platform/sources-api", 26, {
+//   comment: true,
+// }).then(writeTypes);
