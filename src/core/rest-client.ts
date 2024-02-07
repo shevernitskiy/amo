@@ -1,14 +1,15 @@
-import type { HttpMethod, Options, RequestInit } from "../typings/lib.ts";
-import type { OAuth, OAuthCode, OAuthRefresh } from "../typings/auth.ts";
-import { AsyncQueue } from "./async-queue.ts";
-import { AuthError } from "../errors/auth.ts";
+import { ConcurrentPool, DelayQueue } from "./async-queue.ts";
 import { ApiError } from "../errors/api.ts";
-import { NoContentError } from "../errors/no-content.ts";
+import { AuthError } from "../errors/auth.ts";
 import { HttpError } from "../errors/http.ts";
+import { NoContentError } from "../errors/no-content.ts";
+
+import type { OAuth, OAuthCode, OAuthRefresh } from "../typings/auth.ts";
+import type { HttpMethod, Options, RequestInit } from "../typings/lib.ts";
 
 export class RestClient {
   private url_base: string;
-  private queue: AsyncQueue<Response>;
+  private queue: DelayQueue<Response> | ConcurrentPool<Response>;
   private _token?: OAuth;
 
   constructor(
@@ -26,7 +27,14 @@ export class RestClient {
         expires_at: this.auth.expires_at ?? 0,
       };
     }
-    this.queue = new AsyncQueue<Response>(options?.request_delay ?? 150);
+    if (options?.request_delay) {
+      this.queue = new DelayQueue<Response>(options?.request_delay);
+    } else {
+      this.queue = new ConcurrentPool<Response>(
+        options?.concurrent_request ?? 7,
+        options?.concurrent_timeframe ?? 1000,
+      );
+    }
   }
 
   get token(): OAuth | undefined {
@@ -34,11 +42,13 @@ export class RestClient {
   }
 
   private async authorization(value: OAuthCode | OAuthRefresh): Promise<void> {
-    const res = await this.queue.push(fetch, `${this.url_base}/oauth2/access_token`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(value),
-    });
+    const res = await this.queue.push(() =>
+      fetch(`${this.url_base}/oauth2/access_token`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(value),
+      })
+    );
     if (res.ok === false) {
       throw new AuthError(res.body ? await res.json() : "Empty");
     }
@@ -80,15 +90,17 @@ export class RestClient {
       await this.checkToken();
       const target = `${init.url_base ?? this.url_base}${init?.url}${init.query ? "?" + init.query : ""}`;
 
-      const res = await this.queue.push(fetch, target, {
-        method: method,
-        headers: {
-          "Authorization": `${this._token?.token_type} ${this._token?.access_token}`,
-          "Content-Type": "application/json",
-          ...init.headers,
-        },
-        body: init.payload ? JSON.stringify(init.payload) : undefined,
-      });
+      const res = await this.queue.push(() =>
+        fetch(target, {
+          method: method,
+          headers: {
+            "Authorization": `${this._token?.token_type} ${this._token?.access_token}`,
+            "Content-Type": "application/json",
+            ...init.headers,
+          },
+          body: init.payload ? JSON.stringify(init.payload) : undefined,
+        })
+      );
 
       await this.checkError(res, method);
       return res.body ? (await res.json()) as T : null as T;

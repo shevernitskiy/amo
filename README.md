@@ -128,8 +128,21 @@ const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
 
 ### Options
 
-- `request_delay: number` (ms) - amo backend limits you to _7 reqs/sec_, so the client manages with it by performing
-  requests sequentially with delay (_150ms_ by default). You could set your own delay number (or zero, if you want).
+#### Request queue
+
+Amo backend limits you to _7 reqs/sec_, so the client can manage with it by performing requests concurrently or
+sequently with delay. By default, lib performs requests concurrently (_7reqs/1000ms_ by default). To setup you own
+concurrency params use:
+
+- `concurrent_request: number` - size of concurrent pool
+- `concurrent_timeframe: number` - timeframe for concurrent pool (ms)
+
+If you want to use sequential requests, set `request_delay` option param:
+
+- `request_delay: number` (ms) - you can set it to zero, if you want to perform requests as it is
+
+#### Callbacks
+
 - `on_token?: (new_token: OAuth) => void | Promise<void>` - callback, that will be called on _new token_ event (during
   receiving from a code or refreshing). Lib manages the auth/token stuff for you, but it is strongly recommended to
   store the new token persistently somewhere you want (fs, db) to provide it on the next app start.
