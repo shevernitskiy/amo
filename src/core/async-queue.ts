@@ -61,7 +61,7 @@ export class ConcurrentPool<T> implements AsyncQueue<T> {
       return;
     }
 
-    if (this.concurrent <= this.size) {
+    if (this.concurrent < this.size) {
       const promise = this.stack.shift();
       promise?.resolve(promise.fn());
 
