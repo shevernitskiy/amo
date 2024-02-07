@@ -22,3 +22,26 @@ export type RequestUpdateChatTemplate = DeepPartial<ChatTemplate> & RequestId;
 export type ResponseUpdateChatTemplates = ResponseAddChatTemplates;
 export type ResponseUpdateChatTemplate = Links & ChatTemplate & RequestId;
 export type RequestDeleteChatTemplate = Pick<ChatTemplate, "id">;
+
+export type ResponseModerationWhatsAppTemplate = {
+  _embedded: {
+    reviews: {
+      id: number;
+      source_id: number;
+      status: string;
+      reject_reason: string;
+    };
+  };
+};
+
+export type RequestUpdateStatusWhatsAppTemplate = {
+  status: "approved" | "rejected" | "paused";
+  reject_reason: string;
+};
+
+export type ResponseUpdateStatusWhatsAppTemplate = {
+  id: number;
+  source_id: number;
+  status: string;
+  reject_reason: string;
+};

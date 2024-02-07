@@ -1,17 +1,21 @@
-import type { JSONValue } from "../../typings/utility.ts";
 import type {
   RequestAddChatTemplate,
   RequestDeleteChatTemplate,
   RequestUpdateChatTemplate,
+  RequestUpdateStatusWhatsAppTemplate,
   ResponseAddChatTemplates,
   ResponseGetChatTemplateById,
   ResponseGetChatTemplates,
+  ResponseModerationWhatsAppTemplate,
   ResponseUpdateChatTemplate,
   ResponseUpdateChatTemplates,
+  ResponseUpdateStatusWhatsAppTemplate,
 } from "./types.ts";
 import { Endpoint } from "../../core/endpoint.ts";
 import { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
+
+import type { JSONValue } from "../../typings/utility.ts";
 
 export class ChatTemplateApi extends Endpoint {
   /** Метод позволяет получить список шаблонов в аккаунте. */
@@ -69,6 +73,25 @@ export class ChatTemplateApi extends Endpoint {
   deleteChatTemplateById(id: number): Promise<void> {
     return this.rest.delete<void>({
       url: `/api/v4/chats/templates/${id}`,
+    });
+  }
+
+  /** Метод позволяет отправлять шаблон WhatsApp на модерацию. */
+  sendWhatsAppTemplateToModeration(id: number): Promise<ResponseModerationWhatsAppTemplate> {
+    return this.rest.post<ResponseModerationWhatsAppTemplate>({
+      url: `/api/v4/chats/templates/${id}/review`,
+    });
+  }
+
+  /** Метод позволяет редактировать шаблоны по ID. */
+  updateWhatsAppTemplateById(
+    id: number,
+    review_id: number,
+    review: RequestUpdateStatusWhatsAppTemplate,
+  ): Promise<ResponseUpdateStatusWhatsAppTemplate> {
+    return this.rest.patch<ResponseUpdateStatusWhatsAppTemplate>({
+      url: `/api/v4/chats/templates/${id}/review/${review_id}`,
+      payload: review as JSONValue,
     });
   }
 }

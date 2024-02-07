@@ -1,5 +1,5 @@
-import type { Source } from "../../typings/entities.ts";
-import type { DeepPartial, Links, Total } from "../../typings/utility.ts";
+import type { CRMPlugin, Source } from "../../typings/entities.ts";
+import type { DeepPartial, Links, Page, Total } from "../../typings/utility.ts";
 
 export type ResponseGetSources = Total & Links & {
   _embedded: {
@@ -24,3 +24,28 @@ export type RequestUpdateSourceById = DeepPartial<
 
 export type ResponseUpdateSourceById = ResponseGetSourceById;
 export type RequestDeleteSource = Pick<Source, "id">[];
+
+export type RequestCreateCRMPlugin = {
+  pipeline_id: number;
+  trusted_websites?: string[];
+  is_used_in_app?: boolean;
+};
+
+export type ResponseCreateCRMPlugin = {
+  source_id: number;
+  trusted_websites: string[];
+};
+
+export type RequestUpdateCRMPlugin = {
+  trusted_websites: {
+    add: string[];
+  };
+};
+
+export type ResponseUpdateCRMPlugin = CRMPlugin;
+export type ResponseGetCRMPlugin = CRMPlugin;
+export type ResponseGetCRMPlugins = Page & Links & {
+  _embedded: {
+    website_buttons: CRMPlugin[];
+  };
+};
