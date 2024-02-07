@@ -30,7 +30,7 @@ export type ResponseModerationWhatsAppTemplate = {
       source_id: number;
       status: string;
       reject_reason: string;
-    };
+    }[];
   };
 };
 
