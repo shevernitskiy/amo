@@ -42,10 +42,7 @@ export class ConcurrentPool<T> implements AsyncQueue<T> {
   private start_time = 0;
   private concurrent = 0;
 
-  constructor(private size: number, private timeframe: number) {
-    if (size <= 0) throw new Error("Invalid concurrent pool size");
-    if (timeframe <= 0) throw new Error("Invalid concurrent pool timeframe");
-  }
+  constructor(private size: number, private timeframe: number) {}
 
   push(fn: () => Promise<T>): Promise<T> {
     const promise = new Promise<T>((resolve, reject) => this.stack.push({ resolve: resolve, reject: reject, fn: fn }));
@@ -61,7 +58,14 @@ export class ConcurrentPool<T> implements AsyncQueue<T> {
       return;
     }
 
+    const delta = Date.now() - this.start_time;
+
     if (this.concurrent < this.size) {
+      if (delta > this.timeframe) {
+        this.start_time = 0;
+        this.concurrent = 0;
+      }
+
       const promise = this.stack.shift();
       promise?.resolve(promise.fn());
 
@@ -74,7 +78,7 @@ export class ConcurrentPool<T> implements AsyncQueue<T> {
         this.start_time = 0;
         this.concurrent = 0;
         this.resolve();
-      }, this.timeframe + Date.now() - this.start_time);
+      }, this.timeframe - delta);
     }
   }
 }
