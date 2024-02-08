@@ -54,7 +54,7 @@ export type Embedded = {
   tags?: Partial<Tag>[];
   catalog_elements?: {
     id: number;
-    metedata: {
+    metadata: {
       quantity: number;
       catalog_id: number;
       price_id: number;
