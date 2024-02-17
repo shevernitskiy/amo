@@ -47,32 +47,58 @@ import { FileApi } from "./api/file/client.ts";
 export class Amo extends EventEmitter<WebhookEventMap> {
   private rest: RestClient;
 
-  private _account: AccountApi;
-  private _lead: LeadApi;
-  private _unsorted: UnsortedApi;
-  private _pipeline: PipelineApi;
-  private _contact: ContactApi;
-  private _company: CompanyApi;
-  private _catalog: CatalogApi;
-  private _product: ProductApi;
-  private _link: LinkApi;
-  private _task: TaskApi;
-  private _custom_fields: CustomFieldsApi;
-  private _tag: TagApi;
-  private _event: EventApi;
-  private _note: NoteApi;
-  private _customer: CustomerApi;
-  private _status: StatusApi;
-  private _segment: SegmentApi;
-  private _user: UserApi;
-  private _webhook: WebhookApi;
-  private _widget: WidgetApi;
-  private _call: CallApi;
-  private _talk: TalkApi;
-  private _source: SourceApi;
-  private _short_link: ShortLinkApi;
-  private _chat_template: ChatTemplateApi;
-  private _salesbot: SalesBotApi;
+  /** Свойства акканта */
+  readonly account: AccountApi;
+  /** API сделок (получение, создание, редактирование) */
+  readonly lead: LeadApi;
+  /** API неразобранного (получение, создание, принятие, отклонение, привязка) */
+  readonly unsorted: UnsortedApi;
+  /** API воронок (получение, создание, изменение, удаление). API этапов воронок (получение, создание, изменение, удаление). */
+  readonly pipeline: PipelineApi;
+  /** API контактов (получение, создание, редактирование) */
+  readonly contact: ContactApi;
+  /** API компаний (получение, создание, редактирование) */
+  readonly company: CompanyApi;
+  /** API списков (получение, создание, редактирование). API элементов списков (получение, создание, редактирование). */
+  readonly catalog: CatalogApi;
+  /** API списков в контексте списка товаров */
+  readonly product: ProductApi;
+  /** API связей (получение, привязка, отвязка). Метод работает со связями контактов, компаний, сделок и покупателей. */
+  readonly link: LinkApi;
+  /** API задач (получение, создание, редактирование, выполнение) */
+  readonly task: TaskApi;
+  /** API полей (получение, создание, редактирование, удаление). API групп полей (получение, создание, редактирование, удаление). Доступные типы полей. */
+  readonly custom_fields: CustomFieldsApi;
+  /** API тегов (получение, создание). */
+  readonly tag: TagApi;
+  /** API событий (получение). */
+  readonly event: EventApi;
+  /** API примечаний (создание, редактирование) */
+  readonly note: NoteApi;
+  /** API покупателей (получение, создание, редактирование). API транзакций (получение, добавление, удаление). */
+  readonly customer: CustomerApi;
+  /** API статусов покупателей (получение, создание, редактирование, удаление). */
+  readonly status: StatusApi;
+  /** API сегментов покупателей (получение, создание, редактирование, удаление) */
+  readonly segment: SegmentApi;
+  /** API пользователей (получение, добавление в аккаунт). API ролей (получение, создание, редактирование, удаление). */
+  readonly user: UserApi;
+  /** API вебхуков (список, подпись, отписка) */
+  readonly webhook: WebhookApi;
+  /** API виджетов (список, установка, отключение) */
+  readonly widget: WidgetApi;
+  /** API добавления звонков */
+  readonly call: CallApi;
+  /** API бесед (получение, закрытие) */
+  readonly talk: TalkApi;
+  /** API источников (получение, создание, редактирование, удаление) */
+  readonly source: SourceApi;
+  /** API коротких ссылок (создание) */
+  readonly short_link: ShortLinkApi;
+  /** API шаблонов чатов (получение, создание, редактирование, удаление) */
+  readonly chat_template: ChatTemplateApi;
+  /** Salesbot Api */
+  readonly salesbot: SalesBotApi;
   private _file?: FileApi;
 
   constructor(
@@ -83,32 +109,32 @@ export class Amo extends EventEmitter<WebhookEventMap> {
     super();
     this.rest = new RestClient(base_url, auth, options);
 
-    this._account = new AccountApi(this.rest);
-    this._lead = new LeadApi(this.rest);
-    this._unsorted = new UnsortedApi(this.rest);
-    this._pipeline = new PipelineApi(this.rest);
-    this._contact = new ContactApi(this.rest);
-    this._company = new CompanyApi(this.rest);
-    this._catalog = new CatalogApi(this.rest);
-    this._product = new ProductApi(this.rest);
-    this._link = new LinkApi(this.rest);
-    this._task = new TaskApi(this.rest);
-    this._custom_fields = new CustomFieldsApi(this.rest);
-    this._tag = new TagApi(this.rest);
-    this._event = new EventApi(this.rest);
-    this._note = new NoteApi(this.rest);
-    this._customer = new CustomerApi(this.rest);
-    this._status = new StatusApi(this.rest);
-    this._segment = new SegmentApi(this.rest);
-    this._user = new UserApi(this.rest);
-    this._webhook = new WebhookApi(this.rest);
-    this._widget = new WidgetApi(this.rest);
-    this._call = new CallApi(this.rest);
-    this._talk = new TalkApi(this.rest);
-    this._source = new SourceApi(this.rest);
-    this._short_link = new ShortLinkApi(this.rest);
-    this._chat_template = new ChatTemplateApi(this.rest);
-    this._salesbot = new SalesBotApi(this.rest);
+    this.account = new AccountApi(this.rest);
+    this.lead = new LeadApi(this.rest);
+    this.unsorted = new UnsortedApi(this.rest);
+    this.pipeline = new PipelineApi(this.rest);
+    this.contact = new ContactApi(this.rest);
+    this.company = new CompanyApi(this.rest);
+    this.catalog = new CatalogApi(this.rest);
+    this.product = new ProductApi(this.rest);
+    this.link = new LinkApi(this.rest);
+    this.task = new TaskApi(this.rest);
+    this.custom_fields = new CustomFieldsApi(this.rest);
+    this.tag = new TagApi(this.rest);
+    this.event = new EventApi(this.rest);
+    this.note = new NoteApi(this.rest);
+    this.customer = new CustomerApi(this.rest);
+    this.status = new StatusApi(this.rest);
+    this.segment = new SegmentApi(this.rest);
+    this.user = new UserApi(this.rest);
+    this.webhook = new WebhookApi(this.rest);
+    this.widget = new WidgetApi(this.rest);
+    this.call = new CallApi(this.rest);
+    this.talk = new TalkApi(this.rest);
+    this.source = new SourceApi(this.rest);
+    this.short_link = new ShortLinkApi(this.rest);
+    this.chat_template = new ChatTemplateApi(this.rest);
+    this.salesbot = new SalesBotApi(this.rest);
   }
 
   /** Текущий токен приложения */
@@ -121,110 +147,6 @@ export class Amo extends EventEmitter<WebhookEventMap> {
     return this.rest;
   }
 
-  /** Свойства акканта */
-  get account(): AccountApi {
-    return this._account;
-  }
-  /** API сделок (получение, создание, редактирование) */
-  get lead(): LeadApi {
-    return this._lead;
-  }
-  /** API неразобранного (получение, создание, принятие, отклонение, привязка) */
-  get unsorted(): UnsortedApi {
-    return this._unsorted;
-  }
-  /** API воронок (получение, создание, изменение, удаление). API этапов воронок (получение, создание, изменение, удаление). */
-  get pipeline(): PipelineApi {
-    return this._pipeline;
-  }
-  /** API контактов (получение, создание, редактирование) */
-  get contact(): ContactApi {
-    return this._contact;
-  }
-  /** API компаний (получение, создание, редактирование) */
-  get company(): CompanyApi {
-    return this._company;
-  }
-  /** API списков (получение, создание, редактирование). API элементов списков (получение, создание, редактирование). */
-  get catalog(): CatalogApi {
-    return this._catalog;
-  }
-  /** API списков в контексте списка товаров */
-  get product(): ProductApi {
-    return this._product;
-  }
-  /** API связей (получение, привязка, отвязка). Метод работает со связями контактов, компаний, сделок и покупателей. */
-  get link(): LinkApi {
-    return this._link;
-  }
-  /** API задач (получение, создание, редактирование, выполнение) */
-  get task(): TaskApi {
-    return this._task;
-  }
-  /** API полей (получение, создание, редактирование, удаление). API групп полей (получение, создание, редактирование, удаление). Доступные типы полей. */
-  get custom_fields(): CustomFieldsApi {
-    return this._custom_fields;
-  }
-  /** API тегов (получение, создание). */
-  get tag(): TagApi {
-    return this._tag;
-  }
-  /** API событий (получение). */
-  get event(): EventApi {
-    return this._event;
-  }
-  /** API примечаний (создание, редактирование) */
-  get note(): NoteApi {
-    return this._note;
-  }
-  /** API покупателей (получение, создание, редактирование). API транзакций (получение, добавление, удаление). */
-  get customer(): CustomerApi {
-    return this._customer;
-  }
-  /** API статусов покупателей (получение, создание, редактирование, удаление). */
-  get status(): StatusApi {
-    return this._status;
-  }
-  /** API сегментов покупателей (получение, создание, редактирование, удаление) */
-  get segment(): SegmentApi {
-    return this._segment;
-  }
-  /** API пользователей (получение, добавление в аккаунт). API ролей (получение, создание, редактирование, удаление). */
-  get user(): UserApi {
-    return this._user;
-  }
-  /** API вебхуков (список, подпись, отписка) */
-  get webhook(): WebhookApi {
-    return this._webhook;
-  }
-  /** API виджетов (список, установка, отключение) */
-  get widget(): WidgetApi {
-    return this._widget;
-  }
-  /** API добавления звонков */
-  get call(): CallApi {
-    return this._call;
-  }
-  /** API бесед (получение, закрытие) */
-  get talk(): TalkApi {
-    return this._talk;
-  }
-  /** API источников (получение, создание, редактирование, удаление) */
-  get source(): SourceApi {
-    return this._source;
-  }
-  /** API коротких ссылок (создание) */
-  get short_link(): ShortLinkApi {
-    return this._short_link;
-  }
-  /** API шаблонов чатов (получение, создание, редактирование, удаление) */
-  get chat_template(): ChatTemplateApi {
-    return this._chat_template;
-  }
-  /** Salesbot Api */
-  get salesbot(): SalesBotApi {
-    return this._salesbot;
-  }
   /** Через методы API файлов интеграция может загружать файлы, удалять их, создавать версии файлов, связывать файлы с сущностями. */
   file(drive_url: string): FileApi {
     if (this._file === undefined) {
