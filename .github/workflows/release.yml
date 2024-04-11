@@ -26,15 +26,15 @@ jobs:
       - name: Bump project verison
         run: deno task version ${{ inputs.version }}
 
-      - name: Publish to JSR
-        run: deno publish
-
       - name: Commit changes
         uses: EndBug/add-and-commit@v9.1.4
         with:
           author_name: github-actions[bot]
           author_email: 41898282+github-actions[bot]@users.noreply.github.com
           message: "bump version"
+
+      - name: Publish to JSR
+        run: deno publish
 
       - name: Build npm package
         run: deno task npm ${{ inputs.version }}
