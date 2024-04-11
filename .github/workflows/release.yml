@@ -4,22 +4,40 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version'
+        description: "Release version"
         required: true
         type: string
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # The OIDC ID token is used for authentication with JSR.
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: denoland/setup-deno@main
+      - name: Setup Deno
+        uses: denoland/setup-deno@main
         with:
           deno-version: v1.x
 
-      - run: deno task npm ${{ inputs.version }}
+      - name: Bump project verison
+        run: deno task version ${{ inputs.version }}
+
+      - name: Publish to JSR
+        run: deno publish
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9.1.4
+        with:
+          author_name: github-actions[bot]
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: "bump version"
+
+      - name: Build npm package
+        run: deno task npm ${{ inputs.version }}
 
       - name: Publish to npm
         run: |

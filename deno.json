@@ -1,9 +1,13 @@
 {
+  "name": "@shevernitskiy/amo",
+  "version": "0.2.4",
+  "exports": "./mod.ts",
   "lock": false,
   "tasks": {
     "start": "deno run -A run.ts",
     "dev": "deno run -A --watch run.ts",
     "npm": "deno run -A ./scripts/build-npm.ts",
+    "version": "deno run -A ./scripts/project-version.ts",
     "test": "deno test -A --unstable ./tests"
   },
   "fmt": {
