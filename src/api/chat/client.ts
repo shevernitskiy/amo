@@ -1,6 +1,6 @@
 import { createHash, createHmac } from "node:crypto";
 import { Endpoint } from "../../core/endpoint.ts";
-import { JSONValue } from "../../typings/utility.ts";
+import type { JSONValue } from "../../typings/utility.ts";
 
 export class ChatApi extends Endpoint {
   headers(

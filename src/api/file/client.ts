@@ -19,7 +19,7 @@ import type {
 import type { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 import { Endpoint } from "../../core/endpoint.ts";
-import { RestClient } from "../../core/rest-client.ts";
+import type { RestClient } from "../../core/rest-client.ts";
 
 export class FileApi extends Endpoint {
   constructor(rest: RestClient, private drive_url: string) {

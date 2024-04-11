@@ -1,5 +1,5 @@
-import { AccountInfo } from "../../typings/entities.ts";
-import { Links } from "../../typings/utility.ts";
+import type { AccountInfo } from "../../typings/entities.ts";
+import type { Links } from "../../typings/utility.ts";
 
 export type ResponseGetAccountInfo = AccountInfo & Links & {
   _embedded: {

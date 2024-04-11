@@ -13,7 +13,7 @@ import type {
 } from "./types.ts";
 import { Endpoint } from "../../core/endpoint.ts";
 import { query } from "../../helpers/query.ts";
-import { FilterLike } from "../../helpers/filter.ts";
+import type { FilterLike } from "../../helpers/filter.ts";
 
 export class LeadApi extends Endpoint {
   /** Метод позволяет получить список сделок в аккаунте. */

@@ -13,7 +13,7 @@ import type {
   Unsorted,
 } from "./typings/entities.ts";
 import { EventEmitter } from "./core/event-emitter.ts";
-import { parseIncomingWebhook, WebhookEventMap } from "./helpers/webhook.ts";
+import { parseIncomingWebhook, type WebhookEventMap } from "./helpers/webhook.ts";
 import { WebhookError } from "./errors/webhook.ts";
 import { RestClient } from "./core/rest-client.ts";
 import { LeadApi } from "./api/lead/client.ts";

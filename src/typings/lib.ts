@@ -1,11 +1,11 @@
-import { OAuth } from "./auth.ts";
-import { ApiError } from "../errors/api.ts";
-import { AuthError } from "../errors/auth.ts";
-import { HttpError } from "../errors/http.ts";
-import { NoContentError } from "../errors/no-content.ts";
-import { WebhookError } from "../errors/webhook.ts";
+import type { OAuth } from "./auth.ts";
+import type { ApiError } from "../errors/api.ts";
+import type { AuthError } from "../errors/auth.ts";
+import type { HttpError } from "../errors/http.ts";
+import type { NoContentError } from "../errors/no-content.ts";
+import type { WebhookError } from "../errors/webhook.ts";
 
-import { JSONValue } from "./utility.ts";
+import type { JSONValue } from "./utility.ts";
 
 export type Options = {
   request_delay?: number;

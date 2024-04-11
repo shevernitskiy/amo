@@ -1,6 +1,6 @@
 import type { RequestAddWebhook, RequestDeleteWebhook, ResponseAddWebhook, ResponseGetWebhooks } from "./types.ts";
 import { Endpoint } from "../../core/endpoint.ts";
-import { FilterLike } from "../../helpers/filter.ts";
+import type { FilterLike } from "../../helpers/filter.ts";
 import { query } from "../../helpers/query.ts";
 
 export class WebhookApi extends Endpoint {
