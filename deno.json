@@ -1,6 +1,6 @@
 {
   "name": "@shevernitskiy/amo",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "exports": "./mod.ts",
   "lock": false,
   "tasks": {
@@ -14,6 +14,11 @@
     "lineWidth": 120
   },
   "lint": {
-    "exclude": ["./npm/", "./examples/", "./run.ts", "./type-check.ts"]
+    "exclude": [
+      "./npm/",
+      "./examples/",
+      "./run.ts",
+      "./type-check.ts"
+    ]
   }
 }
