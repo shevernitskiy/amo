@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@shevernitskiy/amo?logo=npm&style=flat&labelColor=000)](https://www.npmjs.com/package/@shevernitskiy/amo)
 [![deno module](https://shield.deno.dev/x/amo)](https://deno.land/x/amo/mod.ts)
-[![jsr](https://img.shields.io/jsr/v/@shevernitskiy/amo?logo=jsr&style=flat&labelColor=000)](https://jsr.io/@shevernitskiy/amo)
+[![JSR](https://jsr.io/badges/@shevernitskiy/amo)](https://jsr.io/@shevernitskiy/amo)
 ![dependencies](https://img.shields.io/badge/dependencies-0-green?style=flat&labelColor=000)
 [![license](https://img.shields.io/github/license/shevernitskiy/amo?style=flat&labelColor=000)](https://github.com/shevernitskiy/amo/blob/main/LICENSE)
 
