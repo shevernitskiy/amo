@@ -427,7 +427,7 @@ export type CustomFieldsValue = Partial<{
     /** ID значения */
     enum_id: number;
     /** Значение */
-    value: string;
+    value: string | number | boolean;
     /** Сортировка значения */
     sort: number;
     /** Символьный код значения */
