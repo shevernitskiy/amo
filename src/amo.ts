@@ -1,4 +1,4 @@
-import type { Options } from "./typings/lib.ts";
+import type { ChatOptions, Options } from "./typings/lib.ts";
 import type { OAuth, OAuthCode, OAuthRefresh } from "./typings/auth.ts";
 import type {
   Catalog,
@@ -43,9 +43,12 @@ import { ShortLinkApi } from "./api/short-link/client.ts";
 import { ChatTemplateApi } from "./api/chat-template/client.ts";
 import { SalesBotApi } from "./api/salesbot/client.ts";
 import { FileApi } from "./api/file/client.ts";
+import { ChatApi } from "./api/chat/client.ts";
+import { ChatsRestClient } from "./core/chats/chats-rest-client.ts";
 
 export class Amo extends EventEmitter<WebhookEventMap> {
   private rest: RestClient;
+  private chat_rest?: ChatsRestClient;
 
   /** Свойства акканта */
   readonly account: AccountApi;
@@ -100,15 +103,21 @@ export class Amo extends EventEmitter<WebhookEventMap> {
   /** Salesbot Api */
   readonly salesbot: SalesBotApi;
   private _file?: FileApi;
+  private _chat?: ChatApi;
 
   constructor(
     base_url: string,
     auth: OAuthCode | (OAuth & Pick<OAuthRefresh, "client_id" | "client_secret" | "redirect_uri">),
     options?: Options,
+    private chat_options?: ChatOptions,
   ) {
     super();
     this.rest = new RestClient(base_url, auth, options);
 
+    if(chat_options) {
+      this.chat_rest = new ChatsRestClient(chat_options?.amojo_base_url, chat_options?.amojo_secret, options);
+    }
+  
     this.account = new AccountApi(this.rest);
     this.lead = new LeadApi(this.rest);
     this.unsorted = new UnsortedApi(this.rest);
@@ -153,6 +162,17 @@ export class Amo extends EventEmitter<WebhookEventMap> {
       this._file = new FileApi(this.rest, drive_url);
     }
     return this._file;
+  }
+
+  chat(): ChatApi {
+    if(this.chat_options === undefined || this.chat_rest === undefined) {
+      throw new Error("API чатов не инициализировано используя chat_options");
+    }
+
+    if (this._chat === undefined) {
+      this._chat = new ChatApi(this.chat_rest!, this.chat_options!.amojo_account_id, this.chat_options!.amojo_id, this.chat_options!.amojo_bot_id, this.chat_options!.amojo_channel_title);
+    }
+    return this._chat;
   }
 
   webhookHandler(): (request: Request) => Promise<Response> {
