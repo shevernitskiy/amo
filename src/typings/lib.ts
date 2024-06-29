@@ -24,3 +24,12 @@ export type RequestInit = {
   payload?: JSONValue;
   headers?: Record<string, string | number | boolean>;
 };
+
+export type ChatOptions = {
+  amojo_base_url: string;
+  amojo_account_id: string;
+  amojo_id: string;
+  amojo_secret: string;
+  amojo_bot_id: string;
+  amojo_channel_title: string;
+}
