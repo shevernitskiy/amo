@@ -41,7 +41,7 @@ export type RequestAddLead =
       companies?: Partial<Company>[];
       metadata?: Partial<UnsrotedMetadataForm> | Partial<UnsrotedMetadataSip>;
       source?: {
-        external_id?: number;
+        external_id?: string;
         type?: string;
       };
     };
@@ -118,7 +118,7 @@ export type RequestAddComplex =
       companies?: Partial<Company>[];
       metadata?: Partial<UnsrotedMetadataForm> | Partial<UnsrotedMetadataSip>;
       source?: {
-        external_id?: number;
+        external_id?: string;
         type?: string;
       };
     };
