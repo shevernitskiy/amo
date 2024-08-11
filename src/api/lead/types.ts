@@ -29,6 +29,7 @@ export type RequestAddLead =
       | "loss_reason_id"
       | "responsible_user_id"
       | "custom_fields_values"
+      | "tags_to_add"
     >
   >
   & {
@@ -68,6 +69,8 @@ export type RequestUpdateLead =
       | "loss_reason_id"
       | "responsible_user_id"
       | "custom_fields_values"
+      | "tags_to_add"
+      | "tags_to_delete"
     >
   >
   & {
@@ -106,6 +109,8 @@ export type RequestAddComplex =
       | "loss_reason_id"
       | "responsible_user_id"
       | "custom_fields_values"
+      | "tags_to_add"
+      | "tags_to_delete"
     >
   >
   & {
