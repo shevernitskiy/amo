@@ -49,7 +49,7 @@ export type ResponseAddCatalogElements = Links & {
 
 export type ResponseAddCatalogElement = ResponseGetCatalogElement;
 
-export type RequestUpdateCatalogElement = RequestAddCatalogElement;
+export type RequestUpdateCatalogElement = RequestAddCatalogElement & { id: number };
 
 export type ResponseUpdateCatalogElements = ResponseAddCatalogElements;
 

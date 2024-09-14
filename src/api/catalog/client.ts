@@ -89,7 +89,7 @@ export class CatalogApi extends Endpoint {
   /** Метод позволяет добавлять списки в аккаунт пакетно. */
   addCatalogElements(catalog_id: number, catalogs: RequestAddCatalogElement[]): Promise<ResponseAddCatalogElements> {
     return this.rest.post<ResponseAddCatalogElements>({
-      url: `/api/v4/catalogs/${catalog_id}`,
+      url: `/api/v4/catalogs/${catalog_id}/elements`,
       payload: catalogs as JSONValue,
     });
   }
