@@ -22,7 +22,7 @@ export type ResponseAddNotes = Links & {
   };
 };
 
-export type RequestUpdateNote = Pick<Note, "entity_id" | "note_type" | "params">;
+export type RequestUpdateNote = Pick<Note, "id" | "entity_id" | "note_type" | "params">;
 export type ResponseUpdateNotes = Links & {
   _ebmedded: {
     notes: RequestUpdateNoteById[];
