@@ -17,7 +17,7 @@ export class StatusApi extends Endpoint {
   }
 
   /** Метод позволяет получить модель статуса покупателя в аккаунте по ID статуса. */
-  getStatuseById(id: number): Promise<ResponseGetStatusById> {
+  getStatusById(id: number): Promise<ResponseGetStatusById> {
     return this.rest.get<ResponseGetStatusById>({
       url: `/api/v4/customers/statuses/${id}`,
     });
