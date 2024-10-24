@@ -29,5 +29,5 @@ export type ResponseUpdateNotes = Links & {
   };
 };
 
-export type RequestUpdateNoteById = Links & Pick<Note, "entity_id" | "note_type" | "params">;
+export type RequestUpdateNoteById = Pick<Note, "entity_id" | "note_type" | "params">;
 export type ResponseUpdateNoteById = ResponseUpdateNotes;
