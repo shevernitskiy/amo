@@ -17,14 +17,14 @@ export type RequestAddNote =
   };
 
 export type ResponseAddNotes = Links & {
-  _ebmedded: {
+  _embedded: {
     notes: (Links & Pick<Note, "id" | "entity_id"> & RequestId)[];
   };
 };
 
 export type RequestUpdateNote = Pick<Note, "id" | "entity_id" | "note_type" | "params">;
 export type ResponseUpdateNotes = Links & {
-  _ebmedded: {
+  _embedded: {
     notes: RequestUpdateNoteById[];
   };
 };
