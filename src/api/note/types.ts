@@ -25,7 +25,7 @@ export type ResponseAddNotes = Links & {
 export type RequestUpdateNote = Pick<Note, "id" | "entity_id" | "note_type" | "params">;
 export type ResponseUpdateNotes = Links & {
   _embedded: {
-    notes: RequestUpdateNoteById[];
+    notes: (Links & Pick<Note, "id" | "entity_id" | "updated_at">)[];
   };
 };
 
