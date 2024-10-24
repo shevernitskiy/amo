@@ -17,17 +17,17 @@ export type RequestAddNote =
   };
 
 export type ResponseAddNotes = Links & {
-  _ebmedded: {
+  _embedded: {
     notes: (Links & Pick<Note, "id" | "entity_id"> & RequestId)[];
   };
 };
 
 export type RequestUpdateNote = Pick<Note, "id" | "entity_id" | "note_type" | "params">;
 export type ResponseUpdateNotes = Links & {
-  _ebmedded: {
-    notes: RequestUpdateNoteById[];
+  _embedded: {
+    notes: (Links & Pick<Note, "id" | "entity_id" | "updated_at">)[];
   };
 };
 
-export type RequestUpdateNoteById = Links & Pick<Note, "id" | "entity_id" | "updated_at">;
+export type RequestUpdateNoteById = Pick<Note, "entity_id" | "note_type" | "params">;
 export type ResponseUpdateNoteById = ResponseUpdateNotes;
