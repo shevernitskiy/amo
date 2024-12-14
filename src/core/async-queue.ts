@@ -8,6 +8,12 @@ interface AsyncQueue<T> {
   push(fn: () => Promise<T>): Promise<T>;
 }
 
+export class BypassQueue<T> implements AsyncQueue<T> {
+  push(fn: () => Promise<T>): Promise<T> {
+    return fn();
+  }
+}
+
 export class DelayQueue<T> implements AsyncQueue<T> {
   private stack: AsyncTask<T>[] = [];
   private in_cycle = false;

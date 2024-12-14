@@ -1,4 +1,4 @@
-import { ConcurrentPool, DelayQueue } from "./async-queue.ts";
+import { BypassQueue, ConcurrentPool, DelayQueue } from "./async-queue.ts";
 import { ApiError } from "../errors/api.ts";
 import { AuthError } from "../errors/auth.ts";
 import { HttpError } from "../errors/http.ts";
@@ -9,7 +9,7 @@ import type { HttpMethod, Options, RequestInit } from "../typings/lib.ts";
 
 export class RestClient {
   private url_base: string;
-  private queue: DelayQueue<Response> | ConcurrentPool<Response>;
+  private queue: DelayQueue<Response> | ConcurrentPool<Response> | BypassQueue<Response>;
   private _token?: OAuth;
 
   constructor(
@@ -27,7 +27,9 @@ export class RestClient {
         expires_at: this.auth.expires_at ?? 0,
       };
     }
-    if (options?.request_delay) {
+    if (options?.request_delay === 0) {
+      this.queue = new BypassQueue<Response>();
+    } else if (options?.request_delay && options.request_delay > 0) {
       this.queue = new DelayQueue<Response>(options?.request_delay);
     } else {
       this.queue = new ConcurrentPool<Response>(
