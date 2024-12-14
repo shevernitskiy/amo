@@ -199,7 +199,7 @@ export class Amo extends EventEmitter<WebhookEventMap> {
 
         return new Response("OK", { status: 200 });
       } catch (err) {
-        throw new WebhookError(err);
+        throw new WebhookError((err as Error).message);
       }
     };
   }

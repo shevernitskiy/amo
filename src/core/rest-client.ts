@@ -106,7 +106,7 @@ export class RestClient {
       return res.body ? (await res.json()) as T : null as T;
     } catch (err) {
       if (this.options?.on_error) {
-        this.options.on_error(err);
+        this.options.on_error(err as Error | AuthError | ApiError | NoContentError | HttpError);
         return null as T;
       } else {
         throw err;

@@ -39,7 +39,7 @@ Deno.test("should return HttpError", async () => {
     assertInstanceOf(err, HttpError);
   }
 
-  await sleep(200);
+  await sleep(1200);
 });
 
 Deno.test("should return NoContentError", async () => {
@@ -53,7 +53,7 @@ Deno.test("should return NoContentError", async () => {
     assertInstanceOf(err, NoContentError);
   }
 
-  await sleep(200);
+  await sleep(1200);
 });
 
 Deno.test("should return ApiError", async () => {
@@ -86,7 +86,7 @@ Deno.test("should return ApiError", async () => {
     });
   }
 
-  await sleep(200);
+  await sleep(1200);
 });
 
 Deno.test("should return WebhookError", async () => {
@@ -101,7 +101,7 @@ Deno.test("should return WebhookError", async () => {
     assertInstanceOf(err, WebhookError);
   }
 
-  await sleep(200);
+  await sleep(1200);
 });
 
 Deno.test("should return AuthError", async () => {
@@ -119,7 +119,7 @@ Deno.test("should return AuthError", async () => {
     assertInstanceOf(err, AuthError);
   }
 
-  await sleep(200);
+  await sleep(1200);
 });
 
 Deno.test("should return AuthError to error handler", async () => {
@@ -134,5 +134,5 @@ Deno.test("should return AuthError to error handler", async () => {
 
   await amo.lead.getLeadById(69);
 
-  await sleep(200);
+  await sleep(1200);
 });
