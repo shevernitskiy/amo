@@ -177,7 +177,8 @@ const amo = new Amo("mydomain.amocrm.ru", {
 ### Auth by existing token
 
 This method is used every time after the first authorization by code. The API does not provide the property
-`expires_at`, but lib returns it in `on_token` callback value.
+`expires_at`, but lib returns it in `on_token` callback value. If you are using longlive dev token, just keep
+`expires_at` blank.
 
 ```ts
 const amo = new Amo("mydomain.amocrm.ru", {
