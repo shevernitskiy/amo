@@ -24,7 +24,7 @@ export class RestClient {
         expires_in: this.auth.expires_in,
         access_token: this.auth.access_token,
         refresh_token: this.auth.refresh_token,
-        expires_at: this.auth.expires_at ?? 0,
+        expires_at: this.auth.expires_at ?? Infinity,
       };
     }
     if (options?.request_delay === 0) {
