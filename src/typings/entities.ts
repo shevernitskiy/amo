@@ -2,6 +2,8 @@
 export type AccountInfo = {
   /** ID аккаунта */
   id: number;
+  /** Уникальный идентификатор аккаунта (UUID) */
+  uuid: string;
   /** Название аккаунта */
   name: string;
   /** Субдомен аккаунта */
@@ -10,6 +12,10 @@ export type AccountInfo = {
   current_user_id: number;
   /** Страна, указанная в настройках аккаунта */
   country: string;
+  /** Часовой пояс аккаунта */
+  timezone: string;
+  /** Смещение часового пояса */
+  timezone_offset: string;
   /** Режим покупателей. Возможные варианты: unavailable (функционал недоступен), disabled (функцонал отключен), segments (сегментация), dynamic (deprecated), periodicity (периодические покупки) */
   customers_mode: string;
   /** Включен ли функционал “Неразобранного” в аккаунте */
@@ -22,14 +28,52 @@ export type AccountInfo = {
   is_technical_account: boolean;
   /** Порядок отображения имен контактов (1 – Имя, Фамилия; 2 – Фамилия, Имя) */
   contact_name_display_order: 1 | 2;
-  /** Требуется GET параметр with. Уникальный идентификатор аккаунта для работы с сервисом чатов amoJo */
+  /**
+   * Уникальный идентификатор аккаунта для работы с сервисом чатов amoJo
+   * @remarks Требуется GET параметр `with=amojo_id`
+   */
   amojo_id: string;
-  /** Требуется GET параметр with. Текущая версия amoCRM */
+  /**
+   * Текущая версия amoCRM
+   * @remarks Требуется GET параметр `with=version`
+   */
   version: number;
-  /** Требуется GET параметр with. Адрес сервиса файлов для конкретного аккаунта */
+  /**
+   * Адрес сервиса файлов для конкретного аккаунта
+   * @remarks Требуется GET параметр `with=drive_url`
+   */
   drive_url: string;
-  /** Требуется GET параметр with. Включена ли API фильтрация для аккаунта */
+  /**
+   * Включена ли API фильтрация для аккаунта
+   * @remarks Требуется GET параметр `with=is_api_filter_enabled`
+   */
   is_api_filter_enabled: boolean;
+  /**
+   * Настройки счетов-покупок
+   * @remarks Требуется GET-параметр `with=invoices_settings`
+   */
+  invoices_settings: {
+    /** Язык счетов-покупок и PayWall */
+    lang: string;
+    /** ID списка счетов-покупок */
+    invoices_catalog_id: number;
+  };
+  /**
+   * Настройки названия сущностей
+   * @remarks Требуется GET-параметр `with=entity_names`
+   */
+  entity_names: any; // TODO: add type
+  /** Форматы даты и времени в аккаунте */
+  datetime_formats: {
+    /** Формат даты (например, d.m.Y) */
+    date: string;
+    /** Формат времени (например, H:i) */
+    time: string;
+    /** Формат даты и времени (например, d.m.Y H:i) */
+    date_time: string;
+    /** Формат времени и даты (например, H:i d.m.Y) */
+    time_date: string;
+  };
   created_at: number;
   created_by: number;
   updated_at: number;
@@ -56,7 +100,10 @@ export type Lead = {
   pipeline_id: number | null;
   /** ID причины отказа */
   loss_reason_id: number | null;
-  /** Требуется GET параметр with. ID источника сделки */
+  /**
+   * ID источника сделки
+   * @remarks Требуется GET параметр `with=source_id`
+   */
   source_id?: number | null;
   /** ID пользователя, создающий сделку */
   created_by: number | null;
@@ -72,6 +119,8 @@ export type Lead = {
   closest_task_at: number | null;
   /** Удалена ли сделка */
   is_deleted: boolean;
+  /** Является ли сделка неразобранной */
+  is_unsorted?: boolean;
   /** Массив, содержащий информацию по значениям дополнительных полей, заданных для данной сделки */
   custom_fields_values: CustomFieldsValue[] | null;
   /** Массив тегов для добавления. */
@@ -94,8 +143,13 @@ export type Lead = {
   account_id: number;
   /** Тип поля "стоимость труда"  показывает сколько времени было затрачено на работу со сделкой. Время исчисления в секундах */
   labor_cost: number | null;
-  /** Требуется GET параметр with. Изменен ли в последний раз бюджет сделки роботом */
+  /**
+   * Изменен ли в последний раз бюджет сделки роботом
+   * @remarks Требуется GET параметр with
+   */
   is_price_modified_by_robot?: boolean;
+  /** Уникальный идентификатор посетителя */
+  visitor_uid: string | null;
 };
 
 export type Unsorted = {
@@ -163,8 +217,10 @@ export type UnsrotedMetadataSip = {
   service_code: string;
   /** Данный флаг не возвращается в API, но может быть передан. В случае передачи значения true, в карточку будет добавлено событие о входящем звонке. */
   is_call_event_needed: boolean;
-  from: string; // why is it only in exmaple not table?!
-  uniq: string; // why is it only in exmaple not table?!
+  /** Номер телефона звонящего (обычно дублирует phone) */
+  from: string;
+  /** Уникальный идентификатор звонка */
+  uniq: string;
 };
 
 export type UnsrotedMetadataForm = {
@@ -236,6 +292,32 @@ export type PipelineStatus = {
   type: 0 | 1;
   /** ID аккаунта, в котором находится воронка */
   account_id: number;
+  /**
+   * Описания статуса
+   * @remarks Требуется GET параметр `with=descriptions`
+   */
+  descriptions?: {
+    /** ID описания статуса */
+    id: number;
+    /** ID аккаунта */
+    account_id: number;
+    /** Время создания статуса в формате YYYY-MM-DD HH:MM:SS */
+    created_at: string;
+    /** Время последнего обновления статуса в формате YYYY-MM-DD HH:MM:SS */
+    updated_at: string;
+    /** ID пользователя создавшего описание, 0 – апи */
+    created_by: number;
+    /** ID пользователя обновившего описание, 0 – апи */
+    updated_by: number;
+    /** ID воронки описания статуса */
+    pipeline_id: number;
+    /** ID статуса описания статуса */
+    status_id: number;
+    /** Уровень пользователей которым показывается описание статуса */
+    level: "newbie" | "candidate" | "master";
+    /** Описание статуса */
+    description: string;
+  }[];
 };
 
 export type Contact = {
@@ -261,12 +343,28 @@ export type Contact = {
   updated_at: number;
   /** Удален ли элемент */
   is_deleted: boolean;
+  /** Является ли контакт неразобранным */
+  is_unsorted?: boolean;
   /** Дата ближайшей задачи к выполнению, передается в Unix Timestamp */
-  closest_task_at: number;
+  closest_task_at: number | null;
   /** Массив, содержащий информацию по значениям дополнительных полей, заданных для данного контакта */
   custom_fields_values: CustomFieldsValue[] | null;
   /** ID аккаунта, в котором находится контакт */
   account_id: number;
+  /** Массив тегов для добавления. */
+  tags_to_add?: {
+    /** ID тега для добавления. Важно передать или id или name. */
+    id?: number;
+    /** Название тега для добавления. Важно передать или id или name. */
+    name?: string;
+  }[];
+  /** Массив тегов для удаления. */
+  tags_to_delete?: {
+    /** ID тега для удаления. Важно передать или id или name. */
+    id?: number;
+    /** Название тега для удаления. Важно передать или id или name. */
+    name?: string;
+  }[];
 };
 
 export type Company = {
@@ -287,13 +385,29 @@ export type Company = {
   /** Дата изменения компании, передается в Unix Timestamp */
   updated_at: number;
   /** Дата ближайшей задачи к выполнению, передается в Unix Timestamp */
-  closest_task_at: number;
+  closest_task_at: number | null;
   /** Массив, содержащий информацию по значениям дополнительных полей, заданных для данной компании */
   custom_fields_values: CustomFieldsValue[] | null;
   /** Удален ли элемент */
   is_deleted: boolean;
+  /** Является ли компания неразобранной */
+  is_unsorted?: boolean;
   /** ID аккаунта, в котором находится компания */
   account_id: number;
+  /** Массив тегов для добавления. */
+  tags_to_add?: {
+    /** ID тега для добавления. Важно передать или id или name. */
+    id?: number;
+    /** Название тега для добавления. Важно передать или id или name. */
+    name?: string;
+  }[];
+  /** Массив тегов для удаления. */
+  tags_to_delete?: {
+    /** ID тега для удаления. Важно передать или id или name. */
+    id?: number;
+    /** Название тега для удаления. Важно передать или id или name. */
+    name?: string;
+  }[];
 };
 
 export type Catalog = {
@@ -383,7 +497,7 @@ export type Task = {
   result: {
     /** Текст результата выполнения задачи */
     text: string;
-  };
+  } | null;
   /** ID аккаунта, в котором находится задача */
   account_id: number;
 };
@@ -424,7 +538,7 @@ export type CustomFieldsValue = Partial<{
   is_computed: boolean;
   /** Является ли поле предустановленным. Данный ключ возвращается только при получении списка полей контактов и компаний */
   is_predefined: boolean;
-  /** Доступно ли поле для удаления. Данный ключ возвращается только при получении списка полей контактов и компаний */
+  /** Доступно ли поле для удаления. Данный ключ возвращается только при получении списка полей */
   is_deletable: boolean;
   /** Отображается ли поле в интерфейсе списка. Данный ключ возвращается только при получении списка полей списков (каталогов) */
   is_visible: boolean;
@@ -817,6 +931,8 @@ export type Note = {
   note_type: keyof NoteParams;
   /** Свойства примечания, зависят от типа примечания. Подробней о свойствах читайте тут */
   params: NoteParams[keyof NoteParams];
+  /** Доступно ли примечание для редактирования */
+  is_editable: boolean;
   /** ID аккаунта, в котором находится примечание */
   account_id: number;
 };
@@ -888,6 +1004,20 @@ export type Customer = {
   average_check: number;
   /** ID аккаунта, в котором находится покупатель */
   account_id: number;
+  /** Массив тегов для добавления. */
+  tags_to_add?: {
+    /** ID тега для добавления. Важно передать или id или name. */
+    id?: number;
+    /** Название тега для добавления. Важно передать или id или name. */
+    name?: string;
+  }[];
+  /** Массив тегов для удаления. */
+  tags_to_delete?: {
+    /** ID тега для удаления. Важно передать или id или name. */
+    id?: number;
+    /** Название тега для удаления. Важно передать или id или name. */
+    name?: string;
+  }[];
 };
 
 export type Transaction = {
@@ -1030,6 +1160,26 @@ export type User = {
   email: string;
   /** Язык пользователя. Один из вариантов: ru, en, es */
   lang: "ru" | "en" | "es";
+  /**
+   * Номер телефона пользователя
+   * @remarks Требуется GET параметр `with=phone_number`
+   */
+  phone_number?: string;
+  /**
+   * UUID пользователя
+   * @remarks Требуется GET параметр `with=uuid`
+   */
+  uuid?: string;
+  /**
+   * Ранг пользователя
+   * @remarks Требуется GET-параметр `with=user_rank`
+   */
+  user_rank?: "newbie" | "candidate" | "master";
+  /**
+   * ID пользователя в сервисе чатов
+   * @remarks Требуется GET-параметр `with=amojo_id`
+   */
+  amojo_id?: string;
   /** Права пользователя */
   rights: {
     /** Объект прав доступа к сделкам */
@@ -1070,10 +1220,15 @@ export type User = {
 
 export type RightsValue = "A" | "G" | "M" | "D";
 export type RightsType = {
+  /** Права на добавление (A - все, G - группа, M - свои, D - запрещено) */
   add: RightsValue;
+  /** Права на редактирование (A - все, G - группа, M - свои, D - запрещено) */
   edit: RightsValue;
+  /** Права на просмотр (A - все, G - группа, M - свои, D - запрещено) */
   view: RightsValue;
+  /** Права на удаление (A - все, G - группа, M - свои, D - запрещено) */
   delete: RightsValue;
+  /** Права на экспорт (A - все, G - группа, M - свои, D - запрещено) */
   export: RightsValue;
 };
 
@@ -1431,6 +1586,8 @@ export type File = {
   version_uuid: string;
   /** Имеет ли файл множество версий */
   has_multiple_versions: boolean;
+  /** Ссылка на файл (доступна если файл публичный) */
+  public_url?: string;
   /** Время создания файла Unix Timestamp */
   created_at: number;
   /** Пользователь создавший файл */
@@ -1461,34 +1618,74 @@ export type File = {
     mime_type: string;
   } | null;
   /** Массив превью для файла */
-  previews: {
-    /** Превью файла */
-    /** URL для загрузки превью */
-    download_link: string;
-    /** Ширина превью */
-    width: number;
-    /** Высота превью */
-    height: number;
-  }[] | null;
+  previews:
+    | {
+      /** URL для загрузки превью */
+      download_link: string;
+      /** Ширина превью */
+      width: number;
+      /** Высота превью */
+      height: number;
+    }[]
+    | null;
 };
 
 export type Message = {
+  /** Уникальный идентификатор сообщения */
   id: string;
+  /** Идентификатор чата */
   chat_id: string;
+  /** Идентификатор беседы */
   talk_id: number;
+  /** Идентификатор контакта */
   contact_id: number;
+  /** Текст сообщения */
   text: string;
+  /** Время создания сообщения (Unix Timestamp) */
   created_at: number;
+  /** Тип элемента (внутренний код) */
   element_type: number;
+  /** Тип сущности, к которой привязано сообщение (lead, contact и т.д.) */
   entity_type: string;
+  /** ID элемента (legacy) */
   element_id: number;
+  /** ID сущности, к которой привязано сообщение */
   entity_id: number;
+  /** Тип сообщения (text, picture, video и т.д.) */
   type: string;
+  /** Информация об авторе сообщения */
   author: {
+    /** ID автора */
     id: string;
+    /** Тип автора */
     type: string;
+    /** Имя автора */
     name: string;
+    /** URL аватара автора */
     avatar_url: string;
   };
+  /** Дополнительные данные (например, для Avito) */
   avito: string;
+};
+
+export type LossReason = {
+  /** ID причины отказа */
+  id: number;
+  /** Название причины отказа */
+  name: string;
+  /** Сортировка */
+  sort: number;
+  /** Дата создания, передается в Unix Timestamp */
+  created_at: number;
+  /** Дата изменения, передается в Unix Timestamp */
+  updated_at: number;
+};
+
+export type EntitySubscriber = {
+  /** ID пользователя-подписчика */
+  id: number;
+  /** Имя пользователя */
+  name: string;
+  /** Email пользователя */
+  email: string;
 };

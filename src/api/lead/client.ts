@@ -19,7 +19,15 @@ export class LeadApi extends Endpoint {
   /** Метод позволяет получить список сделок в аккаунте. */
   getLeads(params?: {
     with?: With<
-      ["catalog_elements", "is_price_modified_by_robot", "loss_reason", "contacts", "only_deleted", "source_id"]
+      [
+        "catalog_elements",
+        "is_price_modified_by_robot",
+        "loss_reason",
+        "contacts",
+        "only_deleted",
+        "source_id",
+        "source",
+      ]
     >;
     page?: number;
     limit?: number;
@@ -42,7 +50,15 @@ export class LeadApi extends Endpoint {
   /** Метод позволяет получить данные конкретной сделки по ID. */
   getLeadById(id: number, params?: {
     with?: With<
-      ["catalog_elements", "is_price_modified_by_robot", "loss_reason", "contacts", "only_deleted", "source_id"]
+      [
+        "catalog_elements",
+        "is_price_modified_by_robot",
+        "loss_reason",
+        "contacts",
+        "only_deleted",
+        "source_id",
+        "source",
+      ]
     >;
   }): Promise<ResponseGetLeadById> {
     return this.rest.get<ResponseGetLeadById>({

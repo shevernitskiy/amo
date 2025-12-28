@@ -16,6 +16,7 @@ export class AccountApi extends Endpoint {
       "datetime_settings",
       "drive_url",
       "is_api_filter_enabled",
+      "invoices_settings",
     ]>;
   }): Promise<ResponseGetAccountInfo> {
     return this.rest.get<ResponseGetAccountInfo>({

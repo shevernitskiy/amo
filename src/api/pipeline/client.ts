@@ -1,4 +1,4 @@
-import type { JSONValue } from "../../typings/utility.ts";
+import type { JSONValue, With } from "../../typings/utility.ts";
 import type {
   RequestAddPipeline,
   RequestAddStatus,
@@ -14,6 +14,7 @@ import type {
   ResponseUpdateStatus,
 } from "./types.ts";
 import { Endpoint } from "../../core/endpoint.ts";
+import { query } from "../../helpers/query.ts";
 
 export class PipelineApi extends Endpoint {
   /** Метод позволяет получить список воронок сделок в аккаунте. */
@@ -54,16 +55,25 @@ export class PipelineApi extends Endpoint {
   }
 
   /** Метод позволяет получить список статусов воронки сделок в аккаунте по ID */
-  getStatusesByPipelineId(pipeline_id: number): Promise<ResponseGetStatusesPipeline> {
+  getStatusesByPipelineId(
+    pipeline_id: number,
+    params?: { with?: With<["descriptions"]> },
+  ): Promise<ResponseGetStatusesPipeline> {
     return this.rest.get<ResponseGetStatusesPipeline>({
       url: `/api/v4/leads/pipelines/${pipeline_id}/statuses`,
+      query: query(params),
     });
   }
 
   /** Метод позволяет получить модель статуса воронки сделок в аккаунте по ID статуса. */
-  getStatusesById(id: number, pipeline_id: number): Promise<ResponseGetStatus> {
+  getStatusesById(
+    id: number,
+    pipeline_id: number,
+    params?: { with?: With<["descriptions"]> },
+  ): Promise<ResponseGetStatus> {
     return this.rest.get<ResponseGetStatus>({
       url: `/api/v4/leads/pipelines/${pipeline_id}/statuses/${id}`,
+      query: query(params),
     });
   }
 

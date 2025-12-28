@@ -3,3 +3,4 @@ run.ts
 type-check.ts
 token.json
 /npm
+.env

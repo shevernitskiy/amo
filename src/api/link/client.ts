@@ -57,7 +57,7 @@ export class LinkApi extends Endpoint {
     });
   }
 
-  /** Метод позволяет прикреплять сущности к основной сущности. */
+  /** Метод позволяет открепить сущности у основной сущности. */
   deleteLinksByEntityId(
     id: number,
     entity_type: "leads" | "contacts" | "companies" | "customers",

@@ -17,7 +17,7 @@ import { query } from "../../helpers/query.ts";
 export class UserApi extends Endpoint {
   /** Метод позволяет получить список состоящих в аккаунте пользователей. */
   getUsers(params?: {
-    with?: With<["role", "group", "uuid", "amojo_id"]>;
+    with?: With<["role", "group", "uuid", "amojo_id", "user_rank", "phone_number"]>;
     page?: number;
     limit?: number;
   }): Promise<ResponseGetUsers> {
@@ -29,7 +29,7 @@ export class UserApi extends Endpoint {
 
   /** Метод позволяет получить данные конкретного пользователя, состоящего в аккаунте, по ID. */
   getUserById(id: number, params?: {
-    with?: With<["role", "group", "uuid", "amojo_id"]>;
+    with?: With<["role", "group", "uuid", "amojo_id", "user_rank", "phone_number"]>;
   }): Promise<ResponseGetUserById> {
     return this.rest.get<ResponseGetUserById>({
       url: `/api/v4/users/${id}`,

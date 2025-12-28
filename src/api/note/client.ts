@@ -87,7 +87,7 @@ export class NoteApi extends Endpoint {
     note: RequestUpdateNoteById,
   ): Promise<ResponseUpdateNoteById> {
     return this.rest.patch<ResponseUpdateNoteById>({
-      url: `/api/v4/${entity_type}/${note.entity_id}/notes/${note_id}`,
+      url: `/api/v4/${entity_type}/notes/${note_id}`,
       payload: note as JSONValue,
     });
   }
