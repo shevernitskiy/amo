@@ -106,7 +106,7 @@ export class FileApi extends Endpoint {
   /** Метод позволяет получить файлы связанные с сущностью. */
   getEntityFiles(
     entity_id: number,
-    entity_type: "leads" | "constact" | "companies" | "customers",
+    entity_type: "leads" | "contacts" | "companies" | "customers",
     params?: {
       limit?: number;
       before_id?: number;
@@ -121,7 +121,7 @@ export class FileApi extends Endpoint {
   /** Метод позволяет привязывать файл к сущности. */
   linkEntityFiles(
     entity_id: number,
-    entity_type: "leads" | "constact" | "companies" | "customers",
+    entity_type: "leads" | "contacts" | "companies" | "customers",
     files: RequestLinkEntityFile[],
   ): Promise<void> {
     return this.rest.put<void>({
@@ -133,7 +133,7 @@ export class FileApi extends Endpoint {
   /** Метод позволяет отвязать файл от сущности. */
   unlinkEntityFiles(
     entity_id: number,
-    entity_type: "leads" | "constact" | "companies" | "customers",
+    entity_type: "leads" | "contacts" | "companies" | "customers",
     files: RequestUnlinkEntityFile[],
   ): Promise<void> {
     return this.rest.delete<void>({

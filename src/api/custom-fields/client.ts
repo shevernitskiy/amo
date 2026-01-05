@@ -200,16 +200,16 @@ export class CustomFieldsApi extends Endpoint {
   ): Promise<ResponseAddCustomFieldGroups>;
   addCustomFieldsGroups(
     entity_type: "leads" | "contacts" | "companies" | "customers" | "customers/segments",
-    custom_fields: RequestAddCustomFieldsGroup[],
+    custom_fields_groups: RequestAddCustomFieldsGroup[],
   ): Promise<ResponseAddCustomFieldGroups>;
   addCustomFieldsGroups(
     entity_type: string,
     custom_fields_groups: RequestAddCustomFieldsGroup[],
     catalog_id?: number,
   ): Promise<ResponseAddCustomFieldGroups> {
-    let url = `/api/v4/${entity_type}/custom_fields`;
+    let url = `/api/v4/${entity_type}/custom_fields/groups`;
     if (entity_type === "catalogs" && catalog_id !== undefined) {
-      url = `/api/v4/${entity_type}/${catalog_id}/custom_fields`;
+      url = `/api/v4/${entity_type}/${catalog_id}/custom_fields/groups`;
     }
     return this.rest.post<ResponseAddCustomFieldGroups>({
       url: url,
