@@ -1,4 +1,4 @@
-# ♿amoCRM API client
+# ♿ amoCRM API client
 
 [![npm](https://img.shields.io/npm/v/@shevernitskiy/amo?logo=npm&style=flat&labelColor=000)](https://www.npmjs.com/package/@shevernitskiy/amo)
 [![deno module](https://shield.deno.dev/x/amo)](https://deno.land/x/amo/mod.ts)
@@ -6,61 +6,67 @@
 ![dependencies](https://img.shields.io/badge/dependencies-0-green?style=flat&labelColor=000)
 [![license](https://img.shields.io/github/license/shevernitskiy/amo?style=flat&labelColor=000)](https://github.com/shevernitskiy/amo/blob/main/LICENSE)
 
-This is a simple wrapper client for the amoCRM REST API. It covers almost all API modules and endpoints. Also, it
-manages to token refreshing and webhook handling.
+A simple wrapper client for the amoCRM REST API. It covers almost all API modules and endpoints, and handles token
+refreshing and webhook processing.
 
-> ⚠️Due to awful API [documentation](https://www.amocrm.ru/developers/content/crm_platform/api-reference) with tons of
-> mistakes, inaccuracies, examples mismatch and wrong types, lib may provide wrong typing (pls consider to make a PR or
-> issue at least).
+> [!NOTE]
+> Due to the poor API [documentation](https://www.amocrm.ru/developers/content/crm_platform/api-reference) with many
+> mistakes, inaccuracies, mismatched examples, and incorrect types, this library may provide incorrect typings. Please
+> consider submitting a PR or creating an issue.
 
 ## Progress
 
-- ### Lib
-  - [x] NPM & Node support
-  - [x] examples (not so much)
-  - [x] maybe some test (webhook atm)
-  - [x] readme (draft)
-- ### API
-  - [x] Account
-  - [x] Leads
-  - [x] Unsorted
-  - [x] Pipelines and Stages
-  - [x] Contacts
-  - [x] Companies
-  - [x] Catalogs
-  - [x] Products
-  - [x] Links
-  - [x] Tasks
-  - [x] Custom Fields
-  - [x] Tags
-  - [x] Events
-  - [x] Notes
-  - [x] Customers
-  - [x] Statuses
-  - [x] Segments
-  - [x] Users
-  - [x] Webhooks
-  - [x] Widgets
-  - [x] Calls
-  - [x] Talks
-  - [x] Sources
-  - [x] Salesbot (api method)
-  - [x] Short Links
-  - [x] Chat Templates
-  - [x] Files
-  - [ ] Chats
-- ### Helpers
-  - [x] Filter builder
-  - [x] Webhook handling
-  - [x] Error handling
-  - [ ] Salesbot interactions
+### Library
+
+- [x] NPM & Node support
+- [x] Examples
+- [x] Tests (webhook at the moment)
+- [x] README
+
+### API
+
+- [x] Account
+- [x] Leads
+- [x] Unsorted
+- [x] Pipelines and Stages
+- [x] Contacts
+- [x] Companies
+- [x] Catalogs
+- [x] Products
+- [x] Links
+- [x] Tasks
+- [x] Custom Fields
+- [x] Tags
+- [x] Events
+- [x] Notes
+- [x] Customers
+- [x] Statuses
+- [x] Segments
+- [x] Users
+- [x] Webhooks
+- [x] Widgets
+- [x] Calls
+- [x] Talks
+- [x] Sources
+- [x] Salesbot (API method)
+- [x] Short Links
+- [x] Chat Templates
+- [x] Files
+- [ ] Chats
+
+### Helpers
+
+- [x] Filter builder
+- [x] Webhook handling
+- [x] Error handling
+- [ ] Salesbot interactions
 
 # Usage
 
 ## Installation
 
-<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/nodejs.svg"> Node.JS
-(versions >=18 are supported because of Fetch API)
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/nodejs.svg"> Node.js
+(versions >=18 are supported due to Fetch API)
 
 ```powershell
 npm i @shevernitskiy/amo
@@ -76,8 +82,8 @@ import { Amo } from "https://deno.land/x/amo/mod.ts";
 
 ## Basic example
 
-Here is the basic usage scenario. We use previously saved token object here (cause it valid for a long time, so we do
-not need to refresh it often). More [examples](https://github.com/shevernitskiy/amo/tree/main/examples).
+Here's a basic usage scenario. We use a previously saved token object here (since it's valid for a long time, we don't
+need to refresh it often). More [examples](https://github.com/shevernitskiy/amo/tree/main/examples) are available.
 
 ```ts
 import { readFileSync, writeFileSync } from "node:fs";
@@ -117,11 +123,11 @@ try {
 
 ## Creating client instance
 
-To create a client instance, you should provide 2 or 3 args to the constructor:
+To create a client instance, provide 2 or 3 arguments to the constructor:
 
 - API domain
-- auth data (may be different)
-- options (optionally)
+- Auth data (varies by method)
+- Options (optional)
 
 ```ts
 const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
@@ -131,35 +137,36 @@ const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
 
 #### Request queue
 
-Amo backend limits you to _7 reqs/sec_, so the client can manage with it by performing requests concurrently or
-sequently with delay. By default, lib performs requests concurrently (_7reqs/1000ms_ by default). To setup you own
-concurrency params use:
+The amoCRM backend limits you to _7 requests per second_. The client can handle this by performing requests concurrently
+or sequentially with delays. By default, the library performs requests concurrently (_7 requests per 1000ms_). To set up
+your own concurrency parameters:
 
-- `concurrent_request: number` - size of concurrent pool
-- `concurrent_timeframe: number` - timeframe for concurrent pool (ms)
+- `concurrent_request: number` - size of the concurrent pool
+- `concurrent_timeframe: number` - timeframe for the concurrent pool (in ms)
 
-If you want to use sequential requests, set `request_delay` option param:
+If you want to use sequential requests, set the `request_delay` option parameter:
 
-- `request_delay: number` (ms) - you can set it to zero, if you want to perform requests as it is
+- `request_delay: number` (in ms) - you can set it to zero if you want to perform requests as-is
 
 #### Callbacks
 
-- `on_token?: (new_token: OAuth) => void | Promise<void>` - callback, that will be called on _new token_ event (during
-  receiving from a code or refreshing). Lib manages the auth/token stuff for you, but it is strongly recommended to
-  store the new token persistently somewhere you want (fs, db) to provide it on the next app start.
+- `on_token?: (new_token: OAuth) => void | Promise<void>` - callback that will be called on a _new token_ event (when
+  receiving from a code or refreshing). The library manages auth and token processing for you, but it's strongly
+  recommended to store the new token persistently (fs, db) to provide it on the next app start.
+
 - `on_error?: (error: Error) => void | Promise<void>;` - default error handler. If provided, it will be called instead
-  of throwing errors. Request lifycycle will not be interrupted and you receive `null` as a response.
+  of throwing errors. The request lifecycle will not be interrupted and you'll receive `null` as a response.
 
 ---
 
 ## Authorization
 
-The client can authorize you by both methods: auth code and token data. Also, it refreshes the token automatically on
+The client supports both authorization methods: auth code and token data. It also automatically refreshes the token upon
 expiration.
 
 ### Auth by code
 
-Usually, this method is used just once while a fresh app is registered. You provide the code and get the token data.
+This method is typically used once when a fresh app is registered. You provide the code and receive the token data.
 
 ```ts
 const amo = new Amo("mydomain.amocrm.ru", {
@@ -171,13 +178,13 @@ const amo = new Amo("mydomain.amocrm.ru", {
   }, {
     on_token: (new_token) => console.log("New token obtained", new_token);
   },
-})
+)
 ```
 
 ### Auth by existing token
 
-This method is used every time after the first authorization by code. The API does not provide the property
-`expires_at`, but lib returns it in `on_token` callback value. If you are using longlive dev token, just keep
+This method is used every time after the first authorization by code. The API doesn't provide the `expires_at` property,
+but the library returns it in the `on_token` callback value. If you're using a long-lived dev token, just keep
 `expires_at` blank.
 
 ```ts
@@ -193,21 +200,21 @@ const amo = new Amo("mydomain.amocrm.ru", {
   }, {
     on_token: (new_token) => console.log("New token obtained", new_token);
   },
-})
+)
 ```
 
 ---
 
 ## Making requests
 
-The client provides methods by API category. Each category reflects the docs structure (not endpoints, actually - this
-is one of the strange api architecture things). Here is the schema for calling a method in some category:
+The client provides methods by API category. Each category reflects the docs structure (not endpoints). Here's the
+schema for calling a method:
 
 ```ts
 client_instance.category.method(...)
 ```
 
-So the real world example will:
+A real-world example:
 
 ```ts
 const lead = await amo.lead.getLeadById(6969);
@@ -215,11 +222,11 @@ const lead = await amo.lead.getLeadById(6969);
 
 ### Parameters
 
-Some methods can receive typical request parameters: _order, with, page, limit_ and _filter_
+Some methods can receive typical request parameters: _order, with, page, limit_, and _filter_
 
 #### With
 
-Can take array of strings.
+Accepts an array of strings.
 
 ```ts
 with: ["drive_url", "amojo_id", "amojo_rights", "datetime_settings"]
@@ -227,7 +234,7 @@ with: ["drive_url", "amojo_id", "amojo_rights", "datetime_settings"]
 
 #### Order
 
-Can take the object.
+Accepts an object.
 
 ```ts
 order: { param: "id", type: "asc" }
@@ -235,12 +242,14 @@ order: { param: "id", type: "asc" }
 
 #### Filter
 
-Filter is a complex parameter that depends on the method. Lib provides a filter builder to construct filter queries
-depending on the method. Each filter can take different types of input conditions: single (property = value), multi
-(property = array of values), range (property = from-to), custom fields* , statuses* (*only for leads as I know?). To
-use the filter builder depending on the constraits of the API method, you should pass the callback that receives filter
-instance and return it with your params. The instance will be typed, and you will not be able to set the value if it
-does not satisfy the method constraints (type of the value will be `never`).
+Filter is a complex parameter that depends on the method. The library provides a filter builder to construct filter
+queries based on method constraints. Each filter can accept different input condition types: single (property = value),
+multi (property = array of values), range (property = from-to), custom fields*, and statuses* (*only for leads, as far
+as I know).
+
+To use the filter builder, pass a callback that receives a filter instance and returns it with your parameters. The
+instance is typed, and you won't be able to set a value if it doesn't satisfy the method constraints (the value type
+will be `never`).
 
 ```ts
 filter:
@@ -255,17 +264,17 @@ filter:
 
 ## Webhooks
 
-The client could handle incoming webhook and acting as event emitter, wich emits typed context to the listener callback
-depending on the event. To use this possibility, the client provides a typical handler that you could setup to handle
-incoming http requests.
+The client can handle incoming webhooks and acts as an event emitter, emitting typed context to the listener callback
+depending on the event. To use this feature, the client provides a typical handler that you can set up to handle
+incoming HTTP requests.
 
-Handler signature is (maybe i'll add _(req, res)_ type for express enojyers later):
+Handler signature (I may add _(req, res)_ type for Express users later):
 
 ```ts
 ((request: Request) => Promise<Response>);
 ```
 
-Webhook handling example. Remember that `webhookHandler()` is a function factory, create handler just once and then use
+Webhook handling example. Remember that `webhookHandler()` is a function factory—create the handler once and then use
 it.
 
 ```ts
@@ -289,7 +298,7 @@ The client throws several types of errors:
 - `NoContentError`
 - `WebhookError`
 
-`ApiError` and `AuthError` has additional property response with API error message.
+`ApiError` and `AuthError` have an additional `response` property with the API error message.
 
 Handling is simple:
 
@@ -312,7 +321,7 @@ try {
 }
 ```
 
-Also you could use default non-intercepted error handler passed with the `options` to client constructor:
+You can also use a default non-intercepted error handler passed with the `options` to the client constructor:
 
 ```ts
 const amo = new Amo("mydomain.amocrm.ru", auth_object, {
@@ -326,7 +335,7 @@ if (lead) {
 
 # Contribution
 
-Pull request, issues and feedback are very welcome. Code style is formatted with deno fmt.
+Pull requests, issues, and feedback are very welcome. Code style is formatted with `deno fmt`.
 
 # License
 
