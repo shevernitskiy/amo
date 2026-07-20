@@ -1,5 +1,5 @@
-import * as mf from "https://deno.land/x/mock_fetch@0.3.0/mod.ts";
-import { assertEquals, assertInstanceOf } from "https://deno.land/std@0.184.0/testing/asserts.ts";
+import test from "node:test";
+import assert from "node:assert/strict";
 
 import { Amo } from "../src/amo.ts";
 import { ApiError, AuthError, HttpError, NoContentError, WebhookError } from "../mod.ts";
@@ -22,42 +22,42 @@ const token = {
   expires_at: 9992689469610,
 } as const;
 
-mf.install();
-
 const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token }, {
   on_token: (new_token) => console.log("New token obtained", new_token),
 });
 
-Deno.test("should return HttpError", async () => {
-  mf.mock("GET@/api/v4/account", (_req, _params) => {
+test("should return HttpError", async (t) => {
+  t.mock.method(global, "fetch", () => {
     return new Response(`Error`, { status: 404 });
   });
 
   try {
     await amo.account.getAccount();
+    assert.fail("Expected error was not thrown");
   } catch (err) {
-    assertInstanceOf(err, HttpError);
+    assert.ok(err instanceof HttpError, "Error should be instance of HttpError");
   }
 
   await sleep(1200);
 });
 
-Deno.test("should return NoContentError", async () => {
-  mf.mock("GET@/api/v4/leads/69", () => {
+test("should return NoContentError", async (t) => {
+  t.mock.method(global, "fetch", () => {
     return new Response(null, { status: 204 });
   });
 
   try {
     await amo.lead.getLeadById(69);
+    assert.fail("Expected error was not thrown");
   } catch (err) {
-    assertInstanceOf(err, NoContentError);
+    assert.ok(err instanceof NoContentError, "Error should be instance of NoContentError");
   }
 
   await sleep(1200);
 });
 
-Deno.test("should return ApiError", async () => {
-  mf.mock("GET@/api/v4/leads/69", () => {
+test("should return ApiError", async (t) => {
+  t.mock.method(global, "fetch", () => {
     return new Response(
       JSON.stringify({
         title: "Unauthorized",
@@ -76,9 +76,10 @@ Deno.test("should return ApiError", async () => {
 
   try {
     await amo.lead.getLeadById(69);
+    assert.fail("Expected error was not thrown");
   } catch (err) {
-    assertInstanceOf(err, ApiError);
-    assertEquals(err.response, {
+    assert.ok(err instanceof ApiError, "Error should be instance of ApiError");
+    assert.deepStrictEqual(err.response, {
       title: "Unauthorized",
       type: "https://httpstatus.es/401",
       status: 401,
@@ -89,7 +90,7 @@ Deno.test("should return ApiError", async () => {
   await sleep(1200);
 });
 
-Deno.test("should return WebhookError", async () => {
+test("should return WebhookError", async () => {
   try {
     await amo.webhookHandler()(
       new Request("https://fakeurl.com/", {
@@ -97,42 +98,44 @@ Deno.test("should return WebhookError", async () => {
         body: "<NotParsable Json>",
       }),
     );
+    assert.fail("Expected error was not thrown");
   } catch (err) {
-    assertInstanceOf(err, WebhookError);
+    assert.ok(err instanceof WebhookError, "Error should be instance of WebhookError");
   }
 
   await sleep(1200);
 });
 
-Deno.test("should return AuthError", async () => {
-  mf.mock("POST@/oauth2/access_token", () => {
+test("should return AuthError", async (t) => {
+  t.mock.method(global, "fetch", () => {
     return new Response(null, { status: 403 });
   });
 
-  const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token, expires_at: 0 }, {
+  const localAmo = new Amo("mydomain.amocrm.ru", { ...auth, ...token, expires_at: 0 }, {
     on_token: (new_token) => console.log("New token obtained", new_token),
   });
 
   try {
-    await amo.lead.getLeadById(69);
+    await localAmo.lead.getLeadById(69);
+    assert.fail("Expected error was not thrown");
   } catch (err) {
-    assertInstanceOf(err, AuthError);
+    assert.ok(err instanceof AuthError, "Error should be instance of AuthError");
   }
 
   await sleep(1200);
 });
 
-Deno.test("should return AuthError to error handler", async () => {
-  mf.mock("POST@/oauth2/access_token", () => {
+test("should return AuthError to error handler", async (t) => {
+  t.mock.method(global, "fetch", () => {
     return new Response(null, { status: 403 });
   });
 
-  const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token, expires_at: 0 }, {
+  const localAmo = new Amo("mydomain.amocrm.ru", { ...auth, ...token, expires_at: 0 }, {
     on_token: (new_token) => console.log("New token obtained", new_token),
-    on_error: (err) => assertInstanceOf(err, AuthError),
+    on_error: (err) => assert.ok(err instanceof AuthError, "Error should be instance of AuthError"),
   });
 
-  await amo.lead.getLeadById(69);
+  await localAmo.lead.getLeadById(69);
 
   await sleep(1200);
 });

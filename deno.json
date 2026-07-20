@@ -18,7 +18,8 @@
       "./npm/",
       "./examples/",
       "./run.ts",
-      "./type-check.ts"
+      "./type-check.ts",
+      "./scripts/"
     ]
   }
 }
