@@ -45,7 +45,7 @@ export class DelayQueue<T> implements AsyncQueue<T> {
 export class ConcurrentPool<T> implements AsyncQueue<T> {
   private stack: AsyncTask<T>[] = [];
   private concurrent = 0;
-  private timer = 0;
+  private timer?: NodeJS.Timeout;
 
   constructor(private readonly size: number, private readonly timeframe: number) {
     if (size <= 0) throw new Error("Invalid concurrent pool size");
@@ -59,7 +59,7 @@ export class ConcurrentPool<T> implements AsyncQueue<T> {
   }
 
   private resolve() {
-    if (this.timer === 0) {
+    if (this.timer === undefined) {
       this.frame();
       this.timer = setInterval(() => this.frame(), this.timeframe);
       return;
@@ -77,7 +77,7 @@ export class ConcurrentPool<T> implements AsyncQueue<T> {
     if (this.stack.length === 0) {
       this.concurrent = 0;
       clearInterval(this.timer);
-      this.timer = 0;
+      this.timer = undefined;
       return;
     }
 

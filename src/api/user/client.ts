@@ -1,5 +1,6 @@
 import type { JSONValue, With } from "../../typings/utility.ts";
 import type {
+  RequestActivateUser,
   RequestAddRole,
   RequestAddUser,
   RequestUpdateRole,
@@ -87,6 +88,22 @@ export class UserApi extends Endpoint {
   deleteRoleById(id: number): Promise<void> {
     return this.rest.delete<void>({
       url: `/api/v4/roles/${id}`,
+    });
+  }
+
+  /** Метод позволяет активировать пользователей в аккаунте пакетно (не более 10 пользователей за раз). Тариф Enterprise, права администратора. Активировать пользователей с правами администратора нельзя. */
+  activateUsers(users: RequestActivateUser[]): Promise<void> {
+    return this.rest.post<void>({
+      url: "/api/v4/users/activate",
+      payload: users as JSONValue,
+    });
+  }
+
+  /** Метод позволяет деактивировать пользователей в аккаунте пакетно (не более 10 пользователей за раз). Тариф Enterprise, права администратора. Деактивировать пользователей с правами администратора нельзя. */
+  deactivateUsers(users: RequestActivateUser[]): Promise<void> {
+    return this.rest.post<void>({
+      url: "/api/v4/users/deactivate",
+      payload: users as JSONValue,
     });
   }
 }

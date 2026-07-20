@@ -935,6 +935,11 @@ export type Note = {
   is_editable: boolean;
   /** ID аккаунта, в котором находится примечание */
   account_id: number;
+  /**
+   * Закреплено ли примечание
+   * @remarks Требуется GET-параметр with=is_pinned
+   */
+  is_pinned?: boolean;
 };
 
 export type NoteEntityType = "leads" | "contacts" | "companies" | "customers";
@@ -1442,12 +1447,16 @@ export type Talk = {
   entity_id: number | null;
   /** Тип сущности, по которой ведется беседа (lead, customer) */
   entity_type: "lead" | "customer" | null;
+  /** Статус беседы: in_work, closed, nps_scheduled, nps_in_progress, with_error */
+  status: "in_work" | "closed" | "nps_scheduled" | "nps_in_progress" | "with_error";
   /** В работе ли беседа (не закрыта) */
   is_in_work: boolean;
   /** Прочитана ли беседа */
   is_read: boolean;
   /** Тип источника, по которому была создана беседа (telegram, viber, и т.д.) */
   origin: string;
+  /** ID источника */
+  source_id: number | null;
   /** Дата когда беседа была пропущена (не отвечена за время, установленное в настройках аккаунта), передается в Unix Timestamp */
   missed_at: number | null;
   /** ID аккаунта */

@@ -43,3 +43,9 @@ export type ResponseAddRoles = Total & {
 
 export type RequestUpdateRole = RequestAddRole;
 export type ResponseUpdateRole = Links & Role;
+
+/** Элемент тела запроса активации/деактивации пользователей */
+export type RequestActivateUser = {
+  /** ID пользователя в аккаунте */
+  id: number;
+};

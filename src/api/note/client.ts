@@ -1,4 +1,4 @@
-import type { JSONValue, Order } from "../../typings/utility.ts";
+import type { JSONValue, Order, With } from "../../typings/utility.ts";
 import type { NoteEntityType } from "../../typings/entities.ts";
 import type {
   RequestAddNote,
@@ -18,6 +18,7 @@ import { query } from "../../helpers/query.ts";
 export class NoteApi extends Endpoint {
   /** Метод позволяет получить примечания по типу сущности. */
   getNotesByEntityType(entity_type: NoteEntityType, params?: {
+    with?: With<["is_pinned"]>;
     page?: number;
     limit?: number;
     filter?: FilterLike<
@@ -37,6 +38,7 @@ export class NoteApi extends Endpoint {
 
   /** Метод позволяет получить примечания по ID родительской сущности. */
   getNotesByEntityId(entity_id: number, entity_type: NoteEntityType, params?: {
+    with?: With<["is_pinned"]>;
     page?: number;
     limit?: number;
     filter?: FilterLike<["id", "note_type", "updated_at"], ["id", "note_type"], ["updated_at"], never, never>;
@@ -52,9 +54,13 @@ export class NoteApi extends Endpoint {
   getNotesById(
     note_id: number,
     entity_type: NoteEntityType,
+    params?: {
+      with?: With<["is_pinned"]>;
+    },
   ): Promise<ResponseGetNotesById> {
     return this.rest.get<ResponseGetNotesById>({
       url: `/api/v4/${entity_type}/notes/${note_id}`,
+      query: query(params),
     });
   }
 
@@ -89,6 +95,20 @@ export class NoteApi extends Endpoint {
     return this.rest.patch<ResponseUpdateNoteById>({
       url: `/api/v4/${entity_type}/notes/${note_id}`,
       payload: note as JSONValue,
+    });
+  }
+
+  /** Метод позволяет закрепить примечание по ID. */
+  pinNote(note_id: number, entity_type: NoteEntityType): Promise<void> {
+    return this.rest.post<void>({
+      url: `/api/v4/${entity_type}/notes/${note_id}/pin`,
+    });
+  }
+
+  /** Метод позволяет открепить примечание по ID. */
+  unpinNote(note_id: number, entity_type: NoteEntityType): Promise<void> {
+    return this.rest.post<void>({
+      url: `/api/v4/${entity_type}/notes/${note_id}/unpin`,
     });
   }
 }
