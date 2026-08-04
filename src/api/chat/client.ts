@@ -15,7 +15,7 @@ export class ChatApi extends Endpoint {
       .digest("hex")
       .toLowerCase();
     const signature = createHmac("sha1", secret)
-      .update([method.toUpperCase(), body_hash, "application/json", date, url].join("n"))
+      .update([method.toUpperCase(), body_hash, "application/json", date, url].join("\n"))
       .digest("hex")
       .toLowerCase();
     return {
