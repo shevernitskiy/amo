@@ -1,4 +1,3 @@
-// deno-lint-ignore-file
 import type { Company, Contact, Customer, Lead, Segment, Tag } from "./entities.ts";
 
 export type JSONValue =

@@ -1,10 +1,23 @@
 {
   "compilerOptions": {
-    "outDir": "./npm",
-    "declaration": true,
     "target": "ESNext",
-    "module": "CommonJS"
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node", "bun"],
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true
   },
-  "include": ["./src/**/*", "./mod.ts"],
-  "deno2node": {}
+  "include": [
+    "./src/**/*",
+    "./mod.ts",
+    "./run.ts",
+    "./type-check.ts",
+    "./tests/**/*",
+    "./scripts/**/*",
+    "./examples/**/*"
+  ]
 }

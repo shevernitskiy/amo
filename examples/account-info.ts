@@ -1,4 +1,5 @@
-import { Amo, ApiError, AuthError } from "https://deno.land/x/amo/mod.ts";
+import { readFileSync, writeFileSync } from "node:fs";
+import { Amo, ApiError, AuthError } from "../mod.ts";
 
 try {
   const auth = {
@@ -7,12 +8,12 @@ try {
     redirect_uri: "https://myredirect.org",
   };
 
-  const token = JSON.parse(Deno.readTextFileSync("./token.json"));
+  const token = JSON.parse(readFileSync("./token.json", "utf-8"));
 
   const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token }, {
     on_token: (new_token) => {
       console.log("New token obtained", new_token);
-      Deno.writeTextFileSync("./token.json", JSON.stringify(new_token, null, 2));
+      writeFileSync("./token.json", JSON.stringify(new_token, null, 2), "utf8");
     },
   });
 

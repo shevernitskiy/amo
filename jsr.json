@@ -1,0 +1,14 @@
+{
+  "name": "@shevernitskiy/amo",
+  "version": "0.2.16",
+  "exports": "./mod.ts",
+  "exclude": [
+    "npm",
+    "examples",
+    "scripts",
+    "tests",
+    "type-check.ts",
+    "tsconfig.json",
+    "package.json"
+  ]
+}

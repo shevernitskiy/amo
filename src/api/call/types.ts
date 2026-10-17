@@ -3,7 +3,6 @@ import type { Call } from "../../typings/entities.ts";
 
 export type RequestAddCall = Call & RequestId;
 export type ResponseAddCalls = Total & {
-  // deno-lint-ignore no-explicit-any
   errors: any[];
   _embedded: {
     calls: (RequestId & {

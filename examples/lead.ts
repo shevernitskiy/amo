@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { Amo, ApiError, AuthError } from "@shevernitskiy/amo";
+import { Amo, ApiError, AuthError } from "../mod.ts";
 
 try {
   const auth = {
@@ -17,11 +17,18 @@ try {
     },
   });
 
-  const data = await amo.account.getAccount({
-    with: ["amojo_id"],
-  });
+  const { _embedded: { leads } } = await amo.lead.addLeads([{
+    name: "Test Lead",
+  }]);
+  const [lead] = leads ?? [];
+  if (!lead) throw new Error("no lead returned");
+  console.log(lead);
 
-  console.log(data);
+  const updated_lead = await amo.lead.updateLeads([{
+    id: lead.id,
+    name: "Not, I want another Test Lead",
+  }]);
+  console.log(updated_lead);
 } catch (err) {
   if (err instanceof ApiError || err instanceof AuthError) {
     console.error(err.response);

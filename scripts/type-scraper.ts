@@ -1,4 +1,4 @@
-import { DOMParser, type Element } from "https://deno.land/x/deno_dom@v0.1.36-alpha/deno-dom-wasm.ts";
+import { DOMParser, type Element } from "linkedom";
 
 type ParseOptions = {
   links?: boolean;
@@ -105,9 +105,9 @@ function typeReplacer(value: string): string {
     .replace(/string\(.+\)/, "string");
 }
 
-export function writeTypes(data: string): void {
+export async function writeTypes(data: string): Promise<void> {
   console.log("write", data.split("type ")[1].split(" = ")[0].trim());
-  Deno.writeTextFileSync("./amo.types.ts", data + "\n\n", { create: true }); // append: true to dump all
+  await Bun.write("./amo.types.ts", data + "\n\n"); // append: true to dump all
 }
 
 // parseTableFromUrl("Lead", "https://www.amocrm.ru/developers/content/crm_platform/leads-api", 2, { comment: true })

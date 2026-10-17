@@ -18,12 +18,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@main
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          deno-version: v2.x
+          bun-version: latest
 
-      - name: Setup Node (needed for npm OIDC)
+      - name: Setup Node (needed for jsr & npm CLIs)
         uses: actions/setup-node@v6
         with:
           node-version: '24'
@@ -31,8 +31,11 @@ jobs:
       - name: Ensure npm >= 11.5.1
         run: npm install -g npm@latest
 
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
       - name: Bump project verison
-        run: deno task version ${{ inputs.version }}
+        run: bun run version ${{ inputs.version }}
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9.1.4
@@ -42,16 +45,14 @@ jobs:
           message: "bump version"
 
       - name: Publish to JSR
-        run: deno publish
+        run: npx jsr publish
 
       - name: Build npm package
-        run: deno task npm ${{ inputs.version }}
+        run: bun run npm ${{ inputs.version }}
 
       - name: Publish to npm
-        run: |
-          deno task npm ${{ inputs.version }}
-          cd npm
-          npm publish --access public
+        working-directory: npm
+        run: npm publish --access public
 
       - name: Release
         uses: softprops/action-gh-release@v1

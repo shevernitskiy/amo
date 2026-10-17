@@ -58,7 +58,6 @@ type Mixer<T extends string, V extends string> = `${T}:${V}`;
 type Extender<T extends string, V extends string, E> = Record<`${T}:${V}`, E>;
 
 export function parseIncomingWebhook(
-  // deno-lint-ignore no-explicit-any
   value: any,
 ): [WebhookEntity, WebhookEvent | "note", unknown] {
   if (value.account !== undefined) delete value.account;

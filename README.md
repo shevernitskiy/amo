@@ -1,7 +1,6 @@
 # ♿ amoCRM API client
 
 [![npm](https://img.shields.io/npm/v/@shevernitskiy/amo?logo=npm&style=flat&labelColor=000)](https://www.npmjs.com/package/@shevernitskiy/amo)
-[![deno module](https://shield.deno.dev/x/amo)](https://deno.land/x/amo/mod.ts)
 [![JSR](https://jsr.io/badges/@shevernitskiy/amo)](https://jsr.io/@shevernitskiy/amo)
 ![dependencies](https://img.shields.io/badge/dependencies-0-green?style=flat&labelColor=000)
 [![license](https://img.shields.io/github/license/shevernitskiy/amo?style=flat&labelColor=000)](https://github.com/shevernitskiy/amo/blob/main/LICENSE)
@@ -72,10 +71,14 @@ refreshing and webhook processing.
 npm i @shevernitskiy/amo
 ```
 
-<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg"> Deno
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/bun.svg"> Bun
+
+```sh
+bun add jsr:@shevernitskiy/amo
+```
 
 ```ts
-import { Amo } from "https://deno.land/x/amo/mod.ts";
+import { Amo } from "@shevernitskiy/amo";
 ```
 
 ---
@@ -98,12 +101,16 @@ try {
 
   const token = JSON.parse(readFileSync("./token.json", "utf-8"));
 
-  const amo = new Amo("mydomain.amocrm.ru", { ...auth, ...token }, {
-    on_token: (new_token) => {
-      console.log("New token obtained", new_token);
-      writeFileSync("./token.json", JSON.stringify(new_token, null, 2), "utf8");
+  const amo = new Amo(
+    "mydomain.amocrm.ru",
+    { ...auth, ...token },
+    {
+      on_token: (new_token) => {
+        console.log("New token obtained", new_token);
+        writeFileSync("./token.json", JSON.stringify(new_token, null, 2), "utf8");
+      },
     },
-  });
+  );
 
   const data = await amo.account.getAccount({
     with: ["amojo_id"],
@@ -244,7 +251,7 @@ order: { param: "id", type: "asc" }
 
 Filter is a complex parameter that depends on the method. The library provides a filter builder to construct filter
 queries based on method constraints. Each filter can accept different input condition types: single (property = value),
-multi (property = array of values), range (property = from-to), custom fields*, and statuses* (*only for leads, as far
+multi (property = array of values), range (property = from-to), custom fields*, and statuses* (\*only for leads, as far
 as I know).
 
 To use the filter builder, pass a callback that receives a filter instance and returns it with your parameters. The
@@ -252,12 +259,8 @@ instance is typed, and you won't be able to set a value if it doesn't satisfy th
 will be `never`).
 
 ```ts
-filter:
-((filter) =>
-  filter
-    .single("id", 6969)
-    .multi("created_by", ["john", "smith"])
-    .range("closed_at", 2418124812, 123124712712));
+filter: (filter) =>
+  filter.single("id", 6969).multi("created_by", ["john", "smith"]).range("closed_at", 2418124812, 123124712712);
 ```
 
 ---
@@ -268,10 +271,10 @@ The client can handle incoming webhooks and acts as an event emitter, emitting t
 depending on the event. To use this feature, the client provides a typical handler that you can set up to handle
 incoming HTTP requests.
 
-Handler signature (I may add _(req, res)_ type for Express users later):
+Handler signature:
 
 ```ts
-((request: Request) => Promise<Response>);
+(request: Request) => Promise<Response>;
 ```
 
 Webhook handling example. Remember that `webhookHandler()` is a function factory—create the handler once and then use
@@ -283,7 +286,31 @@ const amo = new Amo("mydomain.amocrm.ru", auth_object, options_object);
 amo.on("leads:status", (lead) => console.log(lead.id));
 
 const handler = amo.webhookHandler();
-Deno.serve({ port: 4545 }, handler);
+```
+
+Bun serves it directly:
+
+```ts
+Bun.serve({ port: 4545, fetch: handler });
+```
+
+Node has no native Fetch server yet, so bridge your own _(req, res)_ into a `Request`:
+
+```ts
+import express from "express";
+
+const app = express();
+
+app.use(express.raw({ type: "*/*" }));
+
+app.all("*", async (req, res) => {
+  const url = `https://${req.headers.host}${req.originalUrl}`;
+  const body = Buffer.isBuffer(req.body) ? new Uint8Array(req.body) : undefined;
+  const response = await handler(new Request(url, { method: req.method, headers: req.headers, body }));
+  res.status(response.status).end(await response.text());
+});
+
+app.listen(4545);
 ```
 
 ---
@@ -335,7 +362,8 @@ if (lead) {
 
 # Contribution
 
-Pull requests, issues, and feedback are very welcome. Code style is formatted with `deno fmt`.
+Pull requests, issues, and feedback are very welcome. The library targets Node, Bun, and Deno, and is developed
+and tested with [Bun](https://bun.sh). Run `bun run check` for type checking and `bun test` for tests.
 
 # License
 

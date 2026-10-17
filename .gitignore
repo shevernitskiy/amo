@@ -1,6 +1,7 @@
-deno.lock
+node_modules
 run.ts
 type-check.ts
 token.json
 /npm
 .env
+amo.types.ts

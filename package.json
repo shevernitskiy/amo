@@ -1,0 +1,28 @@
+{
+  "name": "@shevernitskiy/amo",
+  "version": "0.2.16",
+  "private": true,
+  "type": "module",
+  "description": "amoCRM API client",
+  "license": "MIT",
+  "author": "shevernitskiy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shevernitskiy/amo"
+  },
+  "scripts": {
+    "start": "bun run ./run.ts",
+    "dev": "bun --watch ./run.ts",
+    "test": "bun test",
+    "check": "tsc",
+    "npm": "bun run ./scripts/build-npm.ts",
+    "version": "bun run ./scripts/project-version.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.3",
+    "@types/node": "^26.6.5",
+    "linkedom": "^0.18.13",
+    "typescript": "^5.9.0"
+  },
+  "packageManager": "bun@1.4.3"
+}
